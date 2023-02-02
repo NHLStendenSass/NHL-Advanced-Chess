@@ -20,7 +20,7 @@ Robin Michael Visser - (role)
 
 Sander Siimann - Back-End
 
-(4th member name here) - (role)
+Levente Stieber - (role)
 
 ## 2. Problem Description
 
@@ -47,25 +47,48 @@ Sander Siimann - Back-End
 The Moscow method was used for this project to separate the various functionalities and determine which were more important than others. We used the Moscow method to separate the various functionalities within the various priorities.
 This is what we came up with after conducting research and considering various functionalities:
 
-C# Xaml
+- dssef
+- fssdf
 
-### 7.1 Moscow
+### 7.1 Specifications
+
+C# WinUI3 (Xaml)
+
+### 7.2 Moscow
 
 ##### Must Have:
 
-1. Games: This part happens during the task where sys auto outputs 5 min breaks every half hour. User can choose a mini-game or 
+1. Chess
+   1. Board
+   2. 32 Pieces
+   3. Classic rules
+
+2. Dice changes rules
+3. Voice Commands
+   1. Move pieces
+
 
 ##### Should Have:
 
-1. dsad
+1. Bot
+2. Voice Commands:
+   1. Renaming pieces
+
+3. One vs One locally
 
 ##### Could Have:
 
-1. dsfds
+1. optional voice commands minigame:
+   1. scream - meditation session, etc. 
+
+2. Playing against bot
+3. Multiplayer
+4. 1v1 shooting when 1 piece start eliminating another (Example: queen shooting queen to decide if the move is valid)
+5. Score board
 
 ##### Will Not Have:
 
-1. sddsf
+1. Tournaments
 
 
 
