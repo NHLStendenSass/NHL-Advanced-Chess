@@ -2,4 +2,8 @@
 
 You can find the Start Doucment [here](startDoucment.md).
 
-*subject:* C#2
+**Subject:** C#2
+
+**Date:** 31.02.2023
+
+**Group members:** Robin Michael Visser, Samuel Fremont, Tung Do, Sander Siimann
