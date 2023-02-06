@@ -22,27 +22,27 @@ Sander Siimann - Back-End
 
 Levente Stieber - (role)
 
-## 2. Problem Description
+## 2. Problem Description (Levente)
 
 (Write Idea here)
 
-## 3. Use Case Diagram
+## 3. Use Case Diagram (Robin)
 
 (add image here)
 
-## 4. Mockup
+## 4. Mockup (Tom)
 
 (add app design here)
 
-## 5. UML
+## 5. UML (Together)
 
 (add image here)
 
-## 6. Planning
+## 6. Planning (Sander)
 
 (Gantt chart)
 
-## 7. Features
+## 7. Features (Levente)
 
 The Moscow method was used for this project to separate the various functionalities and determine which were more important than others. We used the Moscow method to separate the various functionalities within the various priorities.
 This is what we came up with after conducting research and considering various functionalities:
@@ -92,7 +92,7 @@ C# WinUI3 (Xaml)
 
 
 
-## References
+## References (Together)
 
 (1): *StudyTracker*. (n.d.). Figma. https://www.figma.com/file/d8h389V2wOFLojXXa27HPr/StudyTracker?node-id=0:1
 
