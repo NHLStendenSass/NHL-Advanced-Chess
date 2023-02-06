@@ -6,7 +6,7 @@ You can find the Start Doucment [here](startDoucment.md).
 
 **Date:** 31.02.2023
 
-**Group members:** Robin Michael Visser, Samuel Fremont, Tung Do, Sander Siimann
+**Group members:** Robin Michael Visser, Levente Stieber, Tung Do, Sander Siimann
 
 # Scrum rules
 
