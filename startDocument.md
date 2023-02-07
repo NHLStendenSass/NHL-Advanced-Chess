@@ -24,7 +24,9 @@ Levente Stieber - (role)
 
 ## 2. Application Description
 
-A group of student wants to play chess that is different from normal. Students want to play chess using voice commands and use a random set of rules. 
+A group of student wants to play chess that is different from normal. Students want to play chess using voice commands and use a random set of rules through a DnD dice.
+
+The method that the application will be developed with is (MVVM) Model–view–viewmodel. this is a software architectural pattern that facilitates the separation of the development of the graphical user interface (the view). **(3)**
 
 ## 3. Use Case Diagram
 
@@ -59,53 +61,44 @@ The following are mockups for the application's main screens
 The Moscow method was used for this project to separate the various functionalities and determine which were more important than others. We used the Moscow method to separate the various functionalities within the various priorities.
 This is what we came up with after conducting research and considering various functionalities:
 
-- dssef
-- fssdf
-
 ### 7.1 Specifications
 
-C# WinUI3 (Xaml)
+1. C# .NET 6.
+2. Framework Monogame.
+3. MVVM pattern.
 
 ### 7.2 Moscow
 
 ##### Must Have:
 
-1. Chess
-   1. Board
-   2. 32 Pieces
-   3. Classic rules
-
-2. Dice changes rules
-3. Voice Commands
-   1. Move pieces
+- Receiving input from user and parsing to the application.(Mouse input)
+- Normal chess board with working chess pieces.
+- Voice commands to move chess pieces. (Ex: "D4 move to F2")
+- Animation for chess piece movement.
+- 1 vs 1 locally from one computer.
+- DnD dice to change the rule from classic one (Ex: D20 ICOSAHEDRON dice lands on 18, the game will loop 18 alive pieces from the user thus choosing the piece that would have special ability, that piece is now granted a special move to a random empty tile)
 
 
 ##### Should Have:
 
-1. Bot
-2. Voice Commands:
-   1. Renaming pieces
-
-3. One vs One locally
+- Voice command to navigate through game.
 
 ##### Could Have:
 
-1. optional voice commands minigame:
-   1. scream - meditation session, etc. 
-
-2. Playing against bot
-3. Multiplayer
-4. 1v1 shooting when 1 piece start eliminating another (Example: queen shooting queen to decide if the move is valid)
-5. Score board
+- Online multiplayer through different computer.
+- Scoreboard records win/loss from different user.
+- Playing against computer.
+- Different chess piece capture animation.
 
 ##### Will Not Have:
 
-1. Tournaments
-
-
+- Tournaments
+- Web hosting
 
 ## References
 
-(1): *StudyTracker*. (n.d.). Figma. https://www.figma.com/file/d8h389V2wOFLojXXa27HPr/StudyTracker?node-id=0:1
+(1): *StudyTracker*. (2023.February 5). Figma. https://www.figma.com/file/d8h389V2wOFLojXXa27HPr/StudyTracker?node-id=0:1
 
-(2): 
+(2): *D&D Dice Explained*. (2023.February 7). Die Hard Dice Store. https://www.dieharddice.com/pages/dnd-dice-explained
+
+(3): Wikipedia contributors. (2023, February 7). *Model–view–viewmodel*. Wikipedia. https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93viewmodel 
