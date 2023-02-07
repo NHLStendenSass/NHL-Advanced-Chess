@@ -77,6 +77,9 @@ This is what we came up with after conducting research and considering various f
 - Animation for chess piece movement.
 - 1 vs 1 locally from one computer.
 - DnD dice to change the rule from classic one (Ex: D20 ICOSAHEDRON dice lands on 18, the game will loop 18 alive pieces from the user thus choosing the piece that would have special ability, that piece is now granted a special move to a random empty tile)
+- Menu screen
+- Option screen
+- Game screen
 
 
 ##### Should Have:
@@ -101,7 +104,7 @@ This is what we came up with after conducting research and considering various f
 - Changes the location of selected piece to empty tile on board.
 - Move twice.
 - Chess pieces exchanges base case rules.
-- 
+- Player loses turn
 
 ## References
 
