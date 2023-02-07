@@ -89,11 +89,19 @@ This is what we came up with after conducting research and considering various f
 - Scoreboard records win/loss from different user.
 - Playing against computer.
 - Different chess piece capture animation.
+- Voice command: Rename pieces.
 
 ##### Will Not Have:
 
 - Tournaments
 - Web hosting
+
+### 7.3 Rules (Special moves)
+
+- Changes the location of selected piece to empty tile on board.
+- Move twice.
+- Chess pieces exchanges base case rules.
+- 
 
 ## References
 
