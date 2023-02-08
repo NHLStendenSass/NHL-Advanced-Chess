@@ -6,11 +6,11 @@
 
 ## Version
 
-| Version | Changes                     | Date       |
-| ------- | --------------------------- | ---------- |
-| 0.1.0   | Creation of Start Document  | 31.01.2023 |
-| 0.1.1   | Added Idea and some mock up | 06.02.2023 |
-|         |                             |            |
+| Version | Changes                                           | Date       |
+| ------- | ------------------------------------------------- | ---------- |
+| 0.1.0   | Creation of Start Document                        | 31.01.2023 |
+| 0.1.1   | Added Idea and some mock up                       | 06.02.2023 |
+| 0.1.2   | Added planning, Gantt chart, screen's description | 08.02.2023 |
 
 ## 1. Group Roles
 
@@ -38,13 +38,19 @@ The following are mockups for the application's main screens
 
 ## Menu screen
 
+Main start screen with 3 options to proceed.
+
 ![](https://i.imgur.com/kikUQNF.png)
 
 ## Option screen
 
+This screen would be use for changing dice and language.
+
 ![](https://i.imgur.com/6NtBCb5.png)
 
 ## Game screen
+
+The game screen with chess pieces and microphone.
 
 ![](https://i.imgur.com/H5JX7sd.png)
 
@@ -54,7 +60,71 @@ The following are mockups for the application's main screens
 
 ## 6. Planning
 
-(Gantt chart)
+![The ganttchart](https://i.imgur.com/ABF5Bp1.png)
+
+### 1st week
+
+```
+Creation of start document and edition of start document, Seperating group roles and tasks, 
+Pitch idea to lecturers, Mock ups.
+```
+
+### 2nd week
+
+```
+Technical specification of project, start realization of project.
+Send start document to lecturers.
+```
+
+### 3rd week
+
+```
+Designing class diagram. 
+Front-end: Splash Screen, Menu Screen, Option Screen, Game Screen.
+Back-end: Chess pieces logic, voice command logic, dice logic.
+```
+
+### 4th week
+
+```
+Class diagram to be sent to the lecturers
+Front-end: Connecting Views classes to ViewModel classes.
+Back-end: Connecting ViewModel classes to Model classes.
+```
+
+### 5th week
+
+```
+Front end: Loading bar Splash Screen, connecting Splash Screen to Menu Screen, Animation chess movement
+Back end: Dice rules for chess pieces
+```
+
+### 6th week
+
+```
+Front end: to be updated
+Back end: to be updated
+```
+
+### 7th week
+
+```
+Finalization stage:  Completing last steps of the application. 
+```
+
+### 8th week
+
+```
+Testing phase, Preparing presentation
+```
+
+### 9th week
+
+```
+Presentation
+```
+
+
 
 ## 7. Features
 
@@ -78,7 +148,7 @@ This is what we came up with after conducting research and considering various f
 - 1 vs 1 locally from one computer.
 - DnD dice to change the rule from classic one (Ex: D20 ICOSAHEDRON dice lands on 18, the game will loop 18 alive pieces from the user thus choosing the piece that would have special ability, that piece is now granted a special move to a random empty tile)
 - Menu screen
-- Option screen
+- Option screen 
 - Game screen
 
 
@@ -93,6 +163,8 @@ This is what we came up with after conducting research and considering various f
 - Playing against computer.
 - Different chess piece capture animation.
 - Voice command: Rename pieces.
+- Different DnD dice options.
+- Different language option (E.g. Dutch, English)
 
 ##### Will Not Have:
 
@@ -107,6 +179,8 @@ This is what we came up with after conducting research and considering various f
 - Player loses turn
 
 ## References
+
+This APA references were used in the research and planning phase of the application.
 
 (1): *StudyTracker*. (2023.February 5). Figma. https://www.figma.com/file/d8h389V2wOFLojXXa27HPr/StudyTracker?node-id=0:1
 
