@@ -11,6 +11,7 @@
 | 0.1.0   | Creation of Start Document                        | 31.01.2023 |
 | 0.1.1   | Added Idea and some mock up                       | 06.02.2023 |
 | 0.1.2   | Added planning, Gantt chart, screen's description | 08.02.2023 |
+| 0.1.3   | Added rule from dice, update Figma link           | 08.02.2023 |
 
 ## 1. Group Roles
 
@@ -171,18 +172,18 @@ This is what we came up with after conducting research and considering various f
 - Tournaments
 - Web hosting
 
-### 7.3 Rules (Special moves)
+### 7.3 Special moves from dice
 
-- Changes the location of selected piece to empty tile on board.
-- Move twice.
-- Chess pieces exchanges base case rules.
-- Player loses turn
+- Chess piece moves to a random empty tile.
+- Chess piece moves twice in one turn.
+- Chess pieces exchanges base case rules. (E.g. Queen gets Knight's move)
+- Player loses turn.
 
 ## References
 
 This APA references were used in the research and planning phase of the application.
 
-(1): *StudyTracker*. (2023.February 5). Figma. https://www.figma.com/file/d8h389V2wOFLojXXa27HPr/StudyTracker?node-id=0:1
+(1): *Chessn't*. (2023.February 8). Figma.https://www.figma.com/file/d8h389V2wOFLojXXa27HPr/Chessn't?node-id=0:1
 
 (2): *D&D Dice Explained*. (2023.February 7). Die Hard Dice Store. https://www.dieharddice.com/pages/dnd-dice-explained
 
