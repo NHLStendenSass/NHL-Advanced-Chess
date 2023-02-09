@@ -34,6 +34,18 @@ The method that the application will be developed with is (MVVM) Model–View–
 
 ![UseCase Diagram chess](https://user-images.githubusercontent.com/57666995/217797801-da0d21be-ed7f-4e36-af67-4f48024429a8.png)
 
+
+
+
+
+
+
+
+
+
+
+
+
 ## 4. Mockup
 
 The following are mockups for the application's main screens
@@ -49,6 +61,12 @@ Main start screen with 3 options to proceed.
 This screen would be use for changing dice and language.
 
 ![](https://i.imgur.com/6NtBCb5.png)
+
+
+
+
+
+
 
 ## Game screen
 
@@ -125,6 +143,14 @@ Testing phase, Preparing presentation
 ```
 Presentation
 ```
+
+
+
+
+
+
+
+
 
 
 
