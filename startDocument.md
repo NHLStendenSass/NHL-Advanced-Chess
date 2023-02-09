@@ -156,6 +156,7 @@ This is what we came up with after conducting research and considering various f
 ##### Should Have:
 
 - Voice command to navigate through game.
+- Quit the game.
 
 ##### Could Have:
 
