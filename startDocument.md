@@ -17,11 +17,11 @@
 
 Tung Do Xuan - Front-End
 
-Robin Michael Visser - (role)
+Robin Michael Visser - Back-End
 
 Sander Siimann - Back-End
 
-Levente Stieber - (role)
+Levente Stieber - Front-End
 
 ## 2. Application Description
 
