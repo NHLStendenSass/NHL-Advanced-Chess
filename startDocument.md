@@ -31,7 +31,7 @@ The method that the application will be developed with is (MVVM) Model–view–
 
 ## 3. Use Case Diagram
 
-![UseCase Diagram chess](https://user-images.githubusercontent.com/57666995/217285819-285cd642-12d8-4bf3-8ea0-d503185f8a76.png)
+![UseCase Diagram chess](https://user-images.githubusercontent.com/57666995/217797801-da0d21be-ed7f-4e36-af67-4f48024429a8.png)
 
 ## 4. Mockup
 
