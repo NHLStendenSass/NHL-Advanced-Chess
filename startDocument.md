@@ -12,6 +12,7 @@
 | 0.1.1   | Added Idea and some mock up                       | 06.02.2023 |
 | 0.1.2   | Added planning, Gantt chart, screen's description | 08.02.2023 |
 | 0.1.3   | Added rule from dice, update Figma link           | 08.02.2023 |
+| 0.1.2   | Added Application description                     | 09.02.2023 |
 
 ## 1. Group Roles
 
@@ -25,9 +26,9 @@ Levente Stieber - Front-End
 
 ## 2. Application Description
 
-A group of student wants to play chess that is different from normal. Students want to play chess using voice commands and use a random set of rules through a DnD dice.
+A group of student wants to play chess that is different from normal. Students want to play chess using voice commands and use a random set of rules through a DnD dice. User can use voice to move a piece (Ex. "D4 to F3") and also navigate through the application itself. User will be granted a dice roll randomly for his turn and receive a random rule from a set of special rules ( **Chapter 7.3**).
 
-The method that the application will be developed with is (MVVM) Model–view–viewmodel. this is a software architectural pattern that facilitates the separation of the development of the graphical user interface (the view). **(3)**
+The method that the application will be developed with is (MVVM) Model–View–ViewModel. this is a software architectural pattern that facilitates the separation of the development of the graphical user interface (the view). 
 
 ## 3. Use Case Diagram
 
