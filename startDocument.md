@@ -203,9 +203,16 @@ This is what we came up with after conducting research and considering various f
 ### 7.3 Special moves from dice
 
 - Chess piece moves to a random empty tile.
+- Chess piece moves to an empty tile the player chooses.
 - Chess piece moves twice in one turn.
 - Chess pieces exchanges base case rules. (E.g. Queen gets Knight's move)
 - Player loses turn.
+- Player can't move but instead can eliminate an opponent's piece by flipping a coin. (50-50%)
+- A pawn on the board is converted to another piece.
+- The player must move a specific piece (chosen randomly) on their turn, regardless of whether it's the best move to make.
+- The player can move their opponent's pieces (as if they were their own) for one turn.
+
+
 
 ## References
 
