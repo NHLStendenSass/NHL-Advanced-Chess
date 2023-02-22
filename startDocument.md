@@ -76,7 +76,7 @@ The game screen with chess pieces and microphone.
 
 ## 5. UML
 
-(add image here)
+![(add image here)](https://cdn.discordapp.com/attachments/1069641268956766292/1077901176663707680/UMLChessnt.png)
 
 ## 6. Planning
 
