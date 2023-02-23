@@ -12,7 +12,8 @@
 | 0.1.1   | Added Idea and some mock up                       | 06.02.2023 |
 | 0.1.2   | Added planning, Gantt chart, screen's description | 08.02.2023 |
 | 0.1.3   | Added rule from dice, update Figma link           | 08.02.2023 |
-| 0.1.2   | Added Application description                     | 09.02.2023 |
+| 0.1.4   | Added Application description                     | 09.02.2023 |
+| 0.1.5   | Added UML                                         | 21.02.2023 |
 
 ## 1. Group Roles
 
@@ -178,6 +179,7 @@ This is what we came up with after conducting research and considering various f
 - Menu screen
 - Option screen 
 - Game screen
+- Main special rules (**Chapter 7.3.1**)
 
 
 ##### Should Have:
@@ -194,6 +196,7 @@ This is what we came up with after conducting research and considering various f
 - Voice command: Rename pieces.
 - Different DnD dice options.
 - Different language option (E.g. Dutch, English)
+- Extra special rules (**Chapter 7.3.2**)
 
 ##### Will Not Have:
 
@@ -202,11 +205,16 @@ This is what we came up with after conducting research and considering various f
 
 ### 7.3 Special moves from dice
 
+#### 	7.3.1 Main special rules:
+
 - Chess piece moves to a random empty tile.
-- Chess piece moves to an empty tile the player chooses.
 - Chess piece moves twice in one turn.
 - Chess pieces exchanges base case rules. (E.g. Queen gets Knight's move)
 - Player loses turn.
+
+#### 	7.3.2 Extra special rules:
+
+- Chess piece moves to an empty tile the player chooses.
 - Player can't move but instead can eliminate an opponent's piece by flipping a coin. (50-50%)
 - A pawn on the board is converted to another piece.
 - The player must move a specific piece (chosen randomly) on their turn, regardless of whether it's the best move to make.
@@ -223,3 +231,5 @@ This APA references were used in the research and planning phase of the applicat
 (2): *D&D Dice Explained*. (2023.February 7). Die Hard Dice Store. https://www.dieharddice.com/pages/dnd-dice-explained
 
 (3): Wikipedia contributors. (2023, February 7). *Model–view–viewmodel*. Wikipedia. https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93viewmodel 
+
+(4): Chessn't UML. (n.d.). Class Diagram. https://cdn.discordapp.com/attachments/1069641268956766292/1077901176663707680/UMLChessnt.png
