@@ -79,6 +79,24 @@ The game screen with chess pieces and microphone.
 
 ![(add image here)](https://cdn.discordapp.com/attachments/1069641268956766292/1077901176663707680/UMLChessnt.png)
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ## 6. Planning
 
 ![The ganttchart](https://i.imgur.com/ABF5Bp1.png)
@@ -145,16 +163,6 @@ Testing phase, Preparing presentation
 Presentation
 ```
 
-
-
-
-
-
-
-
-
-
-
 ## 7. Features
 
 The Moscow method was used for this project to separate the various functionalities and determine which were more important than others. We used the Moscow method to separate the various functionalities within the various priorities.
@@ -219,8 +227,6 @@ This is what we came up with after conducting research and considering various f
 - A pawn on the board is converted to another piece.
 - The player must move a specific piece (chosen randomly) on their turn, regardless of whether it's the best move to make.
 - The player can move their opponent's pieces (as if they were their own) for one turn.
-
-
 
 ## References
 
