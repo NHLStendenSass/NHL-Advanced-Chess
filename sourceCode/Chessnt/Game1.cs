@@ -42,7 +42,7 @@ namespace Chessnt
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            _currentState = new MenuState(this, _graphics.GraphicsDevice, Content);
+            _currentState = new LoadingState(this, _graphics.GraphicsDevice, Content);
 
             // TODO: use this.Content to load your game content here
         }
