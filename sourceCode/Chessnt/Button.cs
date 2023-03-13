@@ -11,28 +11,21 @@ namespace Chessnt
         #region Fields
 
         private MouseState _currentMouse;
-
         private SpriteFont _font;
-
         private bool _isHovering;
-
         private MouseState _previousMouse;
-
         private Texture2D _texture;
         private float _scale;
+        private Rectangle mouseRectangle;
 
         #endregion
 
         #region Properties
-
         public event EventHandler Click;
-
         public bool Clicked { get; private set; }
-
         public Color PenColour { get; set; }
-
         public Vector2 Position { get; set; }
-
+        public string Text { get; set; }
         public Rectangle Rectangle
         {
             get
@@ -40,37 +33,31 @@ namespace Chessnt
                 return new Rectangle((int)Position.X, (int)Position.Y, _texture.Width * 3, _texture.Height * 3);
             }
         }
-
-        public string Text { get; set; }
-
         #endregion
 
         #region Methods
-
         public Button(Texture2D texture, SpriteFont font)
         {
             _texture = texture;
-
             _font = font;
-
             PenColour = Color.White;
         }
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
+            HoveringEffect();
+            DrawRectangleForButton(spriteBatch);
+            DrawButtonWithText(spriteBatch);
+        }
+
+        private void DrawRectangleForButton(SpriteBatch spriteBatch)
+        {
             var colour = Color.Black * 0.0f;
-
-            if (_isHovering)
-            {
-                PenColour = Color.Gray;
-            }
-            else
-            {
-                PenColour = Color.White;
-            }
-
             spriteBatch.Draw(_texture, Rectangle, colour);
+        }
 
+        private void DrawButtonWithText(SpriteBatch spriteBatch)
+        {
             if (!string.IsNullOrEmpty(Text))
             {
                 _scale = 1.010f;
@@ -85,12 +72,29 @@ namespace Chessnt
             }
         }
 
+        private void HoveringEffect()
+        {
+            if (_isHovering)
+            {
+                PenColour = Color.Gray;
+            }
+            else
+            {
+                PenColour = Color.White;
+            }
+        }
+
         public override void Update(GameTime gameTime)
+        {
+            MouseInteractButton();
+        }
+
+        private void MouseInteractButton()
         {
             _previousMouse = _currentMouse;
             _currentMouse = Mouse.GetState();
 
-            var mouseRectangle = new Rectangle(_currentMouse.X, _currentMouse.Y, 1, 1);
+            mouseRectangle = new Rectangle(_currentMouse.X, _currentMouse.Y, 1, 1);
 
             _isHovering = false;
 
