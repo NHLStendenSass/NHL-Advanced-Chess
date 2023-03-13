@@ -23,13 +23,10 @@ namespace Chessnt
         private Button optionButton;
         private Button exitButton;
 
-        private float titleScale;
-
-
         public MenuState(Game1 game, GraphicsDevice graphicsDevice, ContentManager content)
           : base(game, graphicsDevice, content)
         {
-            backgroundTexture = _content.Load<Texture2D>("Background_Menu");
+            backgroundTexture = _content.Load<Texture2D>("menu_background");
             buttonTexture = _content.Load<Texture2D>("Button");
             buttonFont = _content.Load<SpriteFont>("Font");
 
@@ -68,27 +65,44 @@ namespace Chessnt
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             spriteBatch.Begin();
-            spriteBatch.Draw(backgroundTexture, new Vector2(0, 0), Color.White);
 
-
-            titleScale = 1.015f;
-            spriteBatch.DrawString(buttonFont, "Chessn't", new Vector2(180, 140) + new Vector2(1 * titleScale, 1 * titleScale), Color.Black, 0, Vector2.Zero, titleScale, SpriteEffects.None, 1f);
-            spriteBatch.DrawString(buttonFont, "Chessn't", new Vector2(180, 140) + new Vector2(-1 * titleScale, 1 * titleScale), Color.Black, 0, Vector2.Zero, titleScale, SpriteEffects.None, 1f);
-            spriteBatch.DrawString(buttonFont, "Chessn't", new Vector2(180, 140) + new Vector2(-1 * titleScale, -1 * titleScale), Color.Black, 0, Vector2.Zero, titleScale, SpriteEffects.None, 1f);
-            spriteBatch.DrawString(buttonFont, "Chessn't", new Vector2(180, 140) + new Vector2(1 * titleScale, -1 * titleScale), Color.Black, 0, Vector2.Zero, titleScale, SpriteEffects.None, 1f);
-            spriteBatch.DrawString(buttonFont, "Chessn't", new Vector2(180, 140), Color.White);
-
-            foreach (var component in _components)
-            {
-                component.Draw(gameTime, spriteBatch);
-            }
+            DrawMenuBackground(spriteBatch);
+            DrawMenuTexts("Chessn't", 180, 140, 1.015f, spriteBatch);
+            DrawComponents(gameTime, spriteBatch);
 
             spriteBatch.End();
         }
 
+        private void DrawComponents(GameTime gameTime, SpriteBatch spriteBatch)
+        {
+            foreach (var component in _components)
+            {
+                component.Draw(gameTime, spriteBatch);
+            }
+        }
+
+        private void DrawMenuBackground(SpriteBatch spriteBatch)
+        {
+            spriteBatch.Draw(backgroundTexture, new Vector2(0, 0), Color.White);
+        }
+
+        private void DrawTextShadow(String text, int x, int y, float scale, SpriteBatch spriteBatch)
+        {
+            spriteBatch.DrawString(buttonFont, text, new Vector2(x, y) + new Vector2(1 * scale, 1 * scale), Color.Black, 0, Vector2.Zero, scale, SpriteEffects.None, 1f);
+            spriteBatch.DrawString(buttonFont, text, new Vector2(x, y) + new Vector2(-1 * scale, 1 * scale), Color.Black, 0, Vector2.Zero, scale, SpriteEffects.None, 1f);
+            spriteBatch.DrawString(buttonFont, text, new Vector2(x, y) + new Vector2(-1 * scale, -1 * scale), Color.Black, 0, Vector2.Zero, scale, SpriteEffects.None, 1f);
+            spriteBatch.DrawString(buttonFont, text, new Vector2(x, y) + new Vector2(1 * scale, -1 * scale), Color.Black, 0, Vector2.Zero, scale, SpriteEffects.None, 1f);
+        }
+
+        private void DrawMenuTexts(string text, int textX, int textY, float textScale, SpriteBatch spriteBatch)
+        {
+            DrawTextShadow(text, textX, textY, textScale, spriteBatch);
+            spriteBatch.DrawString(buttonFont, text, new Vector2(textX, textY), Color.White);
+        }
+
         private void OptionButton_Click(object sender, EventArgs e)
         {
-            Console.WriteLine("Load Game");
+            throw new NotImplementedException();
         }
 
         private void PlayButton_Click(object sender, EventArgs e)
@@ -104,7 +118,9 @@ namespace Chessnt
         public override void Update(GameTime gameTime)
         {
             foreach (var component in _components)
+            {
                 component.Update(gameTime);
+            }
         }
 
         private void QuitGameButton_Click(object sender, EventArgs e)
