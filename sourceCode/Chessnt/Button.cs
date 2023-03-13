@@ -47,7 +47,7 @@ namespace Chessnt
         {
             HoveringEffect();
             DrawRectangleForButton(spriteBatch);
-            DrawButtonWithText(spriteBatch);
+            DrawText(spriteBatch);
         }
 
         private void DrawRectangleForButton(SpriteBatch spriteBatch)
@@ -56,7 +56,7 @@ namespace Chessnt
             spriteBatch.Draw(_texture, Rectangle, colour);
         }
 
-        private void DrawButtonWithText(SpriteBatch spriteBatch)
+        private void DrawText(SpriteBatch spriteBatch)
         {
             if (!string.IsNullOrEmpty(Text))
             {
