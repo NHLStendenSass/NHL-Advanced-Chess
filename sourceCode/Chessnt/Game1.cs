@@ -6,8 +6,9 @@ namespace Chessnt
 {
     public class Game1 : Game
     {
-        private GraphicsDeviceManager _graphics;
+        private readonly GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
+        private GameManager _gameManager;
 
         public Game1()
         {
@@ -18,7 +19,13 @@ namespace Chessnt
 
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
+            Globals.WindowSize = new(640, 640);
+            _graphics.PreferredBackBufferWidth = Globals.WindowSize.X;
+            _graphics.PreferredBackBufferHeight = Globals.WindowSize.Y;
+            _graphics.ApplyChanges();
+
+            Globals.Content = Content;
+            _gameManager = new();
 
             base.Initialize();
         }
@@ -26,8 +33,7 @@ namespace Chessnt
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-
-            // TODO: use this.Content to load your game content here
+            Globals.SpriteBatch = _spriteBatch;
         }
 
         protected override void Update(GameTime gameTime)
@@ -35,16 +41,17 @@ namespace Chessnt
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            // TODO: Add your update logic here
+            Globals.Update(gameTime);
+            _gameManager.Update();
 
             base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Black);
 
-            // TODO: Add your drawing code here
+            _gameManager.Draw();
 
             base.Draw(gameTime);
         }
