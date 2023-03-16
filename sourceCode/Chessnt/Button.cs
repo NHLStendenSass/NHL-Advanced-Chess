@@ -16,7 +16,8 @@ namespace Chessnt
         private MouseState _previousMouse;
         private Texture2D _texture;
         private float _scale;
-        private Rectangle mouseRectangle;
+        private Rectangle _mouseRectangle;
+        private TextOutline _textOutline;
 
         #endregion
 
@@ -41,6 +42,7 @@ namespace Chessnt
             _texture = texture;
             _font = font;
             PenColour = Color.White;
+            _textOutline = new TextOutline(_font);
         }
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
@@ -64,11 +66,8 @@ namespace Chessnt
                 var x = (Rectangle.X + (Rectangle.Width / 2)) - (_font.MeasureString(Text).X / 2);
                 var y = (Rectangle.Y + (Rectangle.Height / 2)) - (_font.MeasureString(Text).Y / 2);
 
-                spriteBatch.DrawString(_font, Text, new Vector2(x, y) + new Vector2(1 * _scale, 1 * _scale), Color.Black, 0, Vector2.Zero, _scale, SpriteEffects.None, 1f);
-                spriteBatch.DrawString(_font, Text, new Vector2(x, y) + new Vector2(-1 * _scale, 1 * _scale), Color.Black, 0, Vector2.Zero, _scale, SpriteEffects.None, 1f);
-                spriteBatch.DrawString(_font, Text, new Vector2(x, y) + new Vector2(-1 * _scale, -1 * _scale), Color.Black, 0, Vector2.Zero, _scale, SpriteEffects.None, 1f);
-                spriteBatch.DrawString(_font, Text, new Vector2(x, y) + new Vector2(1 * _scale, -1 * _scale), Color.Black, 0, Vector2.Zero, _scale, SpriteEffects.None, 1f);
                 spriteBatch.DrawString(_font, Text, new Vector2(x, y), PenColour);
+                _textOutline.DrawTextOutLine(Text, x, y,_scale, spriteBatch);
             }
         }
 
@@ -94,11 +93,11 @@ namespace Chessnt
             _previousMouse = _currentMouse;
             _currentMouse = Mouse.GetState();
 
-            mouseRectangle = new Rectangle(_currentMouse.X, _currentMouse.Y, 1, 1);
+            _mouseRectangle = new Rectangle(_currentMouse.X, _currentMouse.Y, 1, 1);
 
             _isHovering = false;
 
-            if (mouseRectangle.Intersects(Rectangle))
+            if (_mouseRectangle.Intersects(Rectangle))
             {
                 _isHovering = true;
 

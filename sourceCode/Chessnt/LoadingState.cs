@@ -15,20 +15,23 @@ namespace Chessnt
     {
         private List<Component> _components;
 
-        private Texture2D backgroundTexture;
-        private Texture2D buttonTexture;
-        private SpriteFont buttonFont;
+        private Texture2D _backgroundTexture;
+        private Texture2D _buttonTexture;
+        private SpriteFont _buttonFont;
 
-        private Button playButton;
-        private Button optionButton;
-        private Button exitButton;
+        private Button _playButton;
+        private Button _optionButton;
+        private Button _exitButton;
+
+        private TextOutline _textOutline;
 
         public LoadingState(Game1 game, GraphicsDevice graphicsDevice, ContentManager content)
           : base(game, graphicsDevice, content)
         {
-            backgroundTexture = _content.Load<Texture2D>("loading_background");
-            buttonTexture = _content.Load<Texture2D>("Button");
-            buttonFont = _content.Load<SpriteFont>("Font");
+            _backgroundTexture = base.content.Load<Texture2D>("loading_background");
+            _buttonTexture = base.content.Load<Texture2D>("Button");
+            _buttonFont = base.content.Load<SpriteFont>("Font");
+            _textOutline = new TextOutline(_buttonFont);
         }
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
@@ -37,28 +40,19 @@ namespace Chessnt
 
             DrawMenuBackground(spriteBatch);
             DrawLoadingTexts("Chessn't", 600, 140, 1.01f, spriteBatch);
-            
 
             spriteBatch.End();
         }
 
         private void DrawMenuBackground(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(backgroundTexture, new Vector2(0, 0), Color.White);
+            spriteBatch.Draw(_backgroundTexture, new Vector2(0, 0), Color.White);
         }
 
-        private void DrawTextShadow(String text, int x, int y, float scale, SpriteBatch spriteBatch)
+        private void DrawLoadingTexts(string text, float textX, float textY, float textScale, SpriteBatch spriteBatch)
         {
-            spriteBatch.DrawString(buttonFont, text, new Vector2(x, y) + new Vector2(1 * scale, 1 * scale), Color.Black, 0, Vector2.Zero, scale, SpriteEffects.None, 1f);
-            spriteBatch.DrawString(buttonFont, text, new Vector2(x, y) + new Vector2(-1 * scale, 1 * scale), Color.Black, 0, Vector2.Zero, scale, SpriteEffects.None, 1f);
-            spriteBatch.DrawString(buttonFont, text, new Vector2(x, y) + new Vector2(-1 * scale, -1 * scale), Color.Black, 0, Vector2.Zero, scale, SpriteEffects.None, 1f);
-            spriteBatch.DrawString(buttonFont, text, new Vector2(x, y) + new Vector2(1 * scale, -1 * scale), Color.Black, 0, Vector2.Zero, scale, SpriteEffects.None, 1f);
-        }
-
-        private void DrawLoadingTexts(string text, int textX, int textY, float textScale, SpriteBatch spriteBatch)
-        {
-            DrawTextShadow(text, textX, textY, textScale, spriteBatch);
-            spriteBatch.DrawString(buttonFont, text, new Vector2(textX, textY), Color.White);
+            _textOutline.DrawTextOutLine(text, textX, textY, textScale, spriteBatch);
+            spriteBatch.DrawString(_buttonFont, text, new Vector2(textX, textY), Color.White);
         }
         public override void PostUpdate(GameTime gameTime)
         {
@@ -67,7 +61,8 @@ namespace Chessnt
 
         public override void Update(GameTime gameTime)
         {
-            Task.Delay(3000).ContinueWith(t => _game.ChangeState(new MenuState(_game, _graphicsDevice, _content)));
+            //TODO: Change to menu state after merge
+            //Task.Delay(3000).ContinueWith(t => game.ChangeState(new MenuState(game, graphicsDevice, content)));
         }
     }
 }

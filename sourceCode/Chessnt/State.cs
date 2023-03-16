@@ -13,11 +13,11 @@ namespace Chessnt
     {
         #region Fields
 
-        protected ContentManager _content;
+        protected ContentManager content;
 
-        protected GraphicsDevice _graphicsDevice;
+        protected GraphicsDevice graphicsDevice;
 
-        protected Game1 _game;
+        protected Game1 game;
 
         #endregion
 
@@ -29,11 +29,11 @@ namespace Chessnt
 
         public State(Game1 game, GraphicsDevice graphicsDevice, ContentManager content)
         {
-            _game = game;
+            this.game = game;
 
-            _graphicsDevice = graphicsDevice;
+            this.graphicsDevice = graphicsDevice;
 
-            _content = content;
+            this.content = content;
         }
 
         public abstract void Update(GameTime gameTime);
