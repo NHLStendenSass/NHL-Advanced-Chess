@@ -6,7 +6,6 @@ namespace Chessnt;
 public class GameManager
 {
     private readonly Map _map;
-    private readonly Hero _hero;
 
     public GameManager()
     {
