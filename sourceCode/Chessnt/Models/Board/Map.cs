@@ -1,7 +1,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Chessnt;
+namespace Chessnt.Models.Board;
 
 public class Map
 {
@@ -9,7 +9,7 @@ public class Map
     public Tile[,] Tiles { get; }
     public Point TileSize { get; }
 
-    public Vector2 MapToScreen(int x, int y) =>  new(x * TileSize.X, y * TileSize.Y);
+    public Vector2 MapToScreen(int x, int y) => new(x * TileSize.X, y * TileSize.Y);
     public (int x, int y) ScreenToMap(Vector2 pos) => ((int)pos.X / TileSize.X, (int)pos.Y / TileSize.Y);
 
     public Map()

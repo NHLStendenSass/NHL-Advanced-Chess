@@ -1,7 +1,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Chessnt;
+namespace Chessnt.Models.Board;
 
 public class Sprite
 {
