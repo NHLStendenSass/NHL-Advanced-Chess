@@ -19,6 +19,7 @@ namespace Chessnt.View
         public GameView(Main main, GraphicsDevice graphicsDevice, ContentManager content)
             : base(main, graphicsDevice, content)
         {
+            backgroundTexture = _content.Load<Texture2D>("bg1");
             Globals.Content = content;
             _gameManager = new GameManager();
         }
@@ -37,8 +38,8 @@ namespace Chessnt.View
         {
             spriteBatch.Begin();
 
+            DrawMenuBackground(spriteBatch);
             _gameManager.Draw();
-            //DrawMenuBackground(spriteBatch);
 
             spriteBatch.End();
         }
