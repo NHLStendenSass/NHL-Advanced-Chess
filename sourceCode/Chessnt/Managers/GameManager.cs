@@ -6,7 +6,7 @@ namespace Chessnt;
 
 public class GameManager
 {
-    private readonly Map _map;
+    private readonly Board _map;
 
     public GameManager()
     {

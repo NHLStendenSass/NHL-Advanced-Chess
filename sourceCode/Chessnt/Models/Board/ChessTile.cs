@@ -1,19 +1,21 @@
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Chessnt.Models.Board;
 
 public class Tile : Sprite
 {
-    public bool Blocked { get; set; }
-    public bool Path { get; set; }
-    private readonly int _mapX;
-    private readonly int _mapY;
+    public const int SIZE = 64;
+    private bool isWhite;
+    private Vector2 position;
+    private Texture2D texture;
 
-    public Tile(Texture2D texture, Vector2 position, int mapX, int mapY) : base(texture, position)
+    public Tile(bool isWhite, Vector2 position) : base(isWhite, position)
     {
-        _mapX = mapX;
-        _mapY = mapY;
+        this.isWhite = isWhite;
+        this.position = position;
+        this.texture = isWhite ? Globals.Content.Load<Texture2D>("white_tile") : Globals.Content.Load<Texture2D>("black_tile");
     }
 
     public void Update()
