@@ -107,6 +107,11 @@ namespace Chessnt
                 }
             }
         }
+
+        internal object ContinuousRecognitionWithKeywordSpottingAsync()
+        {
+            throw new NotImplementedException();
+        }
         #endregion
     }
 }

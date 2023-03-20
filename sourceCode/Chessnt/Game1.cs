@@ -11,8 +11,7 @@ namespace Chessnt
         public static Game1 Instance { get; private set; }
         private readonly GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-        private State _currentState;
-
+        public State _currentState;
         private State _nextState;
 
         public void ChangeState(State state)
