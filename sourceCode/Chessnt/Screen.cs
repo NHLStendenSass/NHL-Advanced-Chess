@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Chessnt
 {
-    public abstract class BaseView
+    public abstract class Screen
     {
         #region Fields
 
@@ -19,7 +19,7 @@ namespace Chessnt
 
         protected Main _main;
 
-        public BaseView(Main main, GraphicsDevice graphicsDevice, ContentManager content)
+        public Screen(Main main, GraphicsDevice graphicsDevice, ContentManager content)
         {
             _main = main;
 

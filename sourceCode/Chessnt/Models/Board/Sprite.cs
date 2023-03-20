@@ -5,22 +5,18 @@ namespace Chessnt.Models.Board;
 
 public class Sprite
 {
-    protected Texture2D texture;
-    public Vector2 Position { get; protected set; }
-    public Vector2 Origin { get; protected set; }
-    public Color Color { get; set; }
-    public Rectangle Rectangle => new((int)Position.X, (int)Position.Y, texture.Width, texture.Height);
+    private Texture2D _texture;
 
-    public Sprite(Texture2D texture, Vector2 position)
+    public Sprite(Texture2D texture)
     {
-        this.texture = texture;
-        Position = position;
-        Origin = Vector2.Zero;
-        Color = Color.White;
+        _texture = texture;
     }
 
-    public virtual void Draw()
+    //public Vector2 Position { get; set; }
+    //public Vector2 Size { get; set; }
+
+    public virtual void Draw(SpriteBatch spriteBatch, Rectangle rectangle)
     {
-        Globals.SpriteBatch.Draw(texture, Position, null, Color, 0f, Origin, 1f, SpriteEffects.None, 0f);
+        spriteBatch.Draw(_texture, rectangle, Color.White);
     }
 }

@@ -10,38 +10,33 @@ using System.Threading.Tasks;
 
 namespace Chessnt.View
 {
-    public class GameView : BaseView
+    public class GameScreen : Screen
     {
         private Texture2D backgroundTexture;
 
         private GameManager _gameManager;
         private SpriteBatch _spriteBatch;
-        public GameView(Main main, GraphicsDevice graphicsDevice, ContentManager content)
+        public GameScreen(Main main, GraphicsDevice graphicsDevice, ContentManager content)
             : base(main, graphicsDevice, content)
         {
-            backgroundTexture = _content.Load<Texture2D>("bg1");
             Globals.Content = content;
             _gameManager = new GameManager();
         }
 
-        protected void LoadContent()
+        public void LoadContent()
         {
             Globals.SpriteBatch = _spriteBatch;
+            backgroundTexture = Globals.Content.Load<Texture2D>("bg1");
         }
 
-        private void DrawMenuBackground(SpriteBatch spriteBatch)
+        public void DrawMenuBackground(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(backgroundTexture, new Vector2(0, 0), Color.White);
         }
 
-        public override void Draw(GameTime gameTime, SpriteBatch spriteBatch) 
+        public void DrawChessBoard()
         {
-            spriteBatch.Begin();
-
-            DrawMenuBackground(spriteBatch);
             _gameManager.Draw();
-
-            spriteBatch.End();
         }
 
         public override void PostUpdate(GameTime gameTime)
@@ -53,6 +48,16 @@ namespace Chessnt.View
         {
             Globals.Update(gameTime);
             _gameManager.Update();
+        }
+
+        public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+        {
+            spriteBatch.Begin();
+
+            DrawChessBoard();
+            DrawMenuBackground(spriteBatch);
+
+            spriteBatch.End();
         }
     }
 }

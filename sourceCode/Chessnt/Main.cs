@@ -10,8 +10,8 @@ namespace Chessnt
         private readonly GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
-        private BaseView _currentBaseView;
-        private BaseView _nextBaseView;
+        private Screen _currentBaseView;
+        private Screen _nextBaseView;
 
         public Main()
         {
@@ -20,7 +20,7 @@ namespace Chessnt
             IsMouseVisible = true;
         }
 
-        public void ChangeView(BaseView baseView)
+        public void ChangeView(Screen baseView)
         {
             _nextBaseView = baseView;
         }
@@ -44,7 +44,7 @@ namespace Chessnt
             Globals.SpriteBatch = _spriteBatch;
 
             //Screen management logic
-            _currentBaseView = new GameView(this, _graphics.GraphicsDevice, Content);
+            _currentBaseView = new GameScreen(this, _graphics.GraphicsDevice, Content);
         }
 
         protected override void Update(GameTime gameTime)

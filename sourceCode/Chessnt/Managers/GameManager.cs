@@ -6,20 +6,31 @@ namespace Chessnt;
 
 public class GameManager
 {
-    private readonly Board _map;
+    //private GraphicsDeviceManager graphics;
+    private SpriteBatch spriteBatch;
+
+    private ChessBoard _chessBoard;
+    private Texture2D whiteTexture;
+    private Texture2D blackTexture;
 
     public GameManager()
     {
-        _map = new();
+        _chessBoard = new ChessBoard(whiteTexture, blackTexture);
+    }
+
+    public void LoadContent()
+    {
+        whiteTexture = Globals.Content.Load<Texture2D>("solid_white");
+        blackTexture = Globals.Content.Load<Texture2D>("solid_black");
     }
 
     public void Update()
     {
-        _map.Update();
+        _chessBoard.Update();
     }
 
     public void Draw()
     {
-        _map.Draw();
+        _chessBoard.Draw(spriteBatch);
     }
 }
