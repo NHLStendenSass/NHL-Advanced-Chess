@@ -7,10 +7,9 @@ namespace Chessnt
 {
     public class Game1 : Game
     {
-        private GraphicsDeviceManager _graphics;
+        public GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-        private State _currentState;
-
+        public State _currentState;
         private State _nextState;
 
         public void ChangeState(State state)

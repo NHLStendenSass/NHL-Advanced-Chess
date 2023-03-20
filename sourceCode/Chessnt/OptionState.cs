@@ -11,11 +11,13 @@ namespace Chessnt
 {
     public class OptionState : State
     {
+        private VoiceCommand voiceCommand;
         private List<Component> _components;
         private Texture2D backgroundTexture;
         private Texture2D buttonTexture;
         private SpriteFont buttonFont;
         private Button saveButton;
+        private Button voiceButton;
 
         public OptionState(Game1 game, GraphicsDevice graphicsDevice, ContentManager content)
           : base(game, graphicsDevice, content)
@@ -23,16 +25,32 @@ namespace Chessnt
             backgroundTexture = _content.Load<Texture2D>("option_background");
             buttonTexture = _content.Load<Texture2D>("Button");
             buttonFont = _content.Load<SpriteFont>("Font");
+            voiceCommand = new VoiceCommand(game, graphicsDevice, content);
+
             saveButton = new Button(buttonTexture, buttonFont)
             {
                 Position = new Vector2(725, 875),
                 Text = "Save",
             };
             saveButton.Click += SaveButton_Click;
+
+            voiceButton = new Button(buttonTexture, buttonFont)
+            {
+                Position = new Vector2(600, 300),
+                Text = "Click to talk",
+            };
+            voiceButton.Click += VoiceButton_Click;
+
             _components = new List<Component>()
             {
                 saveButton,
+                voiceButton,
             };
+        }
+
+        private void VoiceButton_Click(object sender, EventArgs e)
+        {
+            voiceCommand.RecognitionWithMicrophoneAsync().Wait();
         }
 
         private void SaveButton_Click(object sender, EventArgs e)
