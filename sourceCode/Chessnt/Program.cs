@@ -1,3 +1,3 @@
 ﻿
-using var game = new Chessnt.Game1();
+using var game = new Chessnt.Main();
 game.Run();
