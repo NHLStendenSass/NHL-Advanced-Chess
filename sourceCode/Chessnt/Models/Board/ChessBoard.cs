@@ -1,69 +1,74 @@
+using Microsoft.VisualBasic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System.Collections.Generic;
 using System.Drawing;
+using Color = Microsoft.Xna.Framework.Color;
+using Point = Microsoft.Xna.Framework.Point;
+using Rectangle = Microsoft.Xna.Framework.Rectangle;
 
 namespace Chessnt.Models.Board;
 
 public class ChessBoard
 {
-    private Texture2D _whiteTexture;
-    private Texture2D _blackTexture;
-    private Tile[,] _tiles;
-    private const int BoardSize = 8;
+    private readonly int _numRows;
+    private readonly int _numCols;
+    private readonly int _tileSize;
+    private readonly Tile[,] _tiles;
 
-    public int Width { get; private set; }
-    public int Height { get; private set; }
 
-    public ChessBoard(Texture2D whiteTexture, Texture2D blackTexture)
+    //-------------
+
+
+    public ChessBoard(int numRows, int numCols, int tileSize)
     {
-        _blackTexture = blackTexture;
-        _whiteTexture = whiteTexture;
+        _numRows = numRows;
+        _numCols = numCols;
+        _tileSize = tileSize;
 
-        // Create tiles
-        _tiles = new Tile[BoardSize, BoardSize];
-        for (int row = 0; row < BoardSize; row++)
+        _tiles = new Tile[numRows, numCols];
+
+        int boardWidth = numCols * tileSize;
+        int boardHeight = numRows * tileSize;
+
+        int x = (Main.Instance.GraphicsDevice.Viewport.Width - boardWidth) / 2;
+        int y = (Main.Instance.GraphicsDevice.Viewport.Height - boardHeight) / 2;
+
+        for (int row = 0; row < numRows; row++)
         {
-            for (int col = 0; col < BoardSize; col++)
+            for (int col = 0; col < numCols; col++)
             {
-                if ((row + col) % 2 == 0)
-                {
-                    _tiles[row, col] = new Tile(whiteTexture);
-                }
-                else
-                {
-                    _tiles[row, col] = new Tile(blackTexture);
-                }
-
-                _tiles[row, col].Position = new Vector2(col * Tile.Size, row * Tile.Size);
+                Color tileColor = ((row + col) % 2 == 0) ? Color.White : Color.Black;
+                Vector2 tilePosition = new Vector2(x + col * tileSize, y + row * tileSize);
+                _tiles[row, col] = new Tile(tilePosition, tileSize, tileColor);
             }
         }
+
+        //--------
+        //Texture2D gridSquares = ContentService.Instance.Textures["Empty"];
+        //grid = new Sprite2D[8, 8];
+        //for (int i = 0; i < 8; i++)
+        //{
+        //    for (int j = 0; j < 8; j++)
+        //    {
+        //        grid[i, j] = new Sprite2D(gridSquares, new Rectangle(j * Constants.TILESIZE, i * Constants.TILESIZE, Constants.TILESIZE, Constants.TILESIZE), Color.Black);
+        //        if ((i + j) % 2 == 0) grid[i, j].Color = Color.White;
+        //    }
+        //}
+        //-------
     }
 
-    //public void SetTextures(Texture2D whiteTexture, Texture2D blackTexture)
-    //{
-    //    this.whiteTexture = whiteTexture;
-    //    this.blackTexture = blackTexture;
-    //}
 
-
-    public void Update()
+    public void Update(SpriteBatch spriteBatch)
     {
-        for (int row = 0; row < 8; row++)
-        {
-            for (int col = 0; col < 8; col++)
-            {
-                _tiles[row, col].Update();
-            }
-        }
+
     }
 
     public void Draw(SpriteBatch spriteBatch)
     {
         // Draw tiles
-        for (int row = 0; row < BoardSize; row++)
+        for (int row = 0; row < _numRows; row++)
         {
-            for (int col = 0; col < BoardSize; col++)
+            for (int col = 0; col < _numCols; col++)
             {
                 _tiles[row, col].Draw(spriteBatch);
             }

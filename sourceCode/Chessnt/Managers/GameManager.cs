@@ -10,23 +10,18 @@ public class GameManager
     private SpriteBatch spriteBatch;
 
     private ChessBoard _chessBoard;
-    private Texture2D whiteTexture;
-    private Texture2D blackTexture;
 
     public GameManager()
     {
-        _chessBoard = new ChessBoard(whiteTexture, blackTexture);
+        _chessBoard = new ChessBoard(8, 8, 64);
     }
 
     public void LoadContent()
     {
-        whiteTexture = Globals.Content.Load<Texture2D>("solid_white");
-        blackTexture = Globals.Content.Load<Texture2D>("solid_black");
     }
 
     public void Update()
     {
-        _chessBoard.Update();
     }
 
     public void Draw()

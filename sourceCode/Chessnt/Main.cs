@@ -7,6 +7,7 @@ namespace Chessnt
 {
     public class Main : Game
     {
+        public static Main Instance { get; private set; }
         private readonly GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
@@ -15,6 +16,7 @@ namespace Chessnt
 
         public Main()
         {
+            Instance = this;
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
@@ -42,6 +44,10 @@ namespace Chessnt
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             Globals.SpriteBatch = _spriteBatch;
+
+            // Create 1x1 white pixel texture
+            Globals.PixelTexture = new Texture2D(GraphicsDevice, 1, 1);
+            Globals.PixelTexture.SetData(new[] { Color.White });
 
             //Screen management logic
             _currentBaseView = new GameScreen(this, _graphics.GraphicsDevice, Content);
