@@ -2,7 +2,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Chessnt.Models.Board;
+namespace Chessnt;
 
 public class Tile : Sprite
 {

@@ -1,39 +1,46 @@
-﻿using Chessnt.View;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
 namespace Chessnt
 {
-    public class Main : Game
+    public class Game1 : Game
     {
         private readonly GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
+        private GameManager _gameManager;
 
+<<<<<<< HEAD:sourceCode/Chessnt/Main.cs
         private Screen _currentBaseView;
         private Screen _nextBaseView;
 
         public Main()
+=======
+        public Game1()
+>>>>>>> parent of 7430d80 (update of using view manager):sourceCode/Chessnt/Game1.cs
         {
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
         }
 
+<<<<<<< HEAD:sourceCode/Chessnt/Main.cs
         public void ChangeView(Screen baseView)
         {
             _nextBaseView = baseView;
         }
 
+=======
+>>>>>>> parent of 7430d80 (update of using view manager):sourceCode/Chessnt/Game1.cs
         protected override void Initialize()
         {
-            Globals.WindowSize = new(1920, 1080);
+            Globals.WindowSize = new(640, 640);
             _graphics.PreferredBackBufferWidth = Globals.WindowSize.X;
             _graphics.PreferredBackBufferHeight = Globals.WindowSize.Y;
             _graphics.ApplyChanges();
 
-            //Globals.Content = Content;
-            //_gameManager = new();
+            Globals.Content = Content;
+            _gameManager = new();
 
             base.Initialize();
         }
@@ -42,9 +49,12 @@ namespace Chessnt
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             Globals.SpriteBatch = _spriteBatch;
+<<<<<<< HEAD:sourceCode/Chessnt/Main.cs
 
             //Screen management logic
             _currentBaseView = new GameScreen(this, _graphics.GraphicsDevice, Content);
+=======
+>>>>>>> parent of 7430d80 (update of using view manager):sourceCode/Chessnt/Game1.cs
         }
 
         protected override void Update(GameTime gameTime)
@@ -52,25 +62,17 @@ namespace Chessnt
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            if (_nextBaseView != null)
-            {
-                _currentBaseView = _nextBaseView;
-
-                _nextBaseView = null;
-            }
-
-            _currentBaseView.Update(gameTime);
-
-            _currentBaseView.PostUpdate(gameTime);
+            Globals.Update(gameTime);
+            _gameManager.Update();
 
             base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.White);
+            GraphicsDevice.Clear(Color.Black);
 
-            _currentBaseView.Draw(gameTime, _spriteBatch);
+            _gameManager.Draw();
 
             base.Draw(gameTime);
         }
