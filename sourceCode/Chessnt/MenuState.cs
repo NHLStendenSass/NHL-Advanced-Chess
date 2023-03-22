@@ -15,50 +15,53 @@ namespace Chessnt
     {
         private List<Component> _components;
 
-        private Texture2D backgroundTexture;
-        private Texture2D buttonTexture;
-        private SpriteFont buttonFont;
+        private Texture2D _backgroundTexture;
+        private Texture2D _buttonTexture;
+        private SpriteFont _buttonFont;
 
-        private Button playButton;
-        private Button optionButton;
-        private Button exitButton;
+        private Button _playButton;
+        private Button _optionButton;
+        private Button _exitButton;
+
+        private TextOutline _textOutline;
 
         public MenuState(Game1 game, GraphicsDevice graphicsDevice, ContentManager content)
           : base(game, graphicsDevice, content)
         {
-            backgroundTexture = _content.Load<Texture2D>("menu_background");
-            buttonTexture = _content.Load<Texture2D>("Button");
-            buttonFont = _content.Load<SpriteFont>("Font");
+            _backgroundTexture = base.content.Load<Texture2D>("menu_background");
+            _buttonTexture = base.content.Load<Texture2D>("Button");
+            _buttonFont = base.content.Load<SpriteFont>("Font");
+            _textOutline = new TextOutline(_buttonFont);
 
-            playButton = new Button(buttonTexture, buttonFont)
+            _playButton = new Button(_buttonTexture, _buttonFont)
             {
                 Position = new Vector2(150, 400),
                 Text = "Play",
             };
 
-            playButton.Click += PlayButton_Click;
+            _playButton.Click += PlayButton_Click;
 
-            optionButton = new Button(buttonTexture, buttonFont)
+            _optionButton = new Button(_buttonTexture, _buttonFont)
             {
                 Position = new Vector2(270, 550),
                 Text = "Option",
             };
 
-            optionButton.Click += OptionButton_Click;
+            _optionButton.Click += OptionButton_Click;
 
-            exitButton = new Button(buttonTexture, buttonFont)
+            _exitButton = new Button(_buttonTexture, _buttonFont)
             {
                 Position = new Vector2(135, 700),
                 Text = "Exit",
             };
 
-            exitButton.Click += QuitGameButton_Click;
+            _exitButton.Click += QuitGameButton_Click;
 
             _components = new List<Component>()
                   {
-                    playButton,
-                    optionButton,
-                    exitButton,
+                    _playButton,
+                    _optionButton,
+                    _exitButton,
                   };
         }
 
@@ -67,6 +70,7 @@ namespace Chessnt
             spriteBatch.Begin();
 
             DrawMenuBackground(spriteBatch);
+           
             DrawMenuTexts("Chessn't", 180, 140, 1.015f, spriteBatch);
             DrawComponents(gameTime, spriteBatch);
 
@@ -83,21 +87,13 @@ namespace Chessnt
 
         private void DrawMenuBackground(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(backgroundTexture, new Vector2(0, 0), Color.White);
-        }
-
-        private void DrawTextShadow(String text, int x, int y, float scale, SpriteBatch spriteBatch)
-        {
-            spriteBatch.DrawString(buttonFont, text, new Vector2(x, y) + new Vector2(1 * scale, 1 * scale), Color.Black, 0, Vector2.Zero, scale, SpriteEffects.None, 1f);
-            spriteBatch.DrawString(buttonFont, text, new Vector2(x, y) + new Vector2(-1 * scale, 1 * scale), Color.Black, 0, Vector2.Zero, scale, SpriteEffects.None, 1f);
-            spriteBatch.DrawString(buttonFont, text, new Vector2(x, y) + new Vector2(-1 * scale, -1 * scale), Color.Black, 0, Vector2.Zero, scale, SpriteEffects.None, 1f);
-            spriteBatch.DrawString(buttonFont, text, new Vector2(x, y) + new Vector2(1 * scale, -1 * scale), Color.Black, 0, Vector2.Zero, scale, SpriteEffects.None, 1f);
+            spriteBatch.Draw(_backgroundTexture, new Vector2(0, 0), Color.White);
         }
 
         private void DrawMenuTexts(string text, int textX, int textY, float textScale, SpriteBatch spriteBatch)
         {
-            DrawTextShadow(text, textX, textY, textScale, spriteBatch);
-            spriteBatch.DrawString(buttonFont, text, new Vector2(textX, textY), Color.White);
+            _textOutline.DrawTextOutLine(text, textX, textY, textScale, spriteBatch);
+            spriteBatch.DrawString(_buttonFont, text, new Vector2(textX, textY), Color.White);
         }
 
         private void OptionButton_Click(object sender, EventArgs e)
@@ -126,7 +122,7 @@ namespace Chessnt
 
         private void QuitGameButton_Click(object sender, EventArgs e)
         {
-            _game.Exit();
+            game.Exit();
         }
     }
 }
