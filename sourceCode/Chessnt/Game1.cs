@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualBasic;
+﻿using Chessnt.View;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -7,7 +8,8 @@ namespace Chessnt
 {
     public class Game1 : Game
     {
-        private GraphicsDeviceManager _graphics;
+        public static Game1 Instance { get; private set; }
+        private readonly GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         private State _currentState;
 
@@ -18,8 +20,12 @@ namespace Chessnt
             _nextState = state;
         }
 
+        private State _currentBaseView;
+        private State _nextBaseView;
+
         public Game1()
         {
+            Instance = this;
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
 
@@ -32,9 +38,20 @@ namespace Chessnt
             IsMouseVisible = true;
         }
 
+        public void ChangeView(State baseView)
+        {
+            _nextBaseView = baseView;
+        }
+
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
+            Globals.WindowSize = new(1920, 1080);
+            _graphics.PreferredBackBufferWidth = Globals.WindowSize.X;
+            _graphics.PreferredBackBufferHeight = Globals.WindowSize.Y;
+            _graphics.ApplyChanges();
+
+            //Globals.Content = Content;
+            //_gameManager = new();
 
             base.Initialize();
         }
@@ -43,8 +60,14 @@ namespace Chessnt
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             _currentState = new LoadingState(this, _graphics.GraphicsDevice, Content);
+            Globals.SpriteBatch = _spriteBatch;
 
-            // TODO: use this.Content to load your game content here
+            // Create 1x1 white pixel texture
+            Globals.PixelTexture = new Texture2D(GraphicsDevice, 1, 1);
+            Globals.PixelTexture.SetData(new[] { Color.White });
+
+            //Screen management logic
+            _currentBaseView = new GameState(this, _graphics.GraphicsDevice, Content);
         }
 
         protected override void Update(GameTime gameTime)
