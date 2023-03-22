@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Chessnt.View
 {
-    public class GameScreen : State
+    public class GameState : State
     {
         private Texture2D _backgroundTexture;
 
@@ -20,7 +20,7 @@ namespace Chessnt.View
 
         private SpriteBatch _spriteBatch;
 
-        public GameScreen(Main main, GraphicsDevice graphicsDevice, ContentManager content)
+        public GameState(Game1 main, GraphicsDevice graphicsDevice, ContentManager content)
             : base(main, graphicsDevice, content)
         {
             Globals.Content = content;

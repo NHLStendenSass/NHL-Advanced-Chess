@@ -17,9 +17,9 @@ namespace Chessnt
 
         protected GraphicsDevice _graphicsDevice;
 
-        protected Main _main;
+        protected Game1 _main;
 
-        public State(Main main, GraphicsDevice graphicsDevice, ContentManager content)
+        public State(Game1 main, GraphicsDevice graphicsDevice, ContentManager content)
         {
             _main = main;
 

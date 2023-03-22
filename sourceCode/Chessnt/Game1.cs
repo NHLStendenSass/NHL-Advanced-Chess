@@ -5,16 +5,16 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Chessnt
 {
-    public class Main : Game
+    public class Game1 : Game
     {
-        public static Main Instance { get; private set; }
+        public static Game1 Instance { get; private set; }
         private readonly GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
         private State _currentBaseView;
         private State _nextBaseView;
 
-        public Main()
+        public Game1()
         {
             Instance = this;
             _graphics = new GraphicsDeviceManager(this);
@@ -50,7 +50,7 @@ namespace Chessnt
             Globals.PixelTexture.SetData(new[] { Color.White });
 
             //Screen management logic
-            _currentBaseView = new GameScreen(this, _graphics.GraphicsDevice, Content);
+            _currentBaseView = new GameState(this, _graphics.GraphicsDevice, Content);
         }
 
         protected override void Update(GameTime gameTime)

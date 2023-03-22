@@ -30,8 +30,8 @@ public class ChessBoard
         int boardWidth = numCols * tileSize;
         int boardHeight = numRows * tileSize;
 
-        int x = (Main.Instance.GraphicsDevice.Viewport.Width - boardWidth) / 2;
-        int y = (Main.Instance.GraphicsDevice.Viewport.Height - boardHeight) / 2;
+        int x = (Game1.Instance.GraphicsDevice.Viewport.Width - boardWidth) / 2;
+        int y = (Game1.Instance.GraphicsDevice.Viewport.Height - boardHeight) / 2;
 
         for (int row = 0; row < numRows; row++)
         {
