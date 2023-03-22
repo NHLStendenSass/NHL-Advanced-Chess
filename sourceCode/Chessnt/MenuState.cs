@@ -107,7 +107,8 @@ namespace Chessnt
 
         private void PlayButton_Click(object sender, EventArgs e)
         {
-            _game.ChangeState(new GameState(_game, _graphicsDevice, _content));
+            //_game.ChangeState(new GameState(_game, _graphicsDevice, _content));
+            throw new NotImplementedException();
         }
 
         public override void PostUpdate(GameTime gameTime)
