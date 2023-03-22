@@ -24,7 +24,7 @@ namespace Chessnt.View
             : base(main, graphicsDevice, content)
         {
             Globals.Content = content;
-            _board = new(numRows: 8, numCols: 8, tileSize: 64);
+            _board = new(numRows: 8, numCols: 8, tileSize: 100);
             _backgroundTexture = Globals.Content.Load<Texture2D>("bg1");
             
             //_gameManager = new GameManager();
