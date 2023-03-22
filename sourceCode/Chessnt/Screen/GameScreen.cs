@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Chessnt.View
 {
-    public class GameScreen : Screen
+    public class GameScreen : State
     {
         private Texture2D _backgroundTexture;
 

@@ -11,8 +11,8 @@ namespace Chessnt
         private readonly GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
-        private Screen _currentBaseView;
-        private Screen _nextBaseView;
+        private State _currentBaseView;
+        private State _nextBaseView;
 
         public Main()
         {
@@ -22,7 +22,7 @@ namespace Chessnt
             IsMouseVisible = true;
         }
 
-        public void ChangeView(Screen baseView)
+        public void ChangeView(State baseView)
         {
             _nextBaseView = baseView;
         }
