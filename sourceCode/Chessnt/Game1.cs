@@ -45,9 +45,9 @@ namespace Chessnt
 
         protected override void Initialize()
         {
-            Globals.WindowSize = new(1920, 1080);
-            _graphics.PreferredBackBufferWidth = Globals.WindowSize.X;
-            _graphics.PreferredBackBufferHeight = Globals.WindowSize.Y;
+            //Globals.WindowSize = new(1920, 1080);
+            //_graphics.PreferredBackBufferWidth = Globals.WindowSize.X;
+            //_graphics.PreferredBackBufferHeight = Globals.WindowSize.Y;
             _graphics.ApplyChanges();
 
             //Globals.Content = Content;
@@ -66,8 +66,6 @@ namespace Chessnt
             Globals.PixelTexture = new Texture2D(GraphicsDevice, 1, 1);
             Globals.PixelTexture.SetData(new[] { Color.White });
 
-            //Screen management logic
-            _currentBaseView = new GameState(this, _graphics.GraphicsDevice, Content);
         }
 
         protected override void Update(GameTime gameTime)

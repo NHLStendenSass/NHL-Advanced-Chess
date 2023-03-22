@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using static System.Net.Mime.MediaTypeNames;
 using System.Xml.Linq;
+using Chessnt.View;
 
 namespace Chessnt
 {
@@ -104,8 +105,7 @@ namespace Chessnt
 
         private void PlayButton_Click(object sender, EventArgs e)
         {
-            //_game.ChangeState(new GameState(_game, _graphicsDevice, _content));
-            throw new NotImplementedException();
+            game.ChangeState(new GameState(game, graphicsDevice, content));
         }
 
         public override void PostUpdate(GameTime gameTime)
