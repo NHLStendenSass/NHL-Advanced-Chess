@@ -12,39 +12,42 @@ namespace Chessnt
     public class OptionState : State
     {
         private List<Component> _components;
-        private Texture2D backgroundTexture;
-        private Texture2D buttonTexture;
-        private SpriteFont buttonFont;
-        private Button saveButton;
+        private Texture2D _backgroundTexture;
+        private Texture2D _buttonTexture;
+        private SpriteFont _buttonFont;
+        private Button _saveButton;
+        private TextOutline _textOutline;
 
         public OptionState(Game1 game, GraphicsDevice graphicsDevice, ContentManager content)
           : base(game, graphicsDevice, content)
         {
-            backgroundTexture = _content.Load<Texture2D>("option_background");
-            buttonTexture = _content.Load<Texture2D>("Button");
-            buttonFont = _content.Load<SpriteFont>("Font");
-            saveButton = new Button(buttonTexture, buttonFont)
+            _backgroundTexture = base.content.Load<Texture2D>("option_background");
+            _buttonTexture = base.content.Load<Texture2D>("Button");
+            _buttonFont = base.content.Load<SpriteFont>("Font");
+            _textOutline = new TextOutline(_buttonFont);
+
+            _saveButton = new Button(_buttonTexture, _buttonFont)
             {
                 Position = new Vector2(725, 875),
                 Text = "Save",
             };
-            saveButton.Click += SaveButton_Click;
+            _saveButton.Click += SaveButton_Click;
             _components = new List<Component>()
             {
-                saveButton,
+                _saveButton,
             };
         }
 
         private void SaveButton_Click(object sender, EventArgs e)
         {
-            _game.ChangeState(new MenuState(_game, _graphicsDevice, _content));
+            game.ChangeState(new MenuState(game, graphicsDevice, content));
         }
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             spriteBatch.Begin();
 
-            spriteBatch.Draw(backgroundTexture, new Vector2(0, 0), Color.White);
+            spriteBatch.Draw(_backgroundTexture, new Vector2(0, 0), Color.White);
 
             DrawOptionTexts("Option", 650, 50, 1.015f, spriteBatch);
             DrawOptionTexts("Voice:", 150, 250, 1.015f, spriteBatch);
@@ -79,16 +82,8 @@ namespace Chessnt
 
         private void DrawOptionTexts(string text, int textX, int textY, float textScale, SpriteBatch spriteBatch)
         {
-            DrawTextShadow(text, textX, textY, textScale, spriteBatch);
-            spriteBatch.DrawString(buttonFont, text, new Vector2(textX, textY), Color.White);
-        }
-        
-        private void DrawTextShadow(String text, int x, int y, float scale, SpriteBatch spriteBatch)
-        {
-            spriteBatch.DrawString(buttonFont, text, new Vector2(x, y) + new Vector2(1 * scale, 1 * scale), Color.Black, 0, Vector2.Zero, scale, SpriteEffects.None, 1f);
-            spriteBatch.DrawString(buttonFont, text, new Vector2(x, y) + new Vector2(-1 * scale, 1 * scale), Color.Black, 0, Vector2.Zero, scale, SpriteEffects.None, 1f);
-            spriteBatch.DrawString(buttonFont, text, new Vector2(x, y) + new Vector2(-1 * scale, -1 * scale), Color.Black, 0, Vector2.Zero, scale, SpriteEffects.None, 1f);
-            spriteBatch.DrawString(buttonFont, text, new Vector2(x, y) + new Vector2(1 * scale, -1 * scale), Color.Black, 0, Vector2.Zero, scale, SpriteEffects.None, 1f);
+            _textOutline.DrawTextOutLine(text, textX, textY, textScale, spriteBatch);
+            spriteBatch.DrawString(_buttonFont, text, new Vector2(textX, textY), Color.White);
         }
     }
 }

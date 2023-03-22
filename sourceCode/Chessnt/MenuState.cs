@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using static System.Net.Mime.MediaTypeNames;
+using System.Xml.Linq;
 
 namespace Chessnt
 {
@@ -98,7 +99,7 @@ namespace Chessnt
 
         private void OptionButton_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            game.ChangeState(new OptionState(game, graphicsDevice, content));
         }
 
         private void PlayButton_Click(object sender, EventArgs e)
