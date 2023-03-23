@@ -2,12 +2,14 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.ApplicationModel.Contacts;
 
 namespace Chessnt.View
 {
@@ -17,8 +19,10 @@ namespace Chessnt.View
 
         //private GameManager _gameManager;
         private ChessBoard _board;
-
         private SpriteBatch _spriteBatch;
+        private Die _die;
+        private int _dieX;
+        private int _dieY;
 
         public GameState(Game1 main, GraphicsDevice graphicsDevice, ContentManager content)
             : base(main, graphicsDevice, content)
@@ -26,7 +30,10 @@ namespace Chessnt.View
             Globals.Content = content;
             _board = new(numRows: 8, numCols: 8, tileSize: 100);
             _backgroundTexture = Globals.Content.Load<Texture2D>("bg1");
-            
+            _dieX = 900;
+            _dieY = 0;
+            _die = new Die(Globals.Content.Load<Texture2D>("dnd"), new Vector2(_dieX, _dieY));
+
             //_gameManager = new GameManager();
         }
 
@@ -52,18 +59,25 @@ namespace Chessnt.View
 
         public override void Update(GameTime gameTime)
         {
+            MouseState currentMouseState = Mouse.GetState();
+            Point mousePosition = new Point(currentMouseState.X, currentMouseState.Y);
+
+            if (mousePosition.X > _dieX && mousePosition.X < _dieX + _die.getWidth() && mousePosition.Y > _dieY && mousePosition.Y < _dieY + _die.getHeight() && currentMouseState.LeftButton == ButtonState.Pressed && !_die.IsRolling())
+            {
+                _die.Roll();
+            }
+
+            _die.Update();
+
             Globals.Update(gameTime);
             //_gameManager.Update();
         }
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            spriteBatch.Begin();
-
             DrawMenuBackground(spriteBatch);
             DrawChessBoard(spriteBatch);
-
-            spriteBatch.End();
+            _die.Draw(spriteBatch, Globals.Content.Load<SpriteFont>("diceFont"));
         }
     }
 }
