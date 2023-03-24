@@ -32,7 +32,7 @@ namespace Chessnt.View
             _backgroundTexture = Globals.Content.Load<Texture2D>("gamebg");
             _dieX = 1510;
             _dieY = 390;
-            _die = new Die(Globals.Content.Load<Texture2D>("dnd"), new Vector2(_dieX, _dieY));
+            _die = new Die(Globals.Content.Load<Texture2D>("dndWhite"), new Vector2(_dieX, _dieY));
 
             //_gameManager = new GameManager();
         }

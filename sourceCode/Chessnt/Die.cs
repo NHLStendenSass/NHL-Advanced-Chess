@@ -65,7 +65,7 @@ namespace Chessnt
         {
             Rectangle destRect = new Rectangle((int)_position.X, (int)_position.Y, _width, _height);
             spriteBatch.Draw(_texture, destRect, Color.White);
-            spriteBatch.DrawString(font, _value.ToString(), new Vector2(_position.X + _width / 2, _position.Y + _height / 2), Color.Black, 0f, new Vector2(font.MeasureString(_value.ToString()).X / 2, font.MeasureString(_value.ToString()).Y / 2), 1f, SpriteEffects.None, 0f);
+            spriteBatch.DrawString(font, _value.ToString(), new Vector2(_position.X + _width / 2, _position.Y + _height / 2), Color.White, 0f, new Vector2(font.MeasureString(_value.ToString()).X / 2, font.MeasureString(_value.ToString()).Y / 2), 1f, SpriteEffects.None, 0f);
         }
     }
 }
