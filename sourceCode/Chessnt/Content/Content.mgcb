@@ -32,6 +32,13 @@
 /processorParam:TextureFormat=Compressed
 /build:diceFont.spritefont
 
+#begin diceFontOutline.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:diceFontOutline.spritefont
+
 #begin dnd.png
 /importer:TextureImporter
 /processor:TextureProcessor

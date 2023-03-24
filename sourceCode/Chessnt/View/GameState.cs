@@ -77,7 +77,7 @@ namespace Chessnt.View
         {
             DrawMenuBackground(spriteBatch);
             DrawChessBoard(spriteBatch);
-            _die.Draw(spriteBatch, Globals.Content.Load<SpriteFont>("diceFont"));
+            _die.Draw(spriteBatch, Globals.Content.Load<SpriteFont>("diceFont"), Globals.Content.Load<SpriteFont>("diceFontOutline"));
         }
     }
 }
