@@ -29,9 +29,9 @@ namespace Chessnt.View
         {
             Globals.Content = content;
             _board = new(numRows: 8, numCols: 8, tileSize: 100);
-            _backgroundTexture = Globals.Content.Load<Texture2D>("bg1");
-            _dieX = 900;
-            _dieY = 0;
+            _backgroundTexture = Globals.Content.Load<Texture2D>("gamebg");
+            _dieX = 1510;
+            _dieY = 390;
             _die = new Die(Globals.Content.Load<Texture2D>("dnd"), new Vector2(_dieX, _dieY));
 
             //_gameManager = new GameManager();

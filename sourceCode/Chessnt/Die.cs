@@ -14,8 +14,8 @@ namespace Chessnt
         private int _rollCounter;
         private int _rollSpeed;
         private int _maxRollCount;
-        private int _width = 130;
-        private int _height = 150;
+        private int _width = 260;
+        private int _height = 300;
 
         public Die(Texture2D texture, Vector2 position)
         {
