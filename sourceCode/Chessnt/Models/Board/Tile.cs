@@ -6,7 +6,7 @@ namespace Chessnt.Models.Board;
 
 public class Tile
 {
-    private readonly Vector2 _position;
+    private Vector2 _position;
     private readonly int _size;
     private readonly Color _color;
 
@@ -18,6 +18,15 @@ public class Tile
         _size = size;
         _color = color;
     }
+
+    public Vector2 getPosition{ get { return this._position; } }
+    public void setPosition(float valueX, float valueY) 
+    {
+        _position.X = valueX;
+        _position.Y = valueY;
+    }
+    public int getSize { get { return this._size;} }
+    public Color GetColor { get { return this._color;} }
 
     public void Draw(SpriteBatch spriteBatch)
     {
