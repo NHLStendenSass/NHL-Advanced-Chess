@@ -3,6 +3,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Chessnt.Chess.Managers;
 
 namespace Chessnt
 {
@@ -61,7 +62,7 @@ namespace Chessnt
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             _currentState = new LoadingState(this, _graphics.GraphicsDevice, Content);
             Globals.SpriteBatch = _spriteBatch;
-
+            ContentService.Instance.LoadContent(this.Content, GraphicsDevice, _spriteBatch);
             // Create 1x1 white pixel texture
             Globals.PixelTexture = new Texture2D(GraphicsDevice, 1, 1);
             Globals.PixelTexture.SetData(new[] { Color.White });

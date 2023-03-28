@@ -16,7 +16,7 @@ namespace Chessnt.View
         private Texture2D _backgroundTexture;
 
         //private GameManager _gameManager;
-        private ChessBoard _board;
+        private ChessBoard board;
 
         private SpriteBatch _spriteBatch;
 
@@ -24,9 +24,9 @@ namespace Chessnt.View
             : base(main, graphicsDevice, content)
         {
             Globals.Content = content;
-            _board = new(numRows: 8, numCols: 8, tileSize: 100);
+            board = new ChessBoard();
             _backgroundTexture = Globals.Content.Load<Texture2D>("bg1");
-            
+
             //_gameManager = new GameManager();
         }
 
@@ -42,28 +42,32 @@ namespace Chessnt.View
 
         public void DrawChessBoard(SpriteBatch spriteBatch)
         {
-            _board.Draw(spriteBatch);
+            board.Draw(spriteBatch);
         }
 
         public override void PostUpdate(GameTime gameTime)
-        { 
-        
+        {
+
         }
 
-        public override void Update(GameTime gameTime)
+        public void ChessUpdate(GameTime gameTime, Input curInput, Input prevInput)
         {
-            Globals.Update(gameTime);
-            //_gameManager.Update();
+            board.Update(gameTime, curInput, prevInput);
         }
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             spriteBatch.Begin();
-
             DrawMenuBackground(spriteBatch);
             DrawChessBoard(spriteBatch);
-
             spriteBatch.End();
+        }
+
+        public override void Update(GameTime gameTime)
+        {
+            Input curInput= new Input();
+            Input prevInput = new Input();
+            ChessUpdate(gameTime, curInput, prevInput);
         }
     }
 }

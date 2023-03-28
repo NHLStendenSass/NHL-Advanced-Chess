@@ -4,15 +4,21 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
-    <File>D:/Github/NHL-Advanced-Chess/sourceCode/Chessnt/Content/bg1.png</File>
-    <File>D:/Github/NHL-Advanced-Chess/sourceCode/Chessnt/Content/Button.png</File>
-    <File>D:/Github/NHL-Advanced-Chess/sourceCode/Chessnt/Content/Font.spritefont</File>
-    <File>D:/Github/NHL-Advanced-Chess/sourceCode/Chessnt/Content/hero.png</File>
-    <File>D:/Github/NHL-Advanced-Chess/sourceCode/Chessnt/Content/loading_background.png</File>
-    <File>D:/Github/NHL-Advanced-Chess/sourceCode/Chessnt/Content/menu_background.png</File>
-    <File>D:/Github/NHL-Advanced-Chess/sourceCode/Chessnt/Content/option_background.png</File>
+    <File>C:/Users/Tung Xuan Do/Documents/GitHub/NHL-Advanced-Chess/sourceCode/Chessnt/Content/../../../../../../Downloads/WhiteEmpty.png</File>
+    <File>C:/Users/Tung Xuan Do/Documents/GitHub/NHL-Advanced-Chess/sourceCode/Chessnt/Content/bg1.png</File>
+    <File>C:/Users/Tung Xuan Do/Documents/GitHub/NHL-Advanced-Chess/sourceCode/Chessnt/Content/Button.png</File>
+    <File>C:/Users/Tung Xuan Do/Documents/GitHub/NHL-Advanced-Chess/sourceCode/Chessnt/Content/ChessPieces.png</File>
+    <File>C:/Users/Tung Xuan Do/Documents/GitHub/NHL-Advanced-Chess/sourceCode/Chessnt/Content/Circle.png</File>
+    <File>C:/Users/Tung Xuan Do/Documents/GitHub/NHL-Advanced-Chess/sourceCode/Chessnt/Content/Font.spritefont</File>
+    <File>C:/Users/Tung Xuan Do/Documents/GitHub/NHL-Advanced-Chess/sourceCode/Chessnt/Content/hero.png</File>
+    <File>C:/Users/Tung Xuan Do/Documents/GitHub/NHL-Advanced-Chess/sourceCode/Chessnt/Content/loading_background.png</File>
+    <File>C:/Users/Tung Xuan Do/Documents/GitHub/NHL-Advanced-Chess/sourceCode/Chessnt/Content/menu_background.png</File>
+    <File>C:/Users/Tung Xuan Do/Documents/GitHub/NHL-Advanced-Chess/sourceCode/Chessnt/Content/option_background.png</File>
   </SourceFiles>
   <DestFiles>
+    <File>WhiteEmpty.png</File>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
