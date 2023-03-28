@@ -9,13 +9,14 @@ namespace Chessnt.Pieces
 {
     internal class Knight : PieceBase
     {
-        public Knight() : base(PieceType.KNIGHT)
-        {
-        }
 
-        internal override bool isValidMove(int currentRow, int currentColumn, int desiredRow, int desiredColumn)
+        private static int size;
+        public Knight(PieceColour _pieceColour) : base(PieceType.KNIGHT, size) { _pieceColour = this.getPieceColour; }
+
+        internal override bool isValidMove(Tile currentTile, Tile desiredTile)
         {
-            throw new NotImplementedException();
+            bool isKnightMove = this._isKnightMove(currentTile, desiredTile);
+            return isKnightMove;
         }
     }
 }

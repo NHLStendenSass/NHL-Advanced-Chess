@@ -9,13 +9,12 @@ namespace Chessnt.Pieces
 {
     internal class Bishop : PieceBase
     {
-        public Bishop() : base(PieceType.BISHOP)
-        {
-        }
+        private static int size;
+        public Bishop(PieceColour _pieceColour) : base(PieceType.BISHOP, size) { _pieceColour = this.getPieceColour; }
 
-        internal override bool isValidMove(int currentRow, int currentColumn, int desiredRow, int desiredColumn)
+        internal override bool isValidMove(Tile currentTile, Tile desiredTile)
         {
-            bool isDiagonalMove = this._isDiagonalMove(currentRow, currentColumn, desiredRow, desiredColumn);
+            bool isDiagonalMove = this._isDiagonalMove(currentTile, desiredTile);
             
             return isDiagonalMove;
         }

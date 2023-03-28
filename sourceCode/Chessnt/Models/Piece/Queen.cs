@@ -9,16 +9,15 @@ namespace Chessnt.Pieces
 {
     internal class Queen : PieceBase
     {
-        public Queen() : base(PieceType.QUEEN)
-        {
 
-        }
+        private static int size;
+        public Queen(PieceColour _pieceColour) : base(PieceType.QUEEN, size) { _pieceColour = this.getPieceColour; }
 
-        internal override bool isValidMove(int currentRow, int currentColumn, int desiredRow, int desiredColumn)
+        internal override bool isValidMove(Tile currentTile, Tile desiredTile)
         {
-            bool isDiagonalMove = this._isDiagonalMove(currentRow, currentColumn, desiredRow, desiredColumn);
-            bool isVerticalmove = this._isVerticalMove(currentRow, currentColumn, desiredRow, desiredColumn);
-            bool isHorizontalMove = this._isHorizontalMove(currentRow, currentColumn, desiredRow, desiredColumn);
+            bool isDiagonalMove = this._isDiagonalMove(currentTile, desiredTile);
+            bool isVerticalmove = this._isVerticalMove(currentTile, desiredTile);
+            bool isHorizontalMove = this._isHorizontalMove(currentTile, desiredTile);
 
             return isDiagonalMove || isVerticalmove || isHorizontalMove;
         }

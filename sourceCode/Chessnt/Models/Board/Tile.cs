@@ -22,8 +22,8 @@ public class Tile
     public Vector2 getPosition{ get { return this._position; } }
     public void setPosition(float valueX, float valueY) 
     {
-        _position.X = valueX;
-        _position.Y = valueY;
+        this._position.X = valueX;
+        this._position.Y = valueY;
     }
     public int getSize { get { return this._size;} }
     public Color GetColor { get { return this._color;} }

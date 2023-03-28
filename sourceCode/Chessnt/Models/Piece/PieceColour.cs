@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Chessnt.Models.Piece
+namespace Chessnt.Pieces
 {
-    internal class PieceColour
+    public enum PieceColour
     {
+        WHITE,
+        BLACK
     }
 }

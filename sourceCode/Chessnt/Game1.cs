@@ -66,6 +66,7 @@ namespace Chessnt
             Globals.PixelTexture = new Texture2D(GraphicsDevice, 1, 1);
             Globals.PixelTexture.SetData(new[] { Color.White });
 
+            
         }
 
         protected override void Update(GameTime gameTime)
