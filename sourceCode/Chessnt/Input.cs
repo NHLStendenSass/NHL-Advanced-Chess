@@ -21,8 +21,9 @@ namespace Chessnt
 
         public void Update()
         {
+            MouseState position = Microsoft.Xna.Framework.Input.Mouse.GetState();
             Keyboard = Microsoft.Xna.Framework.Input.Keyboard.GetState();
-            Mouse = Microsoft.Xna.Framework.Input.Mouse.GetState();
+            Mouse = new MouseState(position.X - 550, position.Y - 110, position.ScrollWheelValue, position.LeftButton, position.MiddleButton, position.RightButton, position.XButton1, position.XButton2);
         }
 
         public Vector2 GetVirtualMouseLocation()
