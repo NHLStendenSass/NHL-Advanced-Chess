@@ -6,8 +6,7 @@ using Chessnt.Chess.Managers;
 
 namespace Chessnt
 {
-
-    enum ChessPiece
+    public enum ChessPiece
     {
         Pawn,
         King,
@@ -17,7 +16,7 @@ namespace Chessnt
         Queen
     }
 
-    abstract class Piece : OptionsButton
+    public abstract class Piece : OptionsButton
     {
         public int NumberOfMoves { get; private set; } = 0;
         protected List<ChessButton> legals;
@@ -26,8 +25,9 @@ namespace Chessnt
         public int Col { get; set; }
         public ChessPiece ChessPiece { get; protected set; }
         protected ChessBoard board;
+
         ChessColor color;
-        internal ChessColor ChessColor { get => color; private set => color = value; }
+        public ChessColor ChessColor { get => color; private set => color = value; }
 
         public Piece(Sprite2D sprite, int row, int col, ChessColor color, ChessBoard board)
             : base(sprite)
@@ -56,6 +56,40 @@ namespace Chessnt
 
         public override void Draw(SpriteBatch spriteBatch)
         {
+            if (this.MarkedState == OptionButtonState.Marked)
+            {
+                DrawLegalMoves(spriteBatch);
+            }
+            base.Draw(spriteBatch);
+        }
+
+        public void Move(int row, int col)
+        {
+            NumberOfMoves++;
+            board.Move(this, row, col);
+            Bounds = new Rectangle(col * 110, row * 110, 80, 80);
+            Center(new Rectangle(col * 110, row * 110, 80,80));
+        }
+
+        protected void AddLegalMove(int r, int c)
+        {
+            ChessButton b = new ChessButton(new Sprite2D(legalsTexture, new Rectangle(c * 110, r * 110, 110, 110), Color.DarkSlateGray));
+            b.Click += (s, e) => { Move(r, c); };
+            b.Hover += (s, e) => { b.Color = Color.Black; };
+            b.UnHover += (s, e) => { b.Color = Color.DarkSlateGray; };
+            legals.Add(b);
+        }
+
+        public abstract void CalculateLegalMoves();
+
+        public abstract bool SetsCheck();
+
+        public void DrawLegalMoves(SpriteBatch spriteBatch)
+        {
+            for (int i = 0; i < legals.Count; i++)
+            {
+                legals[i].Draw(spriteBatch);
+            }
             base.Draw(spriteBatch);
         }
     }

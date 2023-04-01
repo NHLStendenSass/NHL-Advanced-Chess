@@ -91,12 +91,6 @@ namespace Chessnt
                 Rectangle destRect = new Rectangle(centerX, centerY, _rectangle.Width, _rectangle.Height);
                 spriteBatch.Draw(Texture, destRect, null, Color, Angle, origin, SpriteEffects.None, 0f);
             }
-            //if (Show)
-            //{
-            //    Vector2 origin = new Vector2(Texture.Width / 2, Texture.Height / 2);
-            //    Rectangle destRect = new Rectangle(_rectangle.X + _rectangle.Width / 2, _rectangle.Y + _rectangle.Height / 2, _rectangle.Width, _rectangle.Height);
-            //    spriteBatch.Draw(Texture, destRect, null, Color, Angle, origin, SpriteEffects.None, 0f);
-            //}
         }
 
         public void HorizontallyCenter(Rectangle boundaries, float yLocation)

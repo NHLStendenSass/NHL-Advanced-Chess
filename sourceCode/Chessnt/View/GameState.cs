@@ -1,4 +1,5 @@
-﻿using Chessnt.Models.Board;
+﻿using Chessnt.Chess.Managers;
+using Chessnt.Models.Board;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -20,12 +21,18 @@ namespace Chessnt.View
 
         private SpriteBatch _spriteBatch;
 
+        Input currentInput;
+        Input previousInput;    
+
         public GameState(Game1 main, GraphicsDevice graphicsDevice, ContentManager content)
             : base(main, graphicsDevice, content)
         {
             Globals.Content = content;
             board = new ChessBoard(8, 8, 100);
             _backgroundTexture = Globals.Content.Load<Texture2D>("bg1");
+
+            currentInput = new Input();
+            previousInput = new Input();
 
             //_gameManager = new GameManager();
         }
@@ -65,9 +72,14 @@ namespace Chessnt.View
 
         public override void Update(GameTime gameTime)
         {
-            Input curInput= new Input();
-            Input prevInput = new Input();
-            ChessUpdate(gameTime, curInput, prevInput);
+
+
+            previousInput.Keyboard = currentInput.Keyboard;
+            previousInput.Mouse = currentInput.Mouse;
+
+            currentInput.Update();
+
+            ChessUpdate(gameTime, currentInput, previousInput);
         }
     }
 }

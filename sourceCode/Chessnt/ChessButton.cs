@@ -10,20 +10,20 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace Chessnt
 {
-    enum ButtonCondition
+    public enum ButtonCondition
     {
         None,
         Hovered,
         Pressed
     }
 
-    class ChessButton
+    public class ChessButton
     {
         #region Members
         public ButtonCondition State { get; protected set; }
 
         protected Sprite2D sprite;
-        public Text TextMessage { get; set; }
+        //public Text TextMessage { get; set; }
 
         public event EventHandler Click;
         public event EventHandler Hover;

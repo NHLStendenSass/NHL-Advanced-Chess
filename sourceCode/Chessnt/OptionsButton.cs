@@ -5,13 +5,13 @@ using System;
 namespace Chessnt
 {
 
-    enum OptionButtonState
+    public enum OptionButtonState
     {
         Unmarked,
         Marked
     }
 
-    class OptionsButton : ChessButton
+    public class OptionsButton : ChessButton
     {
         public OptionButtonState MarkedState { get; private set; }
 
