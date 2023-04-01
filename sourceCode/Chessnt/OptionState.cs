@@ -45,7 +45,7 @@ namespace Chessnt
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            spriteBatch.Begin();
+
 
             spriteBatch.Draw(_backgroundTexture, new Vector2(0, 0), Color.White);
 
@@ -56,7 +56,7 @@ namespace Chessnt
 
             DrawComponents(gameTime, spriteBatch);
 
-            spriteBatch.End();
+
         }
 
         private void DrawComponents(GameTime gameTime, SpriteBatch spriteBatch)
