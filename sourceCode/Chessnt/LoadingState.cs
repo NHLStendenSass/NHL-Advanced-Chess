@@ -62,7 +62,7 @@ namespace Chessnt
         public override void Update(GameTime gameTime)
         {
             //TODO: Change to menu state after merge
-            Task.Delay(3000).ContinueWith(t => game.ChangeState(new MenuState(game, graphicsDevice, content)));
+            Task.Delay(1000).ContinueWith(t => game.ChangeState(new MenuState(game, graphicsDevice, content)));
         }
     }
 }

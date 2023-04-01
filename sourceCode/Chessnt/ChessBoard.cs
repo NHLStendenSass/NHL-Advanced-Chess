@@ -6,6 +6,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.StartScreen;
@@ -86,6 +87,30 @@ namespace Chessnt
                 temp.Center(grid[6, i].Bounds);
                 board[6, i] = temp;
             }
+            Piece x = new Rook(new Sprite2D(ContentService.Instance.Textures["WhiteRook"], new Rectangle(0, 0, pieceSize, pieceSize)), 7, 0, ChessColor.White, this);
+            x.Center(grid[7, 0].Bounds);
+            board[7, 0] = x;
+            x = new Rook(new Sprite2D(ContentService.Instance.Textures["WhiteRook"], new Rectangle(0, 0, pieceSize, pieceSize)), 7, 7, ChessColor.White, this);
+            x.Center(grid[7, 7].Bounds);
+            board[7, 7] = x;
+            x = new Knight(new Sprite2D(ContentService.Instance.Textures["WhiteKnight"], new Rectangle(0, 0, pieceSize, pieceSize)), 7, 1, ChessColor.White, this);
+            x.Center(grid[7, 1].Bounds);
+            board[7, 1] = x;
+            x = new Knight(new Sprite2D(ContentService.Instance.Textures["WhiteKnight"], new Rectangle(0, 0, pieceSize, pieceSize)), 7, 6, ChessColor.White, this);
+            x.Center(grid[7, 6].Bounds);
+            board[7, 6] = x;
+            x = new Bishop(new Sprite2D(ContentService.Instance.Textures["WhiteBishop"], new Rectangle(0, 0, pieceSize, pieceSize)), 7, 2, ChessColor.White, this);
+            x.Center(grid[7, 2].Bounds);
+            board[7, 2] = x;
+            x = new Bishop(new Sprite2D(ContentService.Instance.Textures["WhiteBishop"], new Rectangle(0, 0, pieceSize, pieceSize)), 7, 5, ChessColor.White, this);
+            x.Center(grid[7, 5].Bounds);
+            board[7, 5] = x;
+            x = new Queen(new Sprite2D(ContentService.Instance.Textures["WhiteQueen"], new Rectangle(0, 0, pieceSize, pieceSize)), 7, 3, ChessColor.White, this);
+            x.Center(grid[7, 3].Bounds);
+            board[7, 3] = x;
+            x = new King(new Sprite2D(ContentService.Instance.Textures["WhiteKing"], new Rectangle(0, 0, pieceSize, pieceSize)), 7, 4, ChessColor.White, this);
+            x.Center(grid[7, 4].Bounds);
+            board[7, 4] = x;
 
             for (int i = 0; i < 8; i++)
             {
@@ -93,6 +118,30 @@ namespace Chessnt
                 temp.Center(grid[1, i].Bounds);
                 board[1, i] = temp;
             }
+            x = new Rook(new Sprite2D(ContentService.Instance.Textures["BlackRook"], new Rectangle(0, 0, pieceSize, pieceSize)), 0, 0, ChessColor.Black, this);
+            x.Center(grid[0, 0].Bounds);
+            board[0, 0] = x;
+            x = new Rook(new Sprite2D(ContentService.Instance.Textures["BlackRook"], new Rectangle(0, 0, pieceSize, pieceSize)), 0, 7, ChessColor.Black, this);
+            x.Center(grid[0, 7].Bounds);
+            board[0, 7] = x;
+            x = new Knight(new Sprite2D(ContentService.Instance.Textures["BlackKnight"], new Rectangle(0, 0, pieceSize, pieceSize)), 0, 1, ChessColor.Black, this);
+            x.Center(grid[0, 1].Bounds);
+            board[0, 1] = x;
+            x = new Knight(new Sprite2D(ContentService.Instance.Textures["BlackKnight"], new Rectangle(0, 0, pieceSize, pieceSize)), 0, 6, ChessColor.Black, this);
+            x.Center(grid[0, 6].Bounds);
+            board[0, 6] = x;
+            x = new Bishop(new Sprite2D(ContentService.Instance.Textures["BlackBishop"], new Rectangle(0, 0, pieceSize, pieceSize)), 0, 2, ChessColor.Black, this);
+            x.Center(grid[0, 2].Bounds);
+            board[0, 2] = x;
+            x = new Bishop(new Sprite2D(ContentService.Instance.Textures["BlackBishop"], new Rectangle(0, 0, pieceSize, pieceSize)), 0, 5, ChessColor.Black, this);
+            x.Center(grid[0, 5].Bounds);
+            board[0, 5] = x;
+            x = new Queen(new Sprite2D(ContentService.Instance.Textures["BlackQueen"], new Rectangle(0, 0, pieceSize, pieceSize)), 0, 3, ChessColor.Black, this);
+            x.Center(grid[0, 3].Bounds);
+            board[0, 3] = x;
+            x = new King(new Sprite2D(ContentService.Instance.Textures["BlackKing"], new Rectangle(0, 0, pieceSize, pieceSize)), 0, 4, ChessColor.Black, this);
+            x.Center(grid[0, 4].Bounds);
+            board[0, 4] = x;
 
             for (int i = 0; i < 8; i++)
             {
@@ -219,7 +268,38 @@ namespace Chessnt
             board[r, c] = null;
             board[tr, tc].Col = tc;
             board[tr, tc].Row = tr;
-            
+
+            if (board[tr, tc].ChessPiece == ChessPiece.Pawn && (board[tr, tc].Row == 0 || board[tr, tc].Row == 7))
+            {
+                int col = tc;
+                int row = tr;
+                if (p.ChessColor == ChessColor.Black)
+                {
+                    Queen piece = new Queen(
+                        new Sprite2D(
+                            ContentService.Instance.Textures["BlackQueen"],
+                            new Rectangle(col * 110, row * 110, 80, 80)
+                            ), row, col, p.ChessColor, this);
+                    blacks.Add(piece);
+                    blacks.Remove(board[row, col]);
+                    board[row, col] = piece;
+                    piece.MarkAnimation = new ButtonAnimation(null, new Rectangle(board[row, col].Bounds.Location, new Point(90, 90)), null, true);
+                    piece.UnMarkAnimation = new ButtonAnimation(null, new Rectangle(board[row, col].Bounds.Location, new Point(80, 80)), null, true);
+                }
+                else
+                {
+                    Queen piece = new Queen(
+                        new Sprite2D(
+                            ContentService.Instance.Textures["WhiteQueen"],
+                            new Rectangle(col * 110, row * 110, 80, 80)
+                            ), row, col, p.ChessColor, this);
+                    whites.Add(piece);
+                    whites.Remove(board[row, col]);
+                    board[row, col] = piece;
+                    piece.MarkAnimation = new ButtonAnimation(null, new Rectangle(board[row, col].Bounds.Location, new Point(90, 90)), null, true);
+                    piece.UnMarkAnimation = new ButtonAnimation(null, new Rectangle(board[row, col].Bounds.Location, new Point(80, 80)), null, true);
+                }
+            }
 
             for (int i = 0; i < 8; i++)
             {
