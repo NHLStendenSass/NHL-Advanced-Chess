@@ -28,7 +28,7 @@ namespace Chessnt.View
             : base(main, graphicsDevice, content)
         {
             Globals.Content = content;
-            board = new ChessBoard(8, 8, 100);
+            board = new ChessBoard(8, 8, 110);
             _backgroundTexture = Globals.Content.Load<Texture2D>("bg1");
 
             currentInput = new Input();
