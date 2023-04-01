@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Chessnt
+namespace Chessnt.Models.Pieces
 {
     class Queen : Piece
     {

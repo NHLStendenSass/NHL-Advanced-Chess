@@ -23,7 +23,7 @@ namespace Chessnt
         private Button _optionButton;
         private Button _exitButton;
 
-        private TextOutline _textOutline;
+        private Utilities.TextOutline _textOutline;
 
         public LoadingState(Game1 game, GraphicsDevice graphicsDevice, ContentManager content)
           : base(game, graphicsDevice, content)
@@ -31,7 +31,7 @@ namespace Chessnt
             _backgroundTexture = base.content.Load<Texture2D>("loading_background");
             _buttonTexture = base.content.Load<Texture2D>("Button");
             _buttonFont = base.content.Load<SpriteFont>("Font");
-            _textOutline = new TextOutline(_buttonFont);
+            _textOutline = new Utilities.TextOutline(_buttonFont);
         }
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)

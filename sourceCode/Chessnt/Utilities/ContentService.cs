@@ -14,8 +14,6 @@
         {
             public Dictionary<string, Texture2D> Textures { get; private set; }
             public Dictionary<string, SpriteFont> Fonts { get; private set; }
-            public Dictionary<string, Song> MusicBank { get; private set; }
-            public Dictionary<string, SoundEffect> SoundBank { get; private set; }
 
 
             private static ContentService _instance;
@@ -27,7 +25,7 @@
                 Fonts = new Dictionary<string, SpriteFont>();
             }
 
-            public static ContentService Instance //Not optimal but only want there to ever exist one ContentSerive, hence a singleton class
+            public static ContentService Instance
             {
                 get
                 {

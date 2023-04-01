@@ -73,7 +73,7 @@ namespace Chessnt
 
         protected void AddCastlingMove(Piece p, int col, int secol)
         {
-            ChessButton b = new ChessButton(new Sprite2D(legalsTexture, new Rectangle(col * 110, Row * 110, 110, 110), Color.DarkSlateGray));
+            ChessButton b = new ChessButton(new Sprite2D(legalsTexture, new Rectangle(col * Constants.TILESIZE, Row * Constants.TILESIZE, Constants.TILESIZE, Constants.TILESIZE), Color.DarkSlateGray));
             b.Click += (s, e) => { Move(Row, col); p.Move(Row, secol); };
             b.Hover += (s, e) => { b.Color = Color.Black; };
             b.UnHover += (s, e) => { b.Color = Color.DarkSlateGray; };

@@ -1,4 +1,5 @@
 ﻿using Chessnt.Chess.Managers;
+using Chessnt.Models.Pieces;
 using Microsoft.VisualBasic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -78,8 +79,8 @@ namespace Chessnt
             whites = new MarkableButtonPanel();
             blacks = new MarkableButtonPanel();
 
-            int pieceSize = 80;
-            int markSize = 90;
+            int pieceSize = Constants.PIECESIZE;
+            int markSize = Constants.MARKED_PIECESIZE;
 
             for (int i = 0; i < 8; i++)
             {
@@ -278,26 +279,26 @@ namespace Chessnt
                     Queen piece = new Queen(
                         new Sprite2D(
                             ContentService.Instance.Textures["BlackQueen"],
-                            new Rectangle(col * 110, row * 110, 80, 80)
+                            new Rectangle(col * Constants.TILESIZE, row * Constants.TILESIZE, Constants.PIECESIZE, Constants.PIECESIZE)
                             ), row, col, p.ChessColor, this);
                     blacks.Add(piece);
                     blacks.Remove(board[row, col]);
                     board[row, col] = piece;
-                    piece.MarkAnimation = new ButtonAnimation(null, new Rectangle(board[row, col].Bounds.Location, new Point(90, 90)), null, true);
-                    piece.UnMarkAnimation = new ButtonAnimation(null, new Rectangle(board[row, col].Bounds.Location, new Point(80, 80)), null, true);
+                    piece.MarkAnimation = new ButtonAnimation(null, new Rectangle(board[row, col].Bounds.Location, new Point(Constants.MARKED_PIECESIZE, Constants.MARKED_PIECESIZE)), null, true);
+                    piece.UnMarkAnimation = new ButtonAnimation(null, new Rectangle(board[row, col].Bounds.Location, new Point(Constants.PIECESIZE, Constants.PIECESIZE)), null, true);
                 }
                 else
                 {
                     Queen piece = new Queen(
                         new Sprite2D(
                             ContentService.Instance.Textures["WhiteQueen"],
-                            new Rectangle(col * 110, row * 110, 80, 80)
+                            new Rectangle(col * Constants.TILESIZE, row * Constants.TILESIZE, Constants.PIECESIZE, Constants.PIECESIZE)
                             ), row, col, p.ChessColor, this);
                     whites.Add(piece);
                     whites.Remove(board[row, col]);
                     board[row, col] = piece;
-                    piece.MarkAnimation = new ButtonAnimation(null, new Rectangle(board[row, col].Bounds.Location, new Point(90, 90)), null, true);
-                    piece.UnMarkAnimation = new ButtonAnimation(null, new Rectangle(board[row, col].Bounds.Location, new Point(80, 80)), null, true);
+                    piece.MarkAnimation = new ButtonAnimation(null, new Rectangle(board[row, col].Bounds.Location, new Point(Constants.MARKED_PIECESIZE, Constants.MARKED_PIECESIZE)), null, true);
+                    piece.UnMarkAnimation = new ButtonAnimation(null, new Rectangle(board[row, col].Bounds.Location, new Point(Constants.PIECESIZE, Constants.PIECESIZE)), null, true);
                 }
             }
 
