@@ -31,8 +31,8 @@ namespace Chessnt
             Content.RootDirectory = "Content";
 
             //Set resolution
-            _graphics.PreferredBackBufferWidth = 1920;
-            _graphics.PreferredBackBufferHeight = 1080;
+            //_graphics.PreferredBackBufferWidth = 1920;
+            //_graphics.PreferredBackBufferHeight = 1080;
             //_graphics.IsFullScreen = true;
             _graphics.ApplyChanges();
 
@@ -46,9 +46,9 @@ namespace Chessnt
 
         protected override void Initialize()
         {
-            //Globals.WindowSize = new(1920, 1080);
-            //_graphics.PreferredBackBufferWidth = Globals.WindowSize.X;
-            //_graphics.PreferredBackBufferHeight = Globals.WindowSize.Y;
+            Globals.WindowSize = new(1920, 1080);
+            _graphics.PreferredBackBufferWidth = Globals.WindowSize.X;
+            _graphics.PreferredBackBufferHeight = Globals.WindowSize.Y;
             _graphics.ApplyChanges();
 
             //Globals.Content = Content;

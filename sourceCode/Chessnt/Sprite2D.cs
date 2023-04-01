@@ -82,10 +82,21 @@ namespace Chessnt
         {
             if (Show)
             {
-                Vector2 origin = new Vector2(-660, -40);
-                Rectangle destRect = new Rectangle((_rectangle.X + _rectangle.Width / 2)+350, _rectangle.Y + _rectangle.Height / 2, _rectangle.Width, _rectangle.Height);
+                int screenWidth = Game1.Instance.GraphicsDevice.Viewport.Width;
+                int screenHeight = Game1.Instance.GraphicsDevice.Viewport.Height;
+                int centerX = (_rectangle.X + _rectangle.Width / 2) + (screenWidth/2) / 2;
+                int centerY = (_rectangle.Y + _rectangle.Height / 2);
+
+                Vector2 origin = new Vector2(0, -40);
+                Rectangle destRect = new Rectangle(centerX, centerY, _rectangle.Width, _rectangle.Height);
                 spriteBatch.Draw(Texture, destRect, null, Color, Angle, origin, SpriteEffects.None, 0f);
             }
+            //if (Show)
+            //{
+            //    Vector2 origin = new Vector2(Texture.Width / 2, Texture.Height / 2);
+            //    Rectangle destRect = new Rectangle(_rectangle.X + _rectangle.Width / 2, _rectangle.Y + _rectangle.Height / 2, _rectangle.Width, _rectangle.Height);
+            //    spriteBatch.Draw(Texture, destRect, null, Color, Angle, origin, SpriteEffects.None, 0f);
+            //}
         }
 
         public void HorizontallyCenter(Rectangle boundaries, float yLocation)

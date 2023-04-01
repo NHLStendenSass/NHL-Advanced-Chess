@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.StartScreen;
 
 namespace Chessnt
 {
@@ -20,24 +21,41 @@ namespace Chessnt
         Black,
         White
     }
-    internal class ChessBoard
+    public class ChessBoard
     {
         MarkableButtonPanel whites;
         MarkableButtonPanel blacks;
+
+        private readonly int _numRows;
+        private readonly int _numCols;
+        private readonly int _tileSize;
+        private int x;
+        private int y;
 
         Sprite2D[,] grid;
 
         Piece[,] board;
 
-        public ChessBoard()
+        public ChessBoard(int numRows, int numCols, int tileSize)
         {
+
+            _numRows = numRows;
+            _numCols = numCols;
+            _tileSize = tileSize;
+
+            int boardWidth = numCols * tileSize;
+            int boardHeight = numRows * tileSize;
+
+            x = (Game1.Instance.GraphicsDevice.Viewport.Width - boardWidth) / 2;
+            y = (Game1.Instance.GraphicsDevice.Viewport.Height - boardHeight) / 2;
+
             Texture2D gridSquares = ContentService.Instance.Textures["Empty"];
-            grid = new Sprite2D[8, 8];
-            for (int i = 0; i < 8; i++)
+            grid = new Sprite2D[numRows, numCols];
+            for (int i = 0; i < numRows; i++)
             {
-                for (int j = 0; j < 8; j++)
+                for (int j = 0; j < numCols; j++)
                 {
-                    grid[i, j] = new Sprite2D(gridSquares, new Rectangle(j * 110, i * 110, 110, 110), Color.DarkGray);
+                    grid[i, j] = new Sprite2D(gridSquares, new Rectangle(j * tileSize, i * tileSize, tileSize, tileSize), Color.DarkGray);
                     if ((i + j) % 2 == 0) grid[i, j].Color = Color.White;
                 }
             }
@@ -87,7 +105,7 @@ namespace Chessnt
             return board[r, c] == null;
         }
 
-        internal void Draw(SpriteBatch spriteBatch)
+        public void Draw(SpriteBatch spriteBatch)
         {
             for (int i = 0; i < 8; i++)
             {
@@ -100,7 +118,7 @@ namespace Chessnt
             blacks.Draw(spriteBatch);
         }
 
-        internal void Update(GameTime gameTime, Input curInput, Input prevInput)
+        public void Update(GameTime gameTime, Input curInput, Input prevInput)
         {
         }
     }
