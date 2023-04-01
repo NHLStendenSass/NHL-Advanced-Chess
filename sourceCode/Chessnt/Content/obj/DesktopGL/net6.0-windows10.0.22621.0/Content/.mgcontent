@@ -4,10 +4,13 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/Users/levis/OneDrive/Dokumentumok/GitHub/NHL-Advanced-Chess/sourceCode/Chessnt/Content/bg1.png</File>
+    <File>C:/Users/levis/OneDrive/Dokumentumok/GitHub/NHL-Advanced-Chess/sourceCode/Chessnt/Content/bg1.jpeg</File>
     <File>C:/Users/levis/OneDrive/Dokumentumok/GitHub/NHL-Advanced-Chess/sourceCode/Chessnt/Content/Button.png</File>
     <File>C:/Users/levis/OneDrive/Dokumentumok/GitHub/NHL-Advanced-Chess/sourceCode/Chessnt/Content/ChessPieces.png</File>
     <File>C:/Users/levis/OneDrive/Dokumentumok/GitHub/NHL-Advanced-Chess/sourceCode/Chessnt/Content/Circle.png</File>
+    <File>C:/Users/levis/OneDrive/Dokumentumok/GitHub/NHL-Advanced-Chess/sourceCode/Chessnt/Content/diceFont.spritefont</File>
+    <File>C:/Users/levis/OneDrive/Dokumentumok/GitHub/NHL-Advanced-Chess/sourceCode/Chessnt/Content/diceFontOutline.spritefont</File>
+    <File>C:/Users/levis/OneDrive/Dokumentumok/GitHub/NHL-Advanced-Chess/sourceCode/Chessnt/Content/dndwhite.png</File>
     <File>C:/Users/levis/OneDrive/Dokumentumok/GitHub/NHL-Advanced-Chess/sourceCode/Chessnt/Content/Font.spritefont</File>
     <File>C:/Users/levis/OneDrive/Dokumentumok/GitHub/NHL-Advanced-Chess/sourceCode/Chessnt/Content/hero.png</File>
     <File>C:/Users/levis/OneDrive/Dokumentumok/GitHub/NHL-Advanced-Chess/sourceCode/Chessnt/Content/loading_background.png</File>
@@ -16,6 +19,9 @@
     <File>C:/Users/levis/OneDrive/Dokumentumok/GitHub/NHL-Advanced-Chess/sourceCode/Chessnt/Content/WhiteEmpty.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
