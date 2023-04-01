@@ -150,7 +150,7 @@ namespace Chessnt
 
         protected void AddEnPassantMove(Piece p, int r, int c)
         {
-            ChessButton b = new ChessButton(new Sprite2D(legalsTexture, new Rectangle(c * 110, r * 110, 110, 110), Color.DarkSlateGray));
+            ChessButton b = new ChessButton(new Sprite2D(legalsTexture, new Rectangle(c * 110-5, r * 110-10, 110, 110), Color.DarkSlateGray));
             b.Click += (s, e) => { p.Move(r, c); Move(r, c);  };
             b.Hover += (s, e) => { b.Color = Color.Black; };
             b.UnHover += (s, e) => { b.Color = Color.DarkSlateGray; };

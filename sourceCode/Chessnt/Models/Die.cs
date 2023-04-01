@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +24,7 @@ namespace Chessnt
         private int _height = 300;
         private TextOutline _textOutline;
         private SpriteFont _font;
+        private int _dieRolledCount;
 
         public Die(Texture2D texture, Vector2 position, ContentManager content)
         {
@@ -35,11 +37,16 @@ namespace Chessnt
             _rollSpeed = 5;
             _maxRollCount = 100;
             _value = 1;
+            _dieRolledCount = 0;
         }
         public int getWidth()
         { return _width; }
         public int getHeight()
         { return _height; }
+        public int getValue()
+        { return _value; }
+        public int getDieRolledCount()
+        { return _dieRolledCount; }
         public void Roll()
         {
             _isRolling = true;
@@ -66,6 +73,7 @@ namespace Chessnt
                 {
                     _isRolling = false;
                     _value = new Random().Next(1, 21);
+                    _dieRolledCount++;
                 }
             }
         }

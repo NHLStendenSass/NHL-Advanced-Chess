@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Chessnt
 {
-    internal class MarkableButtonPanel
+    public class MarkableButtonPanel
     {
         private List<OptionsButton> _panel;
 

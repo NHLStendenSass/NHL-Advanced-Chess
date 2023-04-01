@@ -1,11 +1,13 @@
 ﻿using Chessnt.Chess.Managers;
 using Chessnt.Models.Board;
+using Chessnt.Models.Pieces;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection.Metadata;
 using System.Text;
@@ -17,11 +19,12 @@ namespace Chessnt.View
     {
         private Texture2D _backgroundTexture;
 
-        //private GameManager _gameManager;
         private ChessBoard board;
         private Die _die;
         private int _dieX;
         private int _dieY;
+        private int _dieValue;
+        private int _dieRollCount;
 
         private SpriteBatch _spriteBatch;
 
@@ -38,9 +41,8 @@ namespace Chessnt.View
             previousInput = new Input();
             _dieX = 1510;
             _dieY = 390;
+            _dieRollCount = 0;
             _die = new Die(Globals.Content.Load<Texture2D>("dndWhite"), new Vector2(_dieX, _dieY), content);
-
-            //_gameManager = new GameManager();
         }
 
         public void LoadContent()
@@ -61,6 +63,18 @@ namespace Chessnt.View
         public override void PostUpdate(GameTime gameTime)
         {
 
+        }
+
+        public int getDieValue() 
+        {
+            int row = 1;
+            int col = 3;
+            board.getBlacks().Remove(board.getBoard()[row, col]);
+            Piece x = new Queen(new Sprite2D(ContentService.Instance.Textures["BlackQueen"], new Rectangle(0, 0, Constants.PIECESIZE, Constants.PIECESIZE)), 1, 3, ChessColor.Black, this.board);
+            x.Center(board.Grid[1, 3].Bounds);
+            board.getBoard()[row, col] = x;
+            board.getBlacks().Add(x);
+            return _dieValue; 
         }
 
         public void ChessUpdate(GameTime gameTime, Input curInput, Input prevInput)
@@ -91,6 +105,13 @@ namespace Chessnt.View
             }
 
             _die.Update();
+
+            if (_die.getDieRolledCount() > _dieRollCount)
+            {
+                _dieValue = _die.getValue();
+                getDieValue();
+                _dieRollCount++;
+            }
 
             currentInput.Update();
 

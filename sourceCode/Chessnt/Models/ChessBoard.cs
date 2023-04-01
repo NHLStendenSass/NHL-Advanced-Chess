@@ -26,8 +26,8 @@ namespace Chessnt
     }
     public class ChessBoard
     {
-        MarkableButtonPanel whites;
-        MarkableButtonPanel blacks;
+        private MarkableButtonPanel whites;
+        private MarkableButtonPanel blacks;
 
         private readonly int _numRows;
         private readonly int _numCols;
@@ -42,6 +42,12 @@ namespace Chessnt
         Piece[,] board;
 
         public Turn Turn { get; private set; } = Turn.Player1;
+        public Sprite2D[,] Grid { get => grid; set => grid = value; }
+
+        public Piece[,] getBoard() { return board; }
+
+        public MarkableButtonPanel getWhites() { return whites; }
+        public MarkableButtonPanel getBlacks() { return blacks; }
 
         public Piece LastPieceMoved;
 
