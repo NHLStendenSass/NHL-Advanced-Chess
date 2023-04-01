@@ -9,7 +9,6 @@ public class Tile
     private readonly Vector2 _position;
     private readonly int _size;
     private readonly Color _color;
-
     private static Texture2D _whiteTexture;
 
     public Tile(Vector2 position, int size, Color color)
