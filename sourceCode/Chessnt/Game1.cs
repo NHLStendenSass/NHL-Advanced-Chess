@@ -64,6 +64,8 @@ namespace Chessnt
             // Create 1x1 white pixel texture
             Globals.PixelTexture = new Texture2D(GraphicsDevice, 1, 1);
             Globals.PixelTexture.SetData(new[] { Color.White });
+            new OptionState(this, _graphics.GraphicsDevice, Content);
+
 
         }
 

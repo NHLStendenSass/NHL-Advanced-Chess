@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using static System.Net.Mime.MediaTypeNames;
-using System.Xml.Linq;
+using Windows.ApplicationModel.VoiceCommands;
 
 namespace Chessnt
 {
@@ -23,6 +23,9 @@ namespace Chessnt
         private Button _playButton;
         private Button _optionButton;
         private Button _exitButton;
+        private Button _voiceButton;
+
+        private VoiceCommand _voiceCommand;
 
         private Utilities.TextOutline _textOutline;
 
@@ -33,6 +36,7 @@ namespace Chessnt
             _buttonTexture = base.content.Load<Texture2D>("Button");
             _buttonFont = base.content.Load<SpriteFont>("Font");
             _textOutline = new Utilities.TextOutline(_buttonFont);
+            _voiceCommand = new VoiceCommand(game, graphicsDevice, content);
 
             _playButton = new Button(_buttonTexture, _buttonFont)
             {
@@ -58,11 +62,19 @@ namespace Chessnt
 
             _exitButton.Click += QuitGameButton_Click;
 
+            _voiceButton = new Button(buttonTexture, buttonFont)
+            {
+                Position = new Vector2(1400, 170),
+                Text = "Talk",
+            };
+            _voiceButton.Click += VoiceButton_Click;
+
             _components = new List<Component>()
                   {
                     _playButton,
                     _optionButton,
                     _exitButton,
+                    _voiceButton
                   };
         }
 
@@ -105,6 +117,11 @@ namespace Chessnt
         private void PlayButton_Click(object sender, EventArgs e)
         {
             game.ChangeState(new GameState(game, graphicsDevice, content));
+        }
+
+        private void VoiceButton_Click(object sender, EventArgs e)
+        {
+            _voiceCommand.RecognitionWithMicrophoneAsync().Wait();
         }
 
         public override void PostUpdate(GameTime gameTime)

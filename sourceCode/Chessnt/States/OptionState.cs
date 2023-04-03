@@ -37,8 +37,8 @@ namespace Chessnt
 
             _voiceButton = new Button(buttonTexture, buttonFont)
             {
-                Position = new Vector2(600, 300),
-                Text = "Click to talk",
+                Position = new Vector2(700, 320),
+                Text = "Talk",
             };
             _voiceButton.Click += VoiceButton_Click;
 

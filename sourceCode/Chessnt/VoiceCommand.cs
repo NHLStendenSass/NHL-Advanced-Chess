@@ -14,7 +14,8 @@ namespace Chessnt
     public class VoiceCommand : State
     {
         public VoiceCommand(Game1 game, GraphicsDevice graphicsDevice, ContentManager content)
-          : base(game, graphicsDevice, content){}
+          : base(game, graphicsDevice, content) { 
+        }
 
         public async Task RecognitionWithMicrophoneAsync()
         {
@@ -43,11 +44,9 @@ namespace Chessnt
                     //Actual recognized word
                     Debug.WriteLine(result.Text);
                     //process result.Text
-                    Debug.WriteLine("yes it reached this point");
-                    if (result.Text == "Menu.")
-                    {
-                        _game.ChangeState(new MenuState(_game, _graphicsDevice, _content));
-                    }
+
+                    processRecognition(result);
+
                 }
                 else if (result.Reason == ResultReason.NoMatch)
                 {
@@ -69,9 +68,30 @@ namespace Chessnt
             // </recognitionWithMicrophone>
         }
 
-        public void changeToMenu()
+        private void processRecognition(SpeechRecognitionResult result)
         {
-            _game.ChangeState(new MenuState(_game, _graphicsDevice, _content));
+            switch (result.Text)
+            {
+                case "Menu.":
+                    _game.ChangeState(new MenuState(_game, _graphicsDevice, _content));
+                    break;
+
+                case "Option.":
+                    Debug.WriteLine("You said option");
+                    _game.ChangeState(new OptionState(_game, _graphicsDevice, _content));
+                    break;
+
+                case "Exit.":
+                    _game.Exit();
+                    break;
+
+                default: break;
+            }
+        }
+
+        public override void Update(GameTime gameTime)
+        {
+            throw new NotImplementedException();
         }
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
@@ -80,11 +100,6 @@ namespace Chessnt
         }
 
         public override void PostUpdate(GameTime gameTime)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override void Update(GameTime gameTime)
         {
             throw new NotImplementedException();
         }
