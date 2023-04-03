@@ -41,6 +41,8 @@ namespace Chessnt
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             _currentState = new MenuState(this, _graphics.GraphicsDevice, Content);
+            new OptionState(this, _graphics.GraphicsDevice, Content);
+
 
             // TODO: use this.Content to load your game content here
         }

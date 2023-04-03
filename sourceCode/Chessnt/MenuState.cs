@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using static System.Net.Mime.MediaTypeNames;
+using Windows.ApplicationModel.VoiceCommands;
 
 namespace Chessnt
 {
@@ -17,11 +18,15 @@ namespace Chessnt
 
         private Texture2D backgroundTexture;
         private Texture2D buttonTexture;
+
         private SpriteFont buttonFont;
 
         private Button playButton;
         private Button optionButton;
         private Button exitButton;
+        private Button voiceButton;
+
+        private VoiceCommand voiceCommand;
 
         public MenuState(Game1 game, GraphicsDevice graphicsDevice, ContentManager content)
           : base(game, graphicsDevice, content)
@@ -29,6 +34,7 @@ namespace Chessnt
             backgroundTexture = _content.Load<Texture2D>("menu_background");
             buttonTexture = _content.Load<Texture2D>("Button");
             buttonFont = _content.Load<SpriteFont>("Font");
+            voiceCommand = new VoiceCommand(game, graphicsDevice, content);
 
             playButton = new Button(buttonTexture, buttonFont)
             {
@@ -54,11 +60,19 @@ namespace Chessnt
 
             exitButton.Click += QuitGameButton_Click;
 
+            voiceButton = new Button(buttonTexture, buttonFont)
+            {
+                Position = new Vector2(1400, 170),
+                Text = "Talk",
+            };
+            voiceButton.Click += VoiceButton_Click;
+
             _components = new List<Component>()
                   {
                     playButton,
                     optionButton,
                     exitButton,
+                    voiceButton
                   };
         }
 
@@ -110,6 +124,11 @@ namespace Chessnt
             _game.ChangeState(new GameState(_game, _graphicsDevice, _content));
         }
 
+        private void VoiceButton_Click(object sender, EventArgs e)
+        {
+            voiceCommand.RecognitionWithMicrophoneAsync().Wait();
+        }
+
         public override void PostUpdate(GameTime gameTime)
         {
             // remove sprites if they're not needed
@@ -126,6 +145,6 @@ namespace Chessnt
         private void QuitGameButton_Click(object sender, EventArgs e)
         {
             _game.Exit();
-        }
+        }   
     }
 }
