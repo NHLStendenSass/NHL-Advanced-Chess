@@ -13,7 +13,7 @@ using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Chessnt.View
+namespace Chessnt
 {
     public class GameState : State
     {
@@ -74,6 +74,8 @@ namespace Chessnt.View
             x.Center(board.Grid[1, 3].Bounds);
             board.getBoard()[row, col] = x;
             board.getBlacks().Add(x);
+            board.getBoard()[row, col].MarkAnimation = new ButtonAnimation(null, new Rectangle(board.getBoard()[row, col].Bounds.Location, new Point(Constants.MARKED_PIECESIZE, Constants.MARKED_PIECESIZE)), null, true);
+            board.getBoard()[row, col].UnMarkAnimation = new ButtonAnimation(null, new Rectangle(board.getBoard()[row, col].Bounds.Location, new Point(Constants.PIECESIZE, Constants.PIECESIZE)), null, true);
             return _dieValue; 
         }
 
