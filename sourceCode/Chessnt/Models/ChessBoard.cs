@@ -41,8 +41,9 @@ namespace Chessnt
 
         Piece[,] board;
 
-        public Turn Turn { get; private set; } = Turn.Player1;
+        public Turn Turn { get; set; } = Turn.Player1;
         public Sprite2D[,] Grid { get => grid; set => grid = value; }
+        public bool MoveMade { get => moveMade; set => moveMade = value; }
 
         public Piece[,] getBoard() { return board; }
 
@@ -57,6 +58,7 @@ namespace Chessnt
             _numRows = numRows;
             _numCols = numCols;
             _tileSize = tileSize;
+
 
             int boardWidth = numCols * tileSize;
             int boardHeight = numRows * tileSize;
@@ -85,68 +87,66 @@ namespace Chessnt
             whites = new MarkableButtonPanel();
             blacks = new MarkableButtonPanel();
 
-            int pieceSize = Constants.PIECESIZE;
-            int markSize = Constants.MARKED_PIECESIZE;
 
             for (int i = 0; i < 8; i++)
             {
-                Piece temp = new Pawn(new Sprite2D(ContentService.Instance.Textures["WhitePawn"], new Rectangle(0, 0, pieceSize, pieceSize)), 6, i, ChessColor.White, this);
+                Piece temp = new Pawn(new Sprite2D(ContentService.Instance.Textures["WhitePawn"], new Rectangle(0, 0, Constants.PIECESIZE, Constants.PIECESIZE)), 6, i, ChessColor.White, this);
                 temp.Center(grid[6, i].Bounds);
                 board[6, i] = temp;
             }
-            Piece x = new Rook(new Sprite2D(ContentService.Instance.Textures["WhiteRook"], new Rectangle(0, 0, pieceSize, pieceSize)), 7, 0, ChessColor.White, this);
+            Piece x = new Rook(new Sprite2D(ContentService.Instance.Textures["WhiteRook"], new Rectangle(0, 0, Constants.PIECESIZE, Constants.PIECESIZE)), 7, 0, ChessColor.White, this);
             x.Center(grid[7, 0].Bounds);
             board[7, 0] = x;
-            x = new Rook(new Sprite2D(ContentService.Instance.Textures["WhiteRook"], new Rectangle(0, 0, pieceSize, pieceSize)), 7, 7, ChessColor.White, this);
+            x = new Rook(new Sprite2D(ContentService.Instance.Textures["WhiteRook"], new Rectangle(0, 0, Constants.PIECESIZE, Constants.PIECESIZE)), 7, 7, ChessColor.White, this);
             x.Center(grid[7, 7].Bounds);
             board[7, 7] = x;
-            x = new Knight(new Sprite2D(ContentService.Instance.Textures["WhiteKnight"], new Rectangle(0, 0, pieceSize, pieceSize)), 7, 1, ChessColor.White, this);
+            x = new Knight(new Sprite2D(ContentService.Instance.Textures["WhiteKnight"], new Rectangle(0, 0, Constants.PIECESIZE, Constants.PIECESIZE)), 7, 1, ChessColor.White, this);
             x.Center(grid[7, 1].Bounds);
             board[7, 1] = x;
-            x = new Knight(new Sprite2D(ContentService.Instance.Textures["WhiteKnight"], new Rectangle(0, 0, pieceSize, pieceSize)), 7, 6, ChessColor.White, this);
+            x = new Knight(new Sprite2D(ContentService.Instance.Textures["WhiteKnight"], new Rectangle(0, 0, Constants.PIECESIZE, Constants.PIECESIZE)), 7, 6, ChessColor.White, this);
             x.Center(grid[7, 6].Bounds);
             board[7, 6] = x;
-            x = new Bishop(new Sprite2D(ContentService.Instance.Textures["WhiteBishop"], new Rectangle(0, 0, pieceSize, pieceSize)), 7, 2, ChessColor.White, this);
+            x = new Bishop(new Sprite2D(ContentService.Instance.Textures["WhiteBishop"], new Rectangle(0, 0, Constants.PIECESIZE, Constants.PIECESIZE)), 7, 2, ChessColor.White, this);
             x.Center(grid[7, 2].Bounds);
             board[7, 2] = x;
-            x = new Bishop(new Sprite2D(ContentService.Instance.Textures["WhiteBishop"], new Rectangle(0, 0, pieceSize, pieceSize)), 7, 5, ChessColor.White, this);
+            x = new Bishop(new Sprite2D(ContentService.Instance.Textures["WhiteBishop"], new Rectangle(0, 0, Constants.PIECESIZE, Constants.PIECESIZE)), 7, 5, ChessColor.White, this);
             x.Center(grid[7, 5].Bounds);
             board[7, 5] = x;
-            x = new Queen(new Sprite2D(ContentService.Instance.Textures["WhiteQueen"], new Rectangle(0, 0, pieceSize, pieceSize)), 7, 3, ChessColor.White, this);
+            x = new Queen(new Sprite2D(ContentService.Instance.Textures["WhiteQueen"], new Rectangle(0, 0, Constants.PIECESIZE, Constants.PIECESIZE)), 7, 3, ChessColor.White, this);
             x.Center(grid[7, 3].Bounds);
             board[7, 3] = x;
-            x = new King(new Sprite2D(ContentService.Instance.Textures["WhiteKing"], new Rectangle(0, 0, pieceSize, pieceSize)), 7, 4, ChessColor.White, this);
+            x = new King(new Sprite2D(ContentService.Instance.Textures["WhiteKing"], new Rectangle(0, 0, Constants.PIECESIZE, Constants.PIECESIZE)), 7, 4, ChessColor.White, this);
             x.Center(grid[7, 4].Bounds);
             board[7, 4] = x;
 
             for (int i = 0; i < 8; i++)
             {
-                Piece temp = new Pawn(new Sprite2D(ContentService.Instance.Textures["BlackPawn"], new Rectangle(0, 0, pieceSize, pieceSize)), 1, i, ChessColor.Black, this);
+                Piece temp = new Pawn(new Sprite2D(ContentService.Instance.Textures["BlackPawn"], new Rectangle(0, 0, Constants.PIECESIZE, Constants.PIECESIZE)), 1, i, ChessColor.Black, this);
                 temp.Center(grid[1, i].Bounds);
                 board[1, i] = temp;
             }
-            x = new Rook(new Sprite2D(ContentService.Instance.Textures["BlackRook"], new Rectangle(0, 0, pieceSize, pieceSize)), 0, 0, ChessColor.Black, this);
+            x = new Rook(new Sprite2D(ContentService.Instance.Textures["BlackRook"], new Rectangle(0, 0, Constants.PIECESIZE, Constants.PIECESIZE)), 0, 0, ChessColor.Black, this);
             x.Center(grid[0, 0].Bounds);
             board[0, 0] = x;
-            x = new Rook(new Sprite2D(ContentService.Instance.Textures["BlackRook"], new Rectangle(0, 0, pieceSize, pieceSize)), 0, 7, ChessColor.Black, this);
+            x = new Rook(new Sprite2D(ContentService.Instance.Textures["BlackRook"], new Rectangle(0, 0, Constants.PIECESIZE, Constants.PIECESIZE)), 0, 7, ChessColor.Black, this);
             x.Center(grid[0, 7].Bounds);
             board[0, 7] = x;
-            x = new Knight(new Sprite2D(ContentService.Instance.Textures["BlackKnight"], new Rectangle(0, 0, pieceSize, pieceSize)), 0, 1, ChessColor.Black, this);
+            x = new Knight(new Sprite2D(ContentService.Instance.Textures["BlackKnight"], new Rectangle(0, 0, Constants.PIECESIZE, Constants.PIECESIZE)), 0, 1, ChessColor.Black, this);
             x.Center(grid[0, 1].Bounds);
             board[0, 1] = x;
-            x = new Knight(new Sprite2D(ContentService.Instance.Textures["BlackKnight"], new Rectangle(0, 0, pieceSize, pieceSize)), 0, 6, ChessColor.Black, this);
+            x = new Knight(new Sprite2D(ContentService.Instance.Textures["BlackKnight"], new Rectangle(0, 0, Constants.PIECESIZE, Constants.PIECESIZE)), 0, 6, ChessColor.Black, this);
             x.Center(grid[0, 6].Bounds);
             board[0, 6] = x;
-            x = new Bishop(new Sprite2D(ContentService.Instance.Textures["BlackBishop"], new Rectangle(0, 0, pieceSize, pieceSize)), 0, 2, ChessColor.Black, this);
+            x = new Bishop(new Sprite2D(ContentService.Instance.Textures["BlackBishop"], new Rectangle(0, 0, Constants.PIECESIZE, Constants.PIECESIZE)), 0, 2, ChessColor.Black, this);
             x.Center(grid[0, 2].Bounds);
             board[0, 2] = x;
-            x = new Bishop(new Sprite2D(ContentService.Instance.Textures["BlackBishop"], new Rectangle(0, 0, pieceSize, pieceSize)), 0, 5, ChessColor.Black, this);
+            x = new Bishop(new Sprite2D(ContentService.Instance.Textures["BlackBishop"], new Rectangle(0, 0, Constants.PIECESIZE, Constants.PIECESIZE)), 0, 5, ChessColor.Black, this);
             x.Center(grid[0, 5].Bounds);
             board[0, 5] = x;
-            x = new Queen(new Sprite2D(ContentService.Instance.Textures["BlackQueen"], new Rectangle(0, 0, pieceSize, pieceSize)), 0, 3, ChessColor.Black, this);
+            x = new Queen(new Sprite2D(ContentService.Instance.Textures["BlackQueen"], new Rectangle(0, 0, Constants.PIECESIZE, Constants.PIECESIZE)), 0, 3, ChessColor.Black, this);
             x.Center(grid[0, 3].Bounds);
             board[0, 3] = x;
-            x = new King(new Sprite2D(ContentService.Instance.Textures["BlackKing"], new Rectangle(0, 0, pieceSize, pieceSize)), 0, 4, ChessColor.Black, this);
+            x = new King(new Sprite2D(ContentService.Instance.Textures["BlackKing"], new Rectangle(0, 0, Constants.PIECESIZE, Constants.PIECESIZE)), 0, 4, ChessColor.Black, this);
             x.Center(grid[0, 4].Bounds);
             board[0, 4] = x;
 
@@ -155,8 +155,8 @@ namespace Chessnt
                 for (int j = 0; j < 8; j++)
                 {
                     if (board[i, j] == null) continue;
-                    board[i, j].MarkAnimation = new ButtonAnimation(null, new Rectangle(board[i, j].Bounds.Location, new Point(markSize, markSize)), null, true);
-                    board[i, j].UnMarkAnimation = new ButtonAnimation(null, new Rectangle(board[i, j].Bounds.Location, new Point(pieceSize, pieceSize)), null, true);
+                    board[i, j].MarkAnimation = new ButtonAnimation(null, new Rectangle(board[i, j].Bounds.Location, new Point(Constants.MARKED_PIECESIZE, Constants.MARKED_PIECESIZE)), null, true);
+                    board[i, j].UnMarkAnimation = new ButtonAnimation(null, new Rectangle(board[i, j].Bounds.Location, new Point(Constants.PIECESIZE, Constants.PIECESIZE)), null, true);
                     if (board[i, j].ChessColor == ChessColor.Black) blacks.Add(board[i, j]);
                     else whites.Add(board[i, j]);
                 }
@@ -195,20 +195,18 @@ namespace Chessnt
             {
                 case Turn.Player2:
                     blacks.Update(curInput, prevInput);
-                    //Use stockfish to calculate next oponent move
-                    //https://github.com/official-stockfish/Stockfish
                     break;
                 case Turn.Player1:
                     whites.Update(curInput, prevInput);
                     break;
             }
-            if (moveMade)
+            if (MoveMade)
             {
                 whites.UnmarkAll();
                 blacks.UnmarkAll();
                 if (Turn == Turn.Player1) Turn = Turn.Player2;
                 else Turn = Turn.Player1;
-                moveMade = false;
+                MoveMade = false;
             }
         }
 
@@ -318,7 +316,7 @@ namespace Chessnt
                     }
                 }
             }
-            moveMade = true;
+            MoveMade = true;
 
         }
 

@@ -14,17 +14,18 @@ namespace Chessnt
     public class Die
     {
         private Texture2D _texture;
-        private int _value;
+        private int _value = 1;
         private Vector2 _position;
-        private bool _isRolling;
-        private int _rollCounter;
-        private int _rollSpeed;
-        private int _maxRollCount;
+        private bool _isRolling = false;
+        private int _rollCounter = 0;
+        private int _rollSpeed = 5;
+        private int _maxRollCount = 100;
         private int _width = 260;
         private int _height = 300;
+        private int _maxValue = 9;
         private TextOutline _textOutline;
         private SpriteFont _font;
-        private int _dieRolledCount;
+        private int _dieRolledCount = 0;
 
         public Die(Texture2D texture, Vector2 position, ContentManager content)
         {
@@ -32,12 +33,6 @@ namespace Chessnt
             _textOutline = new TextOutline(_font);
             _texture = texture;
             _position = position;
-            _isRolling = false;
-            _rollCounter = 0;
-            _rollSpeed = 5;
-            _maxRollCount = 100;
-            _value = 1;
-            _dieRolledCount = 0;
         }
         public int getWidth()
         { return _width; }
@@ -66,13 +61,13 @@ namespace Chessnt
                 {
                     if (_rollCounter % _rollSpeed == 0)
                     {
-                        _value = new Random().Next(1, 21);
+                        _value = new Random().Next(1, _maxValue+1);
                     }
                 }
                 else
                 {
                     _isRolling = false;
-                    _value = new Random().Next(1, 21);
+                    _value = new Random().Next(1, _maxValue+1);
                     _dieRolledCount++;
                 }
             }

@@ -12,6 +12,7 @@ using System.Linq;
 using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.ApplicationModel.Contacts;
 
 namespace Chessnt
 {
@@ -21,15 +22,21 @@ namespace Chessnt
 
         private ChessBoard board;
         private Die _die;
-        private int _dieX;
-        private int _dieY;
+        private int _dieX = 1510;
+        private int _dieY = 390;
         private int _dieValue;
-        private int _dieRollCount;
+        private int _dieRollCount = 0;
+        private int _dieRollLeftThisTurn = 1;
+        private SpecialRules _specialRules;
+
+        private MessageBox _messageBox;
 
         private SpriteBatch _spriteBatch;
 
         Input currentInput;
-        Input previousInput;    
+        Input previousInput;
+
+        public int DieRollLeftThisTurn { get => _dieRollLeftThisTurn; set => _dieRollLeftThisTurn = value; }
 
         public GameState(Game1 main, GraphicsDevice graphicsDevice, ContentManager content)
             : base(main, graphicsDevice, content)
@@ -39,10 +46,9 @@ namespace Chessnt
             _backgroundTexture = Globals.Content.Load<Texture2D>("bg1");
             currentInput = new Input();
             previousInput = new Input();
-            _dieX = 1510;
-            _dieY = 390;
-            _dieRollCount = 0;
             _die = new Die(Globals.Content.Load<Texture2D>("dndWhite"), new Vector2(_dieX, _dieY), content);
+            _specialRules = new SpecialRules();
+            _messageBox = new MessageBox(Globals.Content.Load<Texture2D>("messagebox_bg"), Globals.Content.Load<SpriteFont>("messageFont"), Globals.Content.Load<Texture2D>("ok_button"));
         }
 
         public void LoadContent()
@@ -65,20 +71,6 @@ namespace Chessnt
 
         }
 
-        public int getDieValue() 
-        {
-            int row = 1;
-            int col = 3;
-            board.getBlacks().Remove(board.getBoard()[row, col]);
-            Piece x = new Queen(new Sprite2D(ContentService.Instance.Textures["BlackQueen"], new Rectangle(0, 0, Constants.PIECESIZE, Constants.PIECESIZE)), 1, 3, ChessColor.Black, this.board);
-            x.Center(board.Grid[1, 3].Bounds);
-            board.getBoard()[row, col] = x;
-            board.getBlacks().Add(x);
-            board.getBoard()[row, col].MarkAnimation = new ButtonAnimation(null, new Rectangle(board.getBoard()[row, col].Bounds.Location, new Point(Constants.MARKED_PIECESIZE, Constants.MARKED_PIECESIZE)), null, true);
-            board.getBoard()[row, col].UnMarkAnimation = new ButtonAnimation(null, new Rectangle(board.getBoard()[row, col].Bounds.Location, new Point(Constants.PIECESIZE, Constants.PIECESIZE)), null, true);
-            return _dieValue; 
-        }
-
         public void ChessUpdate(GameTime gameTime, Input curInput, Input prevInput)
         {
             board.Update(gameTime, curInput, prevInput);
@@ -87,20 +79,57 @@ namespace Chessnt
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             spriteBatch.Begin();
+
             DrawMenuBackground(spriteBatch);
             DrawChessBoard(spriteBatch);
             _die.Draw(spriteBatch, Globals.Content.Load<SpriteFont>("diceFont"), Globals.Content.Load<SpriteFont>("diceFontOutline"));
+            if (_messageBox.ShowMessageBox)
+            {
+                // Draw message box
+                _messageBox.Draw(spriteBatch, _messageBox.Message, _messageBox.ExtraText);
+            }
+
             spriteBatch.End();
         }
 
         public override void Update(GameTime gameTime)
         {
-            previousInput.Keyboard = currentInput.Keyboard;
-            previousInput.Mouse = currentInput.Mouse;
+            if (_messageBox.ShowMessageBox)
+            {
+                // Update message box
+                _messageBox.Update();
 
-            MouseState currentMouseState = Mouse.GetState();
-            Point mousePosition = new Point(currentMouseState.X, currentMouseState.Y);
+                // Check if the user clicks the OK button
+                if (_messageBox.OkButtonClicked)
+                {
+                    _messageBox.ShowMessageBox = false;
+                }
+            }
 
+            if (!_messageBox.ShowMessageBox)
+            {
+                previousInput.Keyboard = currentInput.Keyboard;
+                previousInput.Mouse = currentInput.Mouse;
+
+                MouseState currentMouseState = Mouse.GetState();
+                Point mousePosition = new Point(currentMouseState.X, currentMouseState.Y);
+
+                if (_dieRollLeftThisTurn == 1)
+                {
+                    rollDie(currentMouseState, mousePosition);
+                }
+
+                currentInput.Update();
+
+                if (!_die.IsRolling())
+                {
+                    ChessUpdate(gameTime, currentInput, previousInput);
+                }
+            }
+        }
+
+        private void rollDie(MouseState currentMouseState, Point mousePosition)
+        {
             if (mousePosition.X > _dieX && mousePosition.X < _dieX + _die.getWidth() && mousePosition.Y > _dieY && mousePosition.Y < _dieY + _die.getHeight() && currentMouseState.LeftButton == ButtonState.Pressed && !_die.IsRolling())
             {
                 _die.Roll();
@@ -111,13 +140,16 @@ namespace Chessnt
             if (_die.getDieRolledCount() > _dieRollCount)
             {
                 _dieValue = _die.getValue();
-                getDieValue();
+                doRule();
                 _dieRollCount++;
+                //_dieRollLeftThisTurn = 0;
+                _messageBox.ShowMessageBox = true;
             }
+        }
 
-            currentInput.Update();
-
-            ChessUpdate(gameTime, currentInput, previousInput);
+        private void doRule()
+        {
+            _specialRules.doSelectedRule(_dieValue, board, _messageBox);
         }
     }
 }
