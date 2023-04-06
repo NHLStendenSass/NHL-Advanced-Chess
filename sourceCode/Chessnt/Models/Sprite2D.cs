@@ -85,7 +85,7 @@ namespace Chessnt
                 int screenWidth = Game1.Instance.GraphicsDevice.Viewport.Width;
                 int screenHeight = Game1.Instance.GraphicsDevice.Viewport.Height;
                 int centerX = (_rectangle.X + _rectangle.Width / 2) + (screenWidth/2) / 2;
-                int centerY = (_rectangle.Y + _rectangle.Height / 2) + 55;
+                int centerY = (_rectangle.Y + _rectangle.Height / 2) + (screenHeight / 100 * 3);
 
                 Vector2 origin = new Vector2(-15, -25);
                 Rectangle destRect = new Rectangle(centerX, centerY, _rectangle.Width, _rectangle.Height);

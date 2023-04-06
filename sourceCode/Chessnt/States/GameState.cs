@@ -18,7 +18,7 @@ namespace Chessnt
     public class GameState : State
     {
         private Texture2D _backgroundTexture;
-
+        private Texture2D _rawColumn;
         private ChessBoard board;
         private Die _die;
         private int _dieX;
@@ -37,6 +37,7 @@ namespace Chessnt
             Globals.Content = content;
             board = new ChessBoard(Constants.TILE_NUMBER, Constants.TILE_NUMBER, Constants.TILESIZE);
             _backgroundTexture = Globals.Content.Load<Texture2D>("bg1");
+            _rawColumn = Globals.Content.Load<Texture2D>("rowColumn");
             currentInput = new Input();
             previousInput = new Input();
             _dieX = 1510;
@@ -53,6 +54,11 @@ namespace Chessnt
         public void DrawMenuBackground(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(_backgroundTexture, new Vector2(0, 0), Color.White);
+        }
+
+        public void DrawRawColumn(SpriteBatch spriteBatch)
+        {
+            spriteBatch.Draw(_rawColumn, new Vector2(480, 30), Color.White);
         }
 
         public void DrawChessBoard(SpriteBatch spriteBatch)
@@ -88,6 +94,7 @@ namespace Chessnt
         {
             spriteBatch.Begin();
             DrawMenuBackground(spriteBatch);
+            DrawRawColumn(spriteBatch);
             DrawChessBoard(spriteBatch);
             _die.Draw(spriteBatch, Globals.Content.Load<SpriteFont>("diceFont"), Globals.Content.Load<SpriteFont>("diceFontOutline"));
             spriteBatch.End();
