@@ -23,7 +23,7 @@ namespace Chessnt
                 {
                     if (board.InGrid(i, j))
                     {
-                        if (board.IsLegalMove(this, i, j))
+                        if (board.IsLegalMove(this, i, j) && board.getBoard()[i, j] is not King)
                         {
                             AddLegalMove(i, j);
                         }
@@ -38,7 +38,7 @@ namespace Chessnt
                     {
                         if (board.InGrid(i, j))
                         {
-                            if (board.IsLegalMove(this, i, j))
+                            if (board.IsLegalMove(this, i, j) && board.getBoard()[i, j] is not King)
                             {
                                 AddLegalMove(i, j);
                             }

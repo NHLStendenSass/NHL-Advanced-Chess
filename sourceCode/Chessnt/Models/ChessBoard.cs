@@ -32,7 +32,8 @@ namespace Chessnt
 
         private bool moveMade = false;
         private bool _diceRollPossible = true;
-        private bool gameOver = false;
+        private bool _isCheckMate = false;
+        private bool _isStaleMate = false;
 
         Sprite2D[,] grid;
 
@@ -42,7 +43,8 @@ namespace Chessnt
         public Sprite2D[,] Grid { get => grid; set => grid = value; }
         public bool MoveMade { get => moveMade; set => moveMade = value; }
         public bool DiceRollPossible { get => _diceRollPossible; set => _diceRollPossible = value; }
-        public bool GameOver { get => gameOver; set => gameOver = value; }
+        public bool IsCheckMate { get => _isCheckMate; set => _isCheckMate = value; }
+        public bool IsStaleMate { get => _isStaleMate; set => _isStaleMate = value; }
 
         public Piece[,] getBoard() { return board; }
 
@@ -189,6 +191,7 @@ namespace Chessnt
                 case Turn.Player2:
                     blacks.Update(curInput, prevInput);
                     bool blackHasAnyMoves = false;
+                    bool isBlackChecked = false;
                     for (int i = 0; i < 8; i++)
                     {
                         for (int j = 0; j < 8; j++)
@@ -200,14 +203,37 @@ namespace Chessnt
                                     if (board[i, j].Legals.Count > 0)
                                     {
                                         blackHasAnyMoves = true;
+                                        break;
                                     }
                                 }
                             }
                         }
                     }
-                    if (blackHasAnyMoves == false)
+                    for (int i = 0; i < 8; i++)
                     {
-                        gameOver = true;
+                        for (int j = 0; j < 8; j++)
+                        {
+                            if (board[i, j] != null)
+                            {
+                                if (board[i, j].ChessColor == ChessColor.White)
+                                {
+                                    if (board[i, j].SetsCheck())
+                                    {
+                                        isBlackChecked = true;
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    if (!blackHasAnyMoves && !isBlackChecked)
+                    {
+                        _isStaleMate = true;
+                        InitializePieces();
+                    }
+                    else if (!blackHasAnyMoves)
+                    {
+                        _isCheckMate = true;
                         InitializePieces();
                     }
                     
@@ -215,6 +241,7 @@ namespace Chessnt
                 case Turn.Player1:
                     whites.Update(curInput, prevInput);
                     bool whiteHasAnyMoves = false;
+                    bool isWhiteChecked = false;
                     for (int i = 0; i < 8; i++)
                     {
                         for (int j = 0; j < 8; j++)
@@ -226,14 +253,37 @@ namespace Chessnt
                                     if (board[i, j].Legals.Count > 0)
                                     {
                                         whiteHasAnyMoves = true;
+                                        break;
                                     }
                                 }
                             }
                         }
                     }
-                    if (whiteHasAnyMoves == false)
+                    for (int i = 0; i < 8; i++)
                     {
-                        gameOver = true;
+                        for (int j = 0; j < 8; j++)
+                        {
+                            if (board[i, j] != null)
+                            {
+                                if (board[i, j].ChessColor == ChessColor.Black)
+                                {
+                                    if (board[i, j].SetsCheck())
+                                    {
+                                        isWhiteChecked = true;
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    if (!whiteHasAnyMoves && !isWhiteChecked)
+                    {
+                        _isStaleMate = true;
+                        InitializePieces();
+                    }
+                    else if (!whiteHasAnyMoves)
+                    {
+                        _isCheckMate = true;
                         InitializePieces();
                     }
                     break;

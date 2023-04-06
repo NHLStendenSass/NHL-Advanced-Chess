@@ -20,7 +20,7 @@ namespace Chessnt.Models.Pieces
             Legals.Clear();
             for (int i = 1; i <= Math.Min(Row, Col); i++)
             {
-                if (board.IsLegalMove(this, Row - i, Col - i))
+                if (board.IsLegalMove(this, Row - i, Col - i) && board.getBoard()[Row - i, Col - i] is not King)
                 {
                     AddLegalMove(Row - i, Col - i);
                 }
@@ -28,7 +28,7 @@ namespace Chessnt.Models.Pieces
             }
             for (int i = 1; i <= 7 - Math.Max(Row, Col); i++)
             {
-                if (board.IsLegalMove(this, Row + i, Col + i))
+                if (board.IsLegalMove(this, Row + i, Col + i) && board.getBoard()[Row + i, Col + i] is not King)
                 {
                     AddLegalMove(Row + i, Col + i);
                 }
@@ -36,7 +36,7 @@ namespace Chessnt.Models.Pieces
             }
             for (int i = 1; i <= Math.Min(Row, 7 - Col); i++)
             {
-                if (board.IsLegalMove(this, Row - i, Col + i))
+                if (board.IsLegalMove(this, Row - i, Col + i) && board.getBoard()[Row - i, Col + i] is not King)
                 {
                     AddLegalMove(Row - i, Col + i);
                 }
@@ -44,7 +44,7 @@ namespace Chessnt.Models.Pieces
             }
             for (int i = 1; i <= Math.Min(7 - Row, Col); i++)
             {
-                if (board.IsLegalMove(this, Row + i, Col - i))
+                if (board.IsLegalMove(this, Row + i, Col - i) && board.getBoard()[Row + i, Col - i] is not King)
                 {
                     AddLegalMove(Row + i, Col - i);
                 }
@@ -52,7 +52,7 @@ namespace Chessnt.Models.Pieces
             }
             for (int i = Row - 1; i >= 0; i--)
             {
-                if (board.IsLegalMove(this, i, Col))
+                if (board.IsLegalMove(this, i, Col) && board.getBoard()[i, Col] is not King)
                 {
                     AddLegalMove(i, Col);
                 }
@@ -60,7 +60,7 @@ namespace Chessnt.Models.Pieces
             }
             for (int i = Col - 1; i >= 0; i--)
             {
-                if (board.IsLegalMove(this, Row, i))
+                if (board.IsLegalMove(this, Row, i) && board.getBoard()[Row, i] is not King)
                 {
                     AddLegalMove(Row, i);
                 }
@@ -68,7 +68,7 @@ namespace Chessnt.Models.Pieces
             }
             for (int i = Row + 1; i < 8; i++)
             {
-                if (board.IsLegalMove(this, i, Col))
+                if (board.IsLegalMove(this, i, Col) && board.getBoard()[i, Col] is not King)
                 {
                     AddLegalMove(i, Col);
                 }
@@ -76,7 +76,7 @@ namespace Chessnt.Models.Pieces
             }
             for (int i = Col + 1; i < 8; i++)
             {
-                if (board.IsLegalMove(this, Row, i))
+                if (board.IsLegalMove(this, Row, i) && board.getBoard()[Row, i] is not King)
                 {
                     AddLegalMove(Row, i);
                 }

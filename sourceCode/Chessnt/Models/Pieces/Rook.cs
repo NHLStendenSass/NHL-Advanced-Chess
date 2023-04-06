@@ -20,7 +20,7 @@ namespace Chessnt
             Legals.Clear();
             for (int i = Row - 1; i >= 0; i--)
             {
-                if (board.IsLegalMove(this, i, Col))
+                if (board.IsLegalMove(this, i, Col) && board.getBoard()[i, Col] is not King)
                 {
                     AddLegalMove(i, Col);
                 }
@@ -28,7 +28,7 @@ namespace Chessnt
             }
             for (int i = Col - 1; i >= 0; i--)
             {
-                if (board.IsLegalMove(this, Row, i))
+                if (board.IsLegalMove(this, Row, i) && board.getBoard()[Row, i] is not King)
                 {
                     AddLegalMove(Row, i);
                 }
@@ -36,7 +36,7 @@ namespace Chessnt
             }
             for (int i = Row + 1; i < 8; i++)
             {
-                if (board.IsLegalMove(this, i, Col))
+                if (board.IsLegalMove(this, i, Col) && board.getBoard()[i, Col] is not King)
                 {
                     AddLegalMove(i, Col);
                 }
@@ -44,7 +44,7 @@ namespace Chessnt
             }
             for (int i = Col + 1; i < 8; i++)
             {
-                if (board.IsLegalMove(this, Row, i))
+                if (board.IsLegalMove(this, Row, i) && board.getBoard()[Row, i] is not King)
                 {
                     AddLegalMove(Row, i);
                 }

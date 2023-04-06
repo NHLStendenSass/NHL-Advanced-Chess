@@ -18,14 +18,14 @@ namespace Chessnt
             {
                 if (ChessColor == ChessColor.White && board.IsEmpty(Row-1, Col) && board.IsEmpty(Row-2, Col))
                 {
-                    if (board.IsLegalMove(this, Row-2, Col))
+                    if (board.IsLegalMove(this, Row-2, Col) && board.getBoard()[Row - 2, Col] is not King)
                     {
                         AddLegalMove(Row-2, Col);
                     }
                 }
                 else if (ChessColor == ChessColor.Black && board.IsEmpty(Row+1, Col) && board.IsEmpty(Row+2, Col))
                 {
-                    if (board.IsLegalMove(this, Row+2, Col))
+                    if (board.IsLegalMove(this, Row+2, Col) && board.getBoard()[Row + 2, Col] is not King)
                     {
                         AddLegalMove(Row+2, Col);
                     }
@@ -33,14 +33,14 @@ namespace Chessnt
             }
             if (ChessColor == ChessColor.White && board.IsEmpty(Row - 1, Col))
             {
-                if (board.IsLegalMove(this, Row - 1, Col))
+                if (board.IsLegalMove(this, Row - 1, Col) && board.getBoard()[Row - 1, Col] is not King)
                 {
                     AddLegalMove(Row - 1, Col);
                 }
             }
             else if (ChessColor == ChessColor.Black && board.IsEmpty(Row + 1, Col))
             {
-                if (board.IsLegalMove(this, Row + 1, Col))
+                if (board.IsLegalMove(this, Row + 1, Col) && board.getBoard()[Row + 1, Col] is not King)
                 {
                     AddLegalMove(Row + 1, Col);
                 }
@@ -49,14 +49,14 @@ namespace Chessnt
             {
                 if (ChessColor == ChessColor.White && !board.IsEmpty(Row - 1, Col - 1) && board.GetPiece(Row - 1, Col - 1).ChessColor != ChessColor)
                 {
-                    if (board.IsLegalMove(this, Row - 1, Col - 1))
+                    if (board.IsLegalMove(this, Row - 1, Col - 1) && board.getBoard()[Row - 1, Col - 1] is not King)
                     {
                         AddLegalMove(Row - 1, Col - 1);
                     }
                 }
                 else if (ChessColor == ChessColor.Black && !board.IsEmpty(Row + 1, Col - 1) && board.GetPiece(Row + 1, Col - 1).ChessColor != ChessColor)
                 {
-                    if (board.IsLegalMove(this, Row + 1, Col - 1))
+                    if (board.IsLegalMove(this, Row + 1, Col - 1) && board.getBoard()[Row + 1, Col - 1] is not King)
                     {
                         AddLegalMove(Row + 1, Col - 1);
                     }
@@ -66,14 +66,14 @@ namespace Chessnt
             {
                 if (ChessColor == ChessColor.White && !board.IsEmpty(Row - 1, Col + 1) && board.GetPiece(Row - 1, Col + 1).ChessColor != ChessColor)
                 {
-                    if (board.IsLegalMove(this, Row - 1, Col + 1))
+                    if (board.IsLegalMove(this, Row - 1, Col + 1) && board.getBoard()[Row - 1, Col + 1] is not King)
                     {
                         AddLegalMove(Row - 1, Col + 1);
                     }
                 }
                 else if (ChessColor == ChessColor.Black && !board.IsEmpty(Row + 1, Col + 1) && board.GetPiece(Row + 1, Col + 1).ChessColor != ChessColor)
                 {
-                    if (board.IsLegalMove(this, Row + 1, Col + 1))
+                    if (board.IsLegalMove(this, Row + 1, Col + 1) && board.getBoard()[Row + 1, Col + 1] is not King)
                     {
                         AddLegalMove(Row + 1, Col + 1);
                     }

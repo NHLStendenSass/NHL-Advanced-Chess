@@ -173,7 +173,7 @@ namespace Chessnt
                     ChessUpdate(gameTime, currentInput, previousInput);
                 }
 
-                if (board.GameOver) 
+                if (board.IsCheckMate) 
                 {
                     if (board.LastPieceMoved.ChessColor == ChessColor.Black)
                     {
@@ -184,7 +184,13 @@ namespace Chessnt
                         _messageBox.Message = "Check Mate! White wins.\nPress Ok to start a new game";
                     }
                     _messageBox.ShowMessageBox = true;
-                    board.GameOver = false;
+                    board.IsCheckMate = false;
+                }
+                if (board.IsStaleMate)
+                {
+                    _messageBox.Message = "Chess, when played perfectly...\n...is a draw. Stalemate.";
+                    _messageBox.ShowMessageBox = true;
+                    board.IsStaleMate = false;
                 }
             }
         }
