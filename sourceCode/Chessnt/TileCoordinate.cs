@@ -166,7 +166,7 @@ namespace Chessnt
             this.h5 = new TileCoordinate(GoRight(originX, 7), GoUp(originY, 4));
             this.h6 = new TileCoordinate(GoRight(originX, 7), GoUp(originY, 5));
             this.h7 = new TileCoordinate(GoRight(originX, 7), GoUp(originY, 6));
-            this.h8 = new TileCoordinate(GoRight(originX, 7), GoUp(originY, 8));
+            this.h8 = new TileCoordinate(GoRight(originX, 7), GoUp(originY, 7));
         }
     }
 

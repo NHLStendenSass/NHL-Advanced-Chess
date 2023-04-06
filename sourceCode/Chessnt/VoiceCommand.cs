@@ -110,71 +110,265 @@ namespace Chessnt
 
         private void GameRecognition(SpeechRecognitionResult result)
         {
+            Dictionary<string, TileCoordinate> tileHelpers = new Dictionary<string, TileCoordinate>();
 
-            switch (result.Text)
+            for (char c = 'A'; c <= 'H'; c++)
             {
-                case "A1.":
-                    x = tileHelper.a1.GetX();
-                    y = tileHelper.a1.GetY();
+                for (int i = 1; i <= 8; i++)
+                {
+                    string key = c.ToString() + i.ToString() + ".";
+                    TileCoordinate tileHelperObj = null;
 
-                    InputSender.SetCursorPosition(x, y);//a1
-
-                    ThreadMouseClick();
-
-                    break;
-
-                case "A2.":
-
-                    x = tileHelper.a2.GetX();
-                    y = tileHelper.a2.GetY();
-
-                    InputSender.SetCursorPosition(x, y);//a1
-
-                    ThreadMouseClick();
-
-                    break;
-                case "A3.":
-
-                    x = tileHelper.a3.GetX();
-                    y = tileHelper.a3.GetY();
-
-                    InputSender.SetCursorPosition(x, y);//a1
-
-                    ThreadMouseClick();
-
-                    break;
-                case "A4.":
-
-                    x = tileHelper.a4.GetX();
-                    y = tileHelper.a4.GetY();
-
-                    InputSender.SetCursorPosition(x, y);//a1
-
-                    ThreadMouseClick();
-
-                    break;
-                case "A5.":
-
-                    x = tileHelper.a5.GetX();
-                    y = tileHelper.a5.GetY();
-
-                    InputSender.SetCursorPosition(x, y);//a1
-
-                    ThreadMouseClick();
-
-                    break;
-                case "A6.":
-
-                    x = tileHelper.a6.GetX();
-                    y = tileHelper.a6.GetY();
-
-                    InputSender.SetCursorPosition(x, y);//a1
-
-                    ThreadMouseClick();
-
-                    break;
-
+                    switch (c)
+                    {
+                        case 'A':
+                            switch (i)
+                            {
+                                case 1:
+                                    tileHelperObj = tileHelper.a1;
+                                    break;
+                                case 2:
+                                    tileHelperObj = tileHelper.a2;
+                                    break;
+                                case 3:
+                                    tileHelperObj = tileHelper.a3;
+                                    break;
+                                case 4:
+                                    tileHelperObj = tileHelper.a4;
+                                    break;
+                                case 5:
+                                    tileHelperObj = tileHelper.a5;
+                                    break;
+                                case 6:
+                                    tileHelperObj = tileHelper.a6;
+                                    break;
+                                case 7:
+                                    tileHelperObj = tileHelper.a7;
+                                    break;
+                                case 8:
+                                    tileHelperObj = tileHelper.a8;
+                                    break;
+                            }
+                            break;
+                        case 'B':
+                            switch (i)
+                            {
+                                case 1:
+                                    tileHelperObj = tileHelper.b1;
+                                    break;
+                                case 2:
+                                    tileHelperObj = tileHelper.b2;
+                                    break;
+                                case 3:
+                                    tileHelperObj = tileHelper.b3;
+                                    break;
+                                case 4:
+                                    tileHelperObj = tileHelper.b4;
+                                    break;
+                                case 5:
+                                    tileHelperObj = tileHelper.b5;
+                                    break;
+                                case 6:
+                                    tileHelperObj = tileHelper.b6;
+                                    break;
+                                case 7:
+                                    tileHelperObj = tileHelper.b7;
+                                    break;
+                                case 8:
+                                    tileHelperObj = tileHelper.b8;
+                                    break;
+                            }
+                            break;
+                        case 'C':
+                            switch (i)
+                            {
+                                case 1:
+                                    tileHelperObj = tileHelper.c1;
+                                    break;
+                                case 2:
+                                    tileHelperObj = tileHelper.c2;
+                                    break;
+                                case 3:
+                                    tileHelperObj = tileHelper.c3;
+                                    break;
+                                case 4:
+                                    tileHelperObj = tileHelper.c4;
+                                    break;
+                                case 5:
+                                    tileHelperObj = tileHelper.c5;
+                                    break;
+                                case 6:
+                                    tileHelperObj = tileHelper.c6;
+                                    break;
+                                case 7:
+                                    tileHelperObj = tileHelper.c7;
+                                    break;
+                                case 8:
+                                    tileHelperObj = tileHelper.c8;
+                                    break;
+                            }
+                            break;
+                        case 'D':
+                            switch (i)
+                            {
+                                case 1:
+                                    tileHelperObj = tileHelper.d1;
+                                    break;
+                                case 2:
+                                    tileHelperObj = tileHelper.d2;
+                                    break;
+                                case 3:
+                                    tileHelperObj = tileHelper.d3;
+                                    break;
+                                case 4:
+                                    tileHelperObj = tileHelper.d4;
+                                    break;
+                                case 5:
+                                    tileHelperObj = tileHelper.d5;
+                                    break;
+                                case 6:
+                                    tileHelperObj = tileHelper.d6;
+                                    break;
+                                case 7:
+                                    tileHelperObj = tileHelper.d7;
+                                    break;
+                                case 8:
+                                    tileHelperObj = tileHelper.d8;
+                                    break;
+                            }
+                            break;
+                        case 'E':
+                            switch (i)
+                            {
+                                case 1:
+                                    tileHelperObj = tileHelper.e1;
+                                    break;
+                                case 2:
+                                    tileHelperObj = tileHelper.e2;
+                                    break;
+                                case 3:
+                                    tileHelperObj = tileHelper.e3;
+                                    break;
+                                case 4:
+                                    tileHelperObj = tileHelper.e4;
+                                    break;
+                                case 5:
+                                    tileHelperObj = tileHelper.e5;
+                                    break;
+                                case 6:
+                                    tileHelperObj = tileHelper.e6;
+                                    break;
+                                case 7:
+                                    tileHelperObj = tileHelper.e7;
+                                    break;
+                                case 8:
+                                    tileHelperObj = tileHelper.e8;
+                                    break;
+                            }
+                            break;
+                        case 'F':
+                            switch (i)
+                            {
+                                case 1:
+                                    tileHelperObj = tileHelper.f1;
+                                    break;
+                                case 2:
+                                    tileHelperObj = tileHelper.f2;
+                                    break;
+                                case 3:
+                                    tileHelperObj = tileHelper.f3;
+                                    break;
+                                case 4:
+                                    tileHelperObj = tileHelper.f4;
+                                    break;
+                                case 5:
+                                    tileHelperObj = tileHelper.f5;
+                                    break;
+                                case 6:
+                                    tileHelperObj = tileHelper.f6;
+                                    break;
+                                case 7:
+                                    tileHelperObj = tileHelper.f7;
+                                    break;
+                                case 8:
+                                    tileHelperObj = tileHelper.f8;
+                                    break;
+                            }
+                            break;
+                        case 'G':
+                            switch (i)
+                            {
+                                case 1:
+                                    tileHelperObj = tileHelper.g1;
+                                    break;
+                                case 2:
+                                    tileHelperObj = tileHelper.g2;
+                                    break;
+                                case 3:
+                                    tileHelperObj = tileHelper.g3;
+                                    break;
+                                case 4:
+                                    tileHelperObj = tileHelper.g4;
+                                    break;
+                                case 5:
+                                    tileHelperObj = tileHelper.g5;
+                                    break;
+                                case 6:
+                                    tileHelperObj = tileHelper.g6;
+                                    break;
+                                case 7:
+                                    tileHelperObj = tileHelper.g7;
+                                    break;
+                                case 8:
+                                    tileHelperObj = tileHelper.g8;
+                                    break;
+                            }
+                            break;
+                        case 'H':
+                            switch (i)
+                            {
+                                case 1:
+                                    tileHelperObj = tileHelper.h1;
+                                    break;
+                                case 2:
+                                    tileHelperObj = tileHelper.h2;
+                                    break;
+                                case 3:
+                                    tileHelperObj = tileHelper.h3;
+                                    break;
+                                case 4:
+                                    tileHelperObj = tileHelper.h4;
+                                    break;
+                                case 5:
+                                    tileHelperObj = tileHelper.h5;
+                                    break;
+                                case 6:
+                                    tileHelperObj = tileHelper.h6;
+                                    break;
+                                case 7:
+                                    tileHelperObj = tileHelper.h7;
+                                    break;
+                                case 8:
+                                    tileHelperObj = tileHelper.h8;
+                                    break;
+                            }
+                            break;
+                        default:
+                            throw new ArgumentException("Invalid value for c");
+                    }
+                    tileHelpers.Add(key, tileHelperObj);
+                }
             }
+            if (tileHelpers.ContainsKey(result.Text))
+            {
+                TileCoordinate tileHelperObj = tileHelpers[result.Text];
+                x = tileHelperObj.GetX();
+                y = tileHelperObj.GetY();
+            }
+
+            InputSender.SetCursorPosition(x, y);
+
+            ThreadMouseClick();
         }
 
         private Thread ThreadMouseClick()
