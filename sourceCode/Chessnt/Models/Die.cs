@@ -16,6 +16,8 @@ namespace Chessnt
         private Texture2D _texture;
         private int _value = 1;
         private Vector2 _position;
+        private int positionX = 1510;
+        private int positionY = 390;
         private bool _isRolling = false;
         private int _rollCounter = 0;
         private int _rollSpeed = 5;
@@ -27,12 +29,15 @@ namespace Chessnt
         private SpriteFont _font;
         private int _dieRolledCount = 0;
 
-        public Die(Texture2D texture, Vector2 position, ContentManager content)
+        public int PositionX { get => positionX; set => positionX = value; }
+        public int PositionY { get => positionY; set => positionY = value; }
+
+        public Die(Texture2D texture, ContentManager content)
         {
             _font = content.Load<SpriteFont>("diceFont");
             _textOutline = new TextOutline(_font);
             _texture = texture;
-            _position = position;
+            _position = new Vector2(PositionX, PositionY);
         }
         public int getWidth()
         { return _width; }

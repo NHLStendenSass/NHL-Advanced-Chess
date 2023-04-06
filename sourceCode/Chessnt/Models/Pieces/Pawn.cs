@@ -14,20 +14,20 @@ namespace Chessnt
         public override void CalculateLegalMoves()
         {
             legals.Clear();
-            if (NumberOfMoves == 0)
+            if (NumberOfMoves == 0 && (Row == 6 && ChessColor == ChessColor.White) || (Row == 1 && ChessColor == ChessColor.Black))
             {
-                if (ChessColor == ChessColor.White && board.IsEmpty(5, Col) && board.IsEmpty(4, Col))
+                if (ChessColor == ChessColor.White && board.IsEmpty(Row-1, Col) && board.IsEmpty(Row-2, Col))
                 {
-                    if (board.IsLegalMove(this, 4, Col))
+                    if (board.IsLegalMove(this, Row-2, Col))
                     {
-                        AddLegalMove(4, Col);
+                        AddLegalMove(Row-2, Col);
                     }
                 }
-                else if (ChessColor == ChessColor.Black && board.IsEmpty(2, Col) && board.IsEmpty(3, Col))
+                else if (ChessColor == ChessColor.Black && board.IsEmpty(Row+1, Col) && board.IsEmpty(Row+2, Col))
                 {
-                    if (board.IsLegalMove(this, 3, Col))
+                    if (board.IsLegalMove(this, Row+2, Col))
                     {
-                        AddLegalMove(3, Col);
+                        AddLegalMove(Row+2, Col);
                     }
                 }
             }

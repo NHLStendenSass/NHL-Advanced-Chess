@@ -29,13 +29,8 @@ namespace Chessnt
         private MarkableButtonPanel whites;
         private MarkableButtonPanel blacks;
 
-        private readonly int _numRows;
-        private readonly int _numCols;
-        private readonly int _tileSize;
-        private int x;
-        private int y;
-
         bool moveMade = false;
+        private bool _diceRollPossible = true;
 
         Sprite2D[,] grid;
 
@@ -44,6 +39,9 @@ namespace Chessnt
         public Turn Turn { get; set; } = Turn.Player1;
         public Sprite2D[,] Grid { get => grid; set => grid = value; }
         public bool MoveMade { get => moveMade; set => moveMade = value; }
+        public bool DiceRollPossible { get => _diceRollPossible; set => _diceRollPossible = value; }
+
+
 
         public Piece[,] getBoard() { return board; }
 
@@ -54,17 +52,10 @@ namespace Chessnt
 
         public ChessBoard(int numRows, int numCols, int tileSize)
         {
-
-            _numRows = numRows;
-            _numCols = numCols;
-            _tileSize = tileSize;
-
-
             int boardWidth = numCols * tileSize;
             int boardHeight = numRows * tileSize;
-
-            x = (Game1.Instance.GraphicsDevice.Viewport.Width - boardWidth) / 2;
-            y = (Game1.Instance.GraphicsDevice.Viewport.Height - boardHeight) / 2;
+            int x = (Game1.Instance.GraphicsDevice.Viewport.Width - boardWidth) / 2;
+            int y = (Game1.Instance.GraphicsDevice.Viewport.Height - boardHeight) / 2;
 
             Texture2D gridSquares = ContentService.Instance.Textures["Empty"];
             grid = new Sprite2D[numRows, numCols];
@@ -317,6 +308,7 @@ namespace Chessnt
                 }
             }
             MoveMade = true;
+            _diceRollPossible = true;
 
         }
 

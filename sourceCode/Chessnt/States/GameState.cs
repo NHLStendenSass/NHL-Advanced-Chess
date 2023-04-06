@@ -18,25 +18,21 @@ namespace Chessnt
 {
     public class GameState : State
     {
+        private SpriteBatch _spriteBatch;
+
         private Texture2D _backgroundTexture;
 
         private ChessBoard board;
+
         private Die _die;
-        private int _dieX = 1510;
-        private int _dieY = 390;
-        private int _dieValue;
         private int _dieRollCount = 0;
-        private int _dieRollLeftThisTurn = 1;
+
         private SpecialRules _specialRules;
 
         private MessageBox _messageBox;
 
-        private SpriteBatch _spriteBatch;
-
         Input currentInput;
         Input previousInput;
-
-        public int DieRollLeftThisTurn { get => _dieRollLeftThisTurn; set => _dieRollLeftThisTurn = value; }
 
         public GameState(Game1 main, GraphicsDevice graphicsDevice, ContentManager content)
             : base(main, graphicsDevice, content)
@@ -46,7 +42,7 @@ namespace Chessnt
             _backgroundTexture = Globals.Content.Load<Texture2D>("bg1");
             currentInput = new Input();
             previousInput = new Input();
-            _die = new Die(Globals.Content.Load<Texture2D>("dndWhite"), new Vector2(_dieX, _dieY), content);
+            _die = new Die(Globals.Content.Load<Texture2D>("dndWhite"), content);
             _specialRules = new SpecialRules();
             _messageBox = new MessageBox(Globals.Content.Load<Texture2D>("messagebox_bg"), Globals.Content.Load<SpriteFont>("messageFont"), Globals.Content.Load<Texture2D>("ok_button"));
         }
@@ -114,7 +110,7 @@ namespace Chessnt
                 MouseState currentMouseState = Mouse.GetState();
                 Point mousePosition = new Point(currentMouseState.X, currentMouseState.Y);
 
-                if (_dieRollLeftThisTurn == 1)
+                if (board.DiceRollPossible == true)
                 {
                     rollDie(currentMouseState, mousePosition);
                 }
@@ -130,7 +126,7 @@ namespace Chessnt
 
         private void rollDie(MouseState currentMouseState, Point mousePosition)
         {
-            if (mousePosition.X > _dieX && mousePosition.X < _dieX + _die.getWidth() && mousePosition.Y > _dieY && mousePosition.Y < _dieY + _die.getHeight() && currentMouseState.LeftButton == ButtonState.Pressed && !_die.IsRolling())
+            if (mousePosition.X > _die.PositionX && mousePosition.X < _die.PositionX + _die.getWidth() && mousePosition.Y > _die.PositionY && mousePosition.Y < _die.PositionY + _die.getHeight() && currentMouseState.LeftButton == ButtonState.Pressed && !_die.IsRolling())
             {
                 _die.Roll();
             }
@@ -139,17 +135,16 @@ namespace Chessnt
 
             if (_die.getDieRolledCount() > _dieRollCount)
             {
-                _dieValue = _die.getValue();
                 doRule();
                 _dieRollCount++;
-                //_dieRollLeftThisTurn = 0;
+                board.DiceRollPossible = false;
                 _messageBox.ShowMessageBox = true;
             }
         }
 
         private void doRule()
         {
-            _specialRules.doSelectedRule(_dieValue, board, _messageBox);
+            _specialRules.doSelectedRule(_die.getValue(), board, _messageBox);
         }
     }
 }
