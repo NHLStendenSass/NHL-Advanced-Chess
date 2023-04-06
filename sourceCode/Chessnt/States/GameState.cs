@@ -1,6 +1,7 @@
 ﻿using Chessnt.Chess.Managers;
 using Chessnt.Models.Board;
 using Chessnt.Models.Pieces;
+using Chessnt.Utilities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -19,17 +20,21 @@ namespace Chessnt
     public class GameState : State
     {
         private SpriteBatch _spriteBatch;
-
         private Texture2D _backgroundTexture;
+        private Texture2D _buttonTexture;
+        private SpriteFont _buttonFont;
+        private Utilities.TextOutline _textOutline;
 
         private ChessBoard board;
-
         private Die _die;
         private int _dieRollCount = 0;
-
         private SpecialRules _specialRules;
-
         private MessageBox _messageBox;
+
+        private Button _backButton;
+        private Button _restartButton;
+        private List<Component> _buttons;
+
 
         Input currentInput;
         Input previousInput;
@@ -40,11 +45,36 @@ namespace Chessnt
             Globals.Content = content;
             board = new ChessBoard(Constants.TILE_NUMBER, Constants.TILE_NUMBER, Constants.TILESIZE);
             _backgroundTexture = Globals.Content.Load<Texture2D>("bg1");
+            _buttonTexture = base.content.Load<Texture2D>("Button");
+            _buttonFont = base.content.Load<SpriteFont>("SmallFont");
+            _textOutline = new Utilities.TextOutline(_buttonFont);
             currentInput = new Input();
             previousInput = new Input();
             _die = new Die(Globals.Content.Load<Texture2D>("dndWhite"), content);
             _specialRules = new SpecialRules();
             _messageBox = new MessageBox(Globals.Content.Load<Texture2D>("messagebox_bg"), Globals.Content.Load<SpriteFont>("messageFont"), Globals.Content.Load<Texture2D>("ok_button"));
+
+            _backButton = new Button(_buttonTexture, _buttonFont)
+            {
+                Position = new Vector2(20, 700),
+                Text = "Back",
+            };
+
+            _backButton.Click += BackButton_Click;
+
+            _restartButton = new Button(_buttonTexture, _buttonFont)
+            {
+                Position = new Vector2(20, 300),
+                Text = "Restart",
+            };
+
+            _restartButton.Click += RestartButton_Click;
+
+            _buttons = new List<Component>()
+                  {
+                    _backButton,
+                    _restartButton
+                  };
         }
 
         public void LoadContent()
@@ -61,10 +91,25 @@ namespace Chessnt
         {
             board.Draw(spriteBatch);
         }
+        private void DrawButtons(GameTime gameTime, SpriteBatch spriteBatch)
+        {
+            foreach (var component in _buttons)
+            {
+                component.Draw(gameTime, spriteBatch);
+            }
+        }
 
         public override void PostUpdate(GameTime gameTime)
         {
 
+        }
+        private void BackButton_Click(object sender, EventArgs e)
+        {
+            game.ChangeState(new MenuState(game, graphicsDevice, content));
+        }
+        private void RestartButton_Click(object sender, EventArgs e)
+        {
+            board.InitializePieces();
         }
 
         public void ChessUpdate(GameTime gameTime, Input curInput, Input prevInput)
@@ -78,11 +123,12 @@ namespace Chessnt
 
             DrawMenuBackground(spriteBatch);
             DrawChessBoard(spriteBatch);
+            DrawButtons(gameTime, spriteBatch);
             _die.Draw(spriteBatch, Globals.Content.Load<SpriteFont>("diceFont"), Globals.Content.Load<SpriteFont>("diceFontOutline"));
             if (_messageBox.ShowMessageBox)
             {
                 // Draw message box
-                _messageBox.Draw(spriteBatch, _messageBox.Message, _messageBox.ExtraText);
+                _messageBox.Draw(spriteBatch, _messageBox.Message);
             }
 
             spriteBatch.End();
@@ -90,6 +136,11 @@ namespace Chessnt
 
         public override void Update(GameTime gameTime)
         {
+            foreach (var component in _buttons)
+            {
+                component.Update(gameTime);
+            }
+
             if (_messageBox.ShowMessageBox)
             {
                 // Update message box
@@ -120,6 +171,20 @@ namespace Chessnt
                 if (!_die.IsRolling())
                 {
                     ChessUpdate(gameTime, currentInput, previousInput);
+                }
+
+                if (board.GameOver) 
+                {
+                    if (board.LastPieceMoved.ChessColor == ChessColor.Black)
+                    {
+                        _messageBox.Message = "Check Mate! Black wins.\nPress Ok to start a new game.";
+                    }
+                    else if (board.LastPieceMoved.ChessColor == ChessColor.White)
+                    {
+                        _messageBox.Message = "Check Mate! White wins.\nPress Ok to start a new game";
+                    }
+                    _messageBox.ShowMessageBox = true;
+                    board.GameOver = false;
                 }
             }
         }

@@ -20,40 +20,40 @@ namespace Chessnt
             {
                 case 1: 
                     doRuleOne(board);
-                    messageBox.Message = "One of your pawns turns into a queen!"; messageBox.ExtraText = "But only if you have one.";
+                    messageBox.Message = "One of your pawns turns into a queen!\nBut only if you have one.";
                     break;
                     
                 case 2:
                     doRuleTwo(board);
-                    messageBox.Message = "One of your pawns turns into a rook!"; messageBox.ExtraText = "But only if you have one.";
+                    messageBox.Message = "One of your pawns turns into a rook!\nBut only if you have one.";
                     break;
                 case 3:
                     doRuleThree(board);
-                    messageBox.Message = "One of your pawns turns into a bishop!"; messageBox.ExtraText = "But only if you have one.";
+                    messageBox.Message = "One of your pawns turns into a bishop!\nBut only if you have one.";
                     break;
                 case 4:
                     doRuleFour(board);
-                    messageBox.Message = "One of your pawns turns into a knight!"; messageBox.ExtraText = "But only if you have one.";
+                    messageBox.Message = "One of your pawns turns into a knight!\nBut only if you have one.";
                     break;
                 case 5:
                     doRuleFive(board);
-                    messageBox.Message = "Oops. One of your queens turns into a pawn!"; messageBox.ExtraText = "But only if you have one.";
+                    messageBox.Message = "Oops. One of your queens turns into a pawn!\nBut only if you have one.";
                     break;
                 case 6:
                     doRuleSix(board);
-                    messageBox.Message = "Oops. One of your rooks turns into a pawn!"; messageBox.ExtraText = "But only if you have one.";
+                    messageBox.Message = "Oops. One of your rooks turns into a pawn!\nBut only if you have one.";
                     break;
                 case 7:
                     doRuleSeven(board);
-                    messageBox.Message = "Oops. One of your bishops turns into a pawn!"; messageBox.ExtraText = "But only if you have one.";
+                    messageBox.Message = "Oops. One of your bishops turns into a pawn!\nBut only if you have one.";
                     break;
                 case 8:
                     doRuleEight(board);
-                    messageBox.Message = "Oops. One of your knights turns into a pawn!"; messageBox.ExtraText = "But only if you have one."; 
+                    messageBox.Message = "Oops. One of your knights turns into a pawn!\nBut only if you have one."; 
                     break;
                 case 9:
                     doRuleNine(board);
-                    messageBox.Message = "You lose your turn."; messageBox.ExtraText = "Unfortunate.";
+                    messageBox.Message = "You lose your turn.\nUnfortunate.";
                     break;
             }
         }

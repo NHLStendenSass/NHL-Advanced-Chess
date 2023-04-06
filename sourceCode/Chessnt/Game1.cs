@@ -29,10 +29,7 @@ namespace Chessnt
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
 
-            //Set resolution
-            //_graphics.PreferredBackBufferWidth = 1920;
-            //_graphics.PreferredBackBufferHeight = 1080;
-            //_graphics.IsFullScreen = true;
+            _graphics.IsFullScreen = true;
             _graphics.ApplyChanges();
 
             IsMouseVisible = true;

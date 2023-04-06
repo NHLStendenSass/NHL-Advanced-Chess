@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net.NetworkInformation;
 using System.Text;
@@ -29,8 +30,9 @@ namespace Chessnt
         private MarkableButtonPanel whites;
         private MarkableButtonPanel blacks;
 
-        bool moveMade = false;
+        private bool moveMade = false;
         private bool _diceRollPossible = true;
+        private bool gameOver = false;
 
         Sprite2D[,] grid;
 
@@ -40,8 +42,7 @@ namespace Chessnt
         public Sprite2D[,] Grid { get => grid; set => grid = value; }
         public bool MoveMade { get => moveMade; set => moveMade = value; }
         public bool DiceRollPossible { get => _diceRollPossible; set => _diceRollPossible = value; }
-
-
+        public bool GameOver { get => gameOver; set => gameOver = value; }
 
         public Piece[,] getBoard() { return board; }
 
@@ -71,13 +72,14 @@ namespace Chessnt
             InitializePieces();
         }
 
-        private void InitializePieces()
+        public void InitializePieces()
         {
             board = new Piece[8, 8];
 
             whites = new MarkableButtonPanel();
             blacks = new MarkableButtonPanel();
 
+            Turn = Turn.Player1;
 
             for (int i = 0; i < 8; i++)
             {
@@ -186,9 +188,54 @@ namespace Chessnt
             {
                 case Turn.Player2:
                     blacks.Update(curInput, prevInput);
+                    bool blackHasAnyMoves = false;
+                    for (int i = 0; i < 8; i++)
+                    {
+                        for (int j = 0; j < 8; j++)
+                        {
+                            if (board[i, j] != null)
+                            {
+                                if (board[i, j].ChessColor == ChessColor.Black)
+                                {
+                                    if (board[i, j].Legals.Count > 0)
+                                    {
+                                        blackHasAnyMoves = true;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    if (blackHasAnyMoves == false)
+                    {
+                        gameOver = true;
+                        InitializePieces();
+                    }
+                    
                     break;
                 case Turn.Player1:
                     whites.Update(curInput, prevInput);
+                    bool whiteHasAnyMoves = false;
+                    for (int i = 0; i < 8; i++)
+                    {
+                        for (int j = 0; j < 8; j++)
+                        {
+                            if (board[i, j] != null)
+                            {
+                                if (board[i, j].ChessColor == ChessColor.White)
+                                {
+                                    if (board[i, j].Legals.Count > 0)
+                                    {
+                                        whiteHasAnyMoves = true;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    if (whiteHasAnyMoves == false)
+                    {
+                        gameOver = true;
+                        InitializePieces();
+                    }
                     break;
             }
             if (MoveMade)

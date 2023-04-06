@@ -19,7 +19,7 @@ namespace Chessnt
     public abstract class Piece : OptionsButton
     {
         public int NumberOfMoves { get; private set; } = 0;
-        protected List<ChessButton> legals;
+        private List<ChessButton> legals;
         protected Texture2D legalsTexture;
         public int Row { get; set; }
         public int Col { get; set; }
@@ -28,11 +28,12 @@ namespace Chessnt
 
         ChessColor color;
         public ChessColor ChessColor { get => color; private set => color = value; }
+        public List<ChessButton> Legals { get => legals; set => legals = value; }
 
         public Piece(Sprite2D sprite, int row, int col, ChessColor color, ChessBoard board)
             : base(sprite)
         {
-            legals = new List<ChessButton>();
+            Legals = new List<ChessButton>();
             this.Row = row;
             this.Col = col;
             legalsTexture = ContentService.Instance.Textures["Circle"];
@@ -46,9 +47,9 @@ namespace Chessnt
         {
             if (MarkedState == OptionButtonState.Marked)
             {
-                for (int i = 0; i < legals.Count; i++)
+                for (int i = 0; i < Legals.Count; i++)
                 {
-                    legals[i].Update(currentInput, previousInput);
+                    Legals[i].Update(currentInput, previousInput);
                 }
             }
             base.Update(currentInput, previousInput);
@@ -77,7 +78,7 @@ namespace Chessnt
             b.Click += (s, e) => { Move(r, c); };
             b.Hover += (s, e) => { b.Color = Color.Black; };
             b.UnHover += (s, e) => { b.Color = Color.DarkSlateGray; };
-            legals.Add(b);
+            Legals.Add(b);
         }
 
         public abstract void CalculateLegalMoves();
@@ -86,9 +87,9 @@ namespace Chessnt
 
         public void DrawLegalMoves(SpriteBatch spriteBatch)
         {
-            for (int i = 0; i < legals.Count; i++)
+            for (int i = 0; i < Legals.Count; i++)
             {
-                legals[i].Draw(spriteBatch);
+                Legals[i].Draw(spriteBatch);
             }
             base.Draw(spriteBatch);
         }

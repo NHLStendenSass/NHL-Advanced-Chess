@@ -17,8 +17,6 @@ namespace Chessnt
         private Rectangle _rect;
         private string _message = "Chessnt";
         private Vector2 _textPos;
-        private string _extraText = "The game";
-        private Vector2 _extraTextPos;
         private Rectangle _okButtonRect;
         private bool _okButtonHovered = false;
         private bool _okButtonClicked = false;
@@ -33,7 +31,6 @@ namespace Chessnt
 
         public bool ShowMessageBox { get => _showMessageBox; set => _showMessageBox = value; }
         public string Message { get => _message; set => _message = value; }
-        public string ExtraText { get => _extraText; set => _extraText = value; }
 
         public MessageBox(Texture2D texture, SpriteFont font, Texture2D okButtonTexture)
         {
@@ -44,9 +41,6 @@ namespace Chessnt
             _textPos = new Vector2(
                 _rect.X + 20,
                 _rect.Y + 100);
-            _extraTextPos = new Vector2(
-                _rect.X + 20,
-                _rect.Y + 140);
             _okButtonRect = new Rectangle(
                 _rect.X + _rect.Width/3,
                 _rect.Y + _rect.Height-100,
@@ -68,13 +62,11 @@ namespace Chessnt
             }
         }
 
-        public void Draw(SpriteBatch spriteBatch, string text, string extraText)
+        public void Draw(SpriteBatch spriteBatch, string text)
         {
             // Draw message box
             spriteBatch.Draw(_texture, _rect, Color.White);
             spriteBatch.DrawString(_font, text, _textPos, Color.Black);
-            spriteBatch.DrawString(_font, extraText, _extraTextPos, Color.Black);
-
 
             // Draw OK button
             Color okButtonColor = _okButtonHovered ? Color.LightGray : Color.White;

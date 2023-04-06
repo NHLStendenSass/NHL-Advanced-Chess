@@ -17,7 +17,7 @@ namespace Chessnt
         #region ChessMethods
         public override void CalculateLegalMoves()
         {
-            legals.Clear();
+            Legals.Clear();
             for (int i = 1; i <= Math.Min(Row, Col); i++)
             {
                 if (board.IsLegalMove(this, Row - i, Col - i))

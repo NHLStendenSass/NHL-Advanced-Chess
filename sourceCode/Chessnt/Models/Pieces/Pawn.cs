@@ -13,7 +13,7 @@ namespace Chessnt
 
         public override void CalculateLegalMoves()
         {
-            legals.Clear();
+            Legals.Clear();
             if (NumberOfMoves == 0 && (Row == 6 && ChessColor == ChessColor.White) || (Row == 1 && ChessColor == ChessColor.Black))
             {
                 if (ChessColor == ChessColor.White && board.IsEmpty(Row-1, Col) && board.IsEmpty(Row-2, Col))
@@ -154,7 +154,7 @@ namespace Chessnt
             b.Click += (s, e) => { p.Move(r, c); Move(r, c);  };
             b.Hover += (s, e) => { b.Color = Color.Black; };
             b.UnHover += (s, e) => { b.Color = Color.DarkSlateGray; };
-            legals.Add(b);
+            Legals.Add(b);
         }
     }
 }
