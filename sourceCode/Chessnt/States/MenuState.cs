@@ -69,12 +69,12 @@ namespace Chessnt
             };
             _voiceButton.Click += VoiceButton_Click;
 
-            voiceButton = new Button(buttonTexture, buttonFont)
+            _voiceButton = new Button(_buttonTexture, _buttonFont)
             {
                 Position = new Vector2(1400, 170),
                 Text = "Talk",
             };
-            voiceButton.Click += VoiceButton_Click;
+            _voiceButton.Click += VoiceButton_Click;
 
             _components = new List<Component>()
                   {
@@ -129,11 +129,6 @@ namespace Chessnt
         private void VoiceButton_Click(object sender, EventArgs e)
         {
             _voiceCommand.RecognitionWithMicrophoneAsync().Wait();
-        }
-
-        private void VoiceButton_Click(object sender, EventArgs e)
-        {
-            voiceCommand.RecognitionWithMicrophoneAsync().Wait();
         }
 
         public override void PostUpdate(GameTime gameTime)
