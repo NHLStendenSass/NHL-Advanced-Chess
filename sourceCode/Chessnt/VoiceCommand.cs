@@ -14,16 +14,21 @@ using System.Runtime.InteropServices;
 using WindowsInput;
 using System.Threading;
 using SendInputsDemo;
+using System.Security.Cryptography;
 
 namespace Chessnt
 {
     public class VoiceCommand : State
     {
         private MouseState mouseState;
+        private Bruh tileHelper;
+        private int x;
+        private int y;
         public VoiceCommand(Game1 game, GraphicsDevice graphicsDevice, ContentManager content)
           : base(game, graphicsDevice, content)
         {
             mouseState = new MouseState();
+            tileHelper = new Bruh();
         }
 
         public async Task RecognitionWithMicrophoneAsync()
@@ -105,21 +110,82 @@ namespace Chessnt
 
         private void GameRecognition(SpeechRecognitionResult result)
         {
+
             switch (result.Text)
             {
-                case "8/2." or "A2.":
+                case "A1.":
+                    x = tileHelper.a1.GetX();
+                    y = tileHelper.a1.GetY();
 
-                    Thread thread = new Thread(new ThreadStart(VeryMouseClick));
-                    thread.Start();
+                    InputSender.SetCursorPosition(x, y);//a1
+
+                    ThreadMouseClick();
 
                     break;
+
+                case "A2.":
+
+                    x = tileHelper.a2.GetX();
+                    y = tileHelper.a2.GetY();
+
+                    InputSender.SetCursorPosition(x, y);//a1
+
+                    ThreadMouseClick();
+
+                    break;
+                case "A3.":
+
+                    x = tileHelper.a3.GetX();
+                    y = tileHelper.a3.GetY();
+
+                    InputSender.SetCursorPosition(x, y);//a1
+
+                    ThreadMouseClick();
+
+                    break;
+                case "A4.":
+
+                    x = tileHelper.a4.GetX();
+                    y = tileHelper.a4.GetY();
+
+                    InputSender.SetCursorPosition(x, y);//a1
+
+                    ThreadMouseClick();
+
+                    break;
+                case "A5.":
+
+                    x = tileHelper.a5.GetX();
+                    y = tileHelper.a5.GetY();
+
+                    InputSender.SetCursorPosition(x, y);//a1
+
+                    ThreadMouseClick();
+
+                    break;
+                case "A6.":
+
+                    x = tileHelper.a6.GetX();
+                    y = tileHelper.a6.GetY();
+
+                    InputSender.SetCursorPosition(x, y);//a1
+
+                    ThreadMouseClick();
+
+                    break;
+
             }
+        }
+
+        private Thread ThreadMouseClick()
+        {
+            Thread thread = new Thread(new ThreadStart(VeryMouseClick));
+            thread.Start();
+            return thread;
         }
 
         private void VeryMouseClick()
         {
-            InputSender.SetCursorPosition(595, 940);//a1
-
             InputSender.SendMouseInput(new InputSender.MouseInput[]
             {
                 new InputSender.MouseInput
@@ -133,7 +199,7 @@ namespace Chessnt
             InputSender.SendMouseInput(new InputSender.MouseInput[]
             {
                 new InputSender.MouseInput
-                {   
+                {
                     dwFlags = (uint)InputSender.MouseEventF.LeftUp
                 }
             });

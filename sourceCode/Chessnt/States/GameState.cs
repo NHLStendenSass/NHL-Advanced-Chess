@@ -122,7 +122,6 @@ namespace Chessnt
             DrawMenuBackground(spriteBatch);
             DrawChessBoard(spriteBatch);
             DrawComponents(gameTime, spriteBatch);
-            spriteBatch.Draw(ContentService.Instance.Textures["Circle"], new Rectangle(580, 820, 100, 100), Color.Red);//coordinate of a2
             _die.Draw(spriteBatch, Globals.Content.Load<SpriteFont>("diceFont"), Globals.Content.Load<SpriteFont>("diceFontOutline"));
             spriteBatch.End();
         }
