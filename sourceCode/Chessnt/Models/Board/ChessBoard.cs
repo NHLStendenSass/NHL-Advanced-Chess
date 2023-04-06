@@ -74,4 +74,9 @@ public class ChessBoard
             }
         }
     }
+
+    public bool IsEmpty(int r, int c)
+    {
+        return board[r, c] == null;
+    }
 }

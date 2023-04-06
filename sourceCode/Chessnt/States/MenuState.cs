@@ -9,7 +9,6 @@ using System.Text;
 using System.Threading.Tasks;
 using static System.Net.Mime.MediaTypeNames;
 using System.Xml.Linq;
-using Chessnt.View;
 
 namespace Chessnt
 {
@@ -25,7 +24,7 @@ namespace Chessnt
         private Button _optionButton;
         private Button _exitButton;
 
-        private TextOutline _textOutline;
+        private Utilities.TextOutline _textOutline;
 
         public MenuState(Game1 game, GraphicsDevice graphicsDevice, ContentManager content)
           : base(game, graphicsDevice, content)
@@ -33,7 +32,7 @@ namespace Chessnt
             _backgroundTexture = base.content.Load<Texture2D>("menu_background");
             _buttonTexture = base.content.Load<Texture2D>("Button");
             _buttonFont = base.content.Load<SpriteFont>("Font");
-            _textOutline = new TextOutline(_buttonFont);
+            _textOutline = new Utilities.TextOutline(_buttonFont);
 
             _playButton = new Button(_buttonTexture, _buttonFont)
             {

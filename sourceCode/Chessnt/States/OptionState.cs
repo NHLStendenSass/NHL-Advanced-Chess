@@ -16,7 +16,7 @@ namespace Chessnt
         private Texture2D _buttonTexture;
         private SpriteFont _buttonFont;
         private Button _saveButton;
-        private TextOutline _textOutline;
+        private Utilities.TextOutline _textOutline;
 
         public OptionState(Game1 game, GraphicsDevice graphicsDevice, ContentManager content)
           : base(game, graphicsDevice, content)
@@ -24,7 +24,7 @@ namespace Chessnt
             _backgroundTexture = base.content.Load<Texture2D>("option_background");
             _buttonTexture = base.content.Load<Texture2D>("Button");
             _buttonFont = base.content.Load<SpriteFont>("Font");
-            _textOutline = new TextOutline(_buttonFont);
+            _textOutline = new Utilities.TextOutline(_buttonFont);
 
             _saveButton = new Button(_buttonTexture, _buttonFont)
             {

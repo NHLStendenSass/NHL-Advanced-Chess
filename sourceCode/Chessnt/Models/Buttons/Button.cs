@@ -17,7 +17,7 @@ namespace Chessnt
         private Texture2D _texture;
         private float _scale;
         private Rectangle _mouseRectangle;
-        private TextOutline _textOutline;
+        private Utilities.TextOutline _textOutline;
 
         #endregion
 
@@ -42,7 +42,7 @@ namespace Chessnt
             _texture = texture;
             _font = font;
             PenColour = Color.White;
-            _textOutline = new TextOutline(_font);
+            _textOutline = new Utilities.TextOutline(_font);
         }
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
