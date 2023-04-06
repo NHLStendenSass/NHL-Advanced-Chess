@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -9,20 +10,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using System.Runtime.InteropServices;
+using WindowsInput;
+using System.Threading;
+using SendInputsDemo;
+
 namespace Chessnt
 {
     public class VoiceCommand : State
     {
+        private MouseState mouseState;
         public VoiceCommand(Game1 game, GraphicsDevice graphicsDevice, ContentManager content)
-          : base(game, graphicsDevice, content) { 
+          : base(game, graphicsDevice, content)
+        {
+            mouseState = new MouseState();
         }
 
         public async Task RecognitionWithMicrophoneAsync()
         {
-            // <recognitionWithMicrophone>
-            // Creates an instance of a speech config with specified subscription key and service region.
-            // Replace with your own subscription key and service region (e.g., "westus").
-            // The default language is "en-us".
+
             var config = SpeechConfig.FromSubscription("fa917a71bb6746e3922cb46042fb9361", "eastus");
 
             // Creates a speech recognizer using microphone as audio input.
@@ -30,12 +36,6 @@ namespace Chessnt
             {
                 // Starts recognizing
                 Debug.WriteLine("Say something...");
-                // Starts speech recognition, and returns after a single utterance is recognized. The end of a
-                // single utterance is determined by listening for silence at the end or until a maximum of 15
-                // seconds of audio is processed.  The task returns the recognition text as result.
-                // Note: Since RecognizeOnceAsync() returns only a single utterance, it is suitable only for single
-                // shot recognition like command or query.
-                // For long-running multi-utterance recognition, use StartContinuousRecognitionAsync() instead.
                 var result = await recognizer.RecognizeOnceAsync().ConfigureAwait(false);
 
                 // Checks result.
@@ -45,7 +45,7 @@ namespace Chessnt
                     Debug.WriteLine(result.Text);
                     //process result.Text
 
-                    processRecognition(result);
+                    this.ProcessRecognition(result);
 
                 }
                 else if (result.Reason == ResultReason.NoMatch)
@@ -68,25 +68,75 @@ namespace Chessnt
             // </recognitionWithMicrophone>
         }
 
-        private void processRecognition(SpeechRecognitionResult result)
+        private void ProcessRecognition(SpeechRecognitionResult result)
+        {
+            this.MenuRecognition(result);
+            this.OptionRecognition(result);
+            this.GameRecognition(result);
+        }
+
+        private void MenuRecognition(SpeechRecognitionResult result)
         {
             switch (result.Text)
             {
-                case "Menu.":
-                    _game.ChangeState(new MenuState(_game, _graphicsDevice, _content));
+                case "Play.":
+                    game.ChangeState(new GameState(game, graphicsDevice, content));
                     break;
 
                 case "Option.":
-                    Debug.WriteLine("You said option");
-                    _game.ChangeState(new OptionState(_game, _graphicsDevice, _content));
+                    game.ChangeState(new OptionState(game, graphicsDevice, content));
                     break;
 
                 case "Exit.":
-                    _game.Exit();
+                    game.Exit();
                     break;
-
-                default: break;
             }
+        }
+
+        private void OptionRecognition(SpeechRecognitionResult result)
+        {
+            switch (result.Text)
+            {
+                case "Menu." or "Save." or "Safe.":
+                    game.ChangeState(new MenuState(game, graphicsDevice, content));
+                    break;
+            }
+        }
+
+        private void GameRecognition(SpeechRecognitionResult result)
+        {
+            switch (result.Text)
+            {
+                case "8/2." or "A2.":
+
+                    Thread thread = new Thread(new ThreadStart(VeryMouseClick));
+                    thread.Start();
+
+                    break;
+            }
+        }
+
+        private void VeryMouseClick()
+        {
+            InputSender.SetCursorPosition(595, 940);//a1
+
+            InputSender.SendMouseInput(new InputSender.MouseInput[]
+            {
+                new InputSender.MouseInput
+                {
+                    dwFlags = (uint)InputSender.MouseEventF.LeftDown
+                }
+            });
+
+            Thread.Sleep(500);
+
+            InputSender.SendMouseInput(new InputSender.MouseInput[]
+            {
+                new InputSender.MouseInput
+                {   
+                    dwFlags = (uint)InputSender.MouseEventF.LeftUp
+                }
+            });
         }
 
         public override void Update(GameTime gameTime)
@@ -96,7 +146,6 @@ namespace Chessnt
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            throw new NotImplementedException();
         }
 
         public override void PostUpdate(GameTime gameTime)

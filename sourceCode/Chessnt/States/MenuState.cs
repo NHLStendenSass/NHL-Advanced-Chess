@@ -62,7 +62,7 @@ namespace Chessnt
 
             _exitButton.Click += QuitGameButton_Click;
 
-            _voiceButton = new Button(buttonTexture, buttonFont)
+            _voiceButton = new Button(_buttonTexture, _buttonFont)
             {
                 Position = new Vector2(1400, 170),
                 Text = "Talk",

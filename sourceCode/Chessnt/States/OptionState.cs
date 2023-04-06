@@ -33,9 +33,9 @@ namespace Chessnt
                 Position = new Vector2(725, 875),
                 Text = "Save",
             };
-            saveButton.Click += SaveButton_Click;
+            _saveButton.Click += SaveButton_Click;
 
-            _voiceButton = new Button(buttonTexture, buttonFont)
+            _voiceButton = new Button(_buttonTexture, _buttonFont)
             {
                 Position = new Vector2(700, 320),
                 Text = "Talk",
@@ -44,7 +44,7 @@ namespace Chessnt
 
             _components = new List<Component>()
             {
-                saveButton,
+                _saveButton,
                 _voiceButton,
             };
         }

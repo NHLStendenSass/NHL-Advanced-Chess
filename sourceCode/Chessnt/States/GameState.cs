@@ -1,6 +1,7 @@
 ﻿using Chessnt.Chess.Managers;
 using Chessnt.Models.Board;
 using Chessnt.Models.Pieces;
+using Chessnt.Utilities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -28,8 +29,16 @@ namespace Chessnt
 
         private SpriteBatch _spriteBatch;
 
+        private List<Component> _components;
+        private Button _voiceButton;
+        private VoiceCommand _voiceCommand;
+
+        private Texture2D _buttonTexture;
+        private SpriteFont _buttonFont;
+        private Utilities.TextOutline _textOutline;
+
         Input currentInput;
-        Input previousInput;    
+        Input previousInput;
 
         public GameState(Game1 main, GraphicsDevice graphicsDevice, ContentManager content)
             : base(main, graphicsDevice, content)
@@ -37,12 +46,35 @@ namespace Chessnt
             Globals.Content = content;
             board = new ChessBoard(Constants.TILE_NUMBER, Constants.TILE_NUMBER, Constants.TILESIZE);
             _backgroundTexture = Globals.Content.Load<Texture2D>("bg1");
+            _buttonTexture = base.content.Load<Texture2D>("Button");
+            _buttonFont = base.content.Load<SpriteFont>("Font");
+            _textOutline = new Utilities.TextOutline(_buttonFont);
+            _voiceCommand = new VoiceCommand(game, graphicsDevice, content);
+
             currentInput = new Input();
             previousInput = new Input();
+
             _dieX = 1510;
             _dieY = 390;
             _dieRollCount = 0;
             _die = new Die(Globals.Content.Load<Texture2D>("dndWhite"), new Vector2(_dieX, _dieY), content);
+
+            _voiceButton = new Button(_buttonTexture, _buttonFont)
+            {
+                Position = new Vector2(1400, 170),
+                Text = "Talk",
+            };
+            _voiceButton.Click += VoiceButton_Click;
+
+            _components = new List<Component>()
+                  {
+                    _voiceButton
+                  };
+        }
+
+        private void VoiceButton_Click(object sender, EventArgs e)
+        {
+            _voiceCommand.RecognitionWithMicrophoneAsync().Wait();
         }
 
         public void LoadContent()
@@ -65,7 +97,7 @@ namespace Chessnt
 
         }
 
-        public int getDieValue() 
+        public int getDieValue()
         {
             int row = 1;
             int col = 3;
@@ -76,7 +108,7 @@ namespace Chessnt
             board.getBlacks().Add(x);
             board.getBoard()[row, col].MarkAnimation = new ButtonAnimation(null, new Rectangle(board.getBoard()[row, col].Bounds.Location, new Point(Constants.MARKED_PIECESIZE, Constants.MARKED_PIECESIZE)), null, true);
             board.getBoard()[row, col].UnMarkAnimation = new ButtonAnimation(null, new Rectangle(board.getBoard()[row, col].Bounds.Location, new Point(Constants.PIECESIZE, Constants.PIECESIZE)), null, true);
-            return _dieValue; 
+            return _dieValue;
         }
 
         public void ChessUpdate(GameTime gameTime, Input curInput, Input prevInput)
@@ -89,8 +121,18 @@ namespace Chessnt
             spriteBatch.Begin();
             DrawMenuBackground(spriteBatch);
             DrawChessBoard(spriteBatch);
+            DrawComponents(gameTime, spriteBatch);
+            spriteBatch.Draw(ContentService.Instance.Textures["Circle"], new Rectangle(580, 820, 100, 100), Color.Red);//coordinate of a2
             _die.Draw(spriteBatch, Globals.Content.Load<SpriteFont>("diceFont"), Globals.Content.Load<SpriteFont>("diceFontOutline"));
             spriteBatch.End();
+        }
+
+        private void DrawComponents(GameTime gameTime, SpriteBatch spriteBatch)
+        {
+            foreach (var component in _components)
+            {
+                component.Draw(gameTime, spriteBatch);
+            }
         }
 
         public override void Update(GameTime gameTime)
@@ -118,6 +160,14 @@ namespace Chessnt
             currentInput.Update();
 
             ChessUpdate(gameTime, currentInput, previousInput);
+            TalkButtonUpdate(gameTime);
+        }
+
+        private void TalkButtonUpdate(GameTime gameTime) {
+            foreach (var component in _components)
+            {
+                component.Update(gameTime);
+            }
         }
     }
 }
