@@ -43,7 +43,7 @@ namespace Chessnt
                 Position = new Vector2(725, 690),
                 Text = "Open rules!",
             };
-            _urlButton.Click += new EventHandler(UrlButton_Click);
+            _urlButton.Click += UrlButton_Click;
             _components = new List<Component>()
             {
                 _saveButton,
@@ -107,10 +107,6 @@ namespace Chessnt
 
         private void DrawContent(string text, int textX, int textY, float textScale, SpriteBatch spriteBatch)
         {
-
-
-            //_textOutline.DrawTextOutLine(text, textX, textY, textScale, spriteBatch);
-            //spriteBatch.DrawString(_buttonFont, text, new Vector2(textX, textY), Color.White, 0f, Vector2.Zero, textScale, SpriteEffects.None, 0f);
             Vector2 textSize = _buttonFont.MeasureString(text) * textScale;
             Rectangle rect = new Rectangle(textX, textY, (int)textSize.X + 25, (int)textSize.Y + 25);
 
