@@ -12,6 +12,7 @@
     <File>C:/Users/levis/OneDrive/Dokumentumok/GitHub/NHL-Advanced-Chess/sourceCode/Chessnt/Content/diceFontOutline.spritefont</File>
     <File>C:/Users/levis/OneDrive/Dokumentumok/GitHub/NHL-Advanced-Chess/sourceCode/Chessnt/Content/dnd.png</File>
     <File>C:/Users/levis/OneDrive/Dokumentumok/GitHub/NHL-Advanced-Chess/sourceCode/Chessnt/Content/dndwhite.png</File>
+    <File>C:/Users/levis/OneDrive/Dokumentumok/GitHub/NHL-Advanced-Chess/sourceCode/Chessnt/Content/dot.png</File>
     <File>C:/Users/levis/OneDrive/Dokumentumok/GitHub/NHL-Advanced-Chess/sourceCode/Chessnt/Content/Font.spritefont</File>
     <File>C:/Users/levis/OneDrive/Dokumentumok/GitHub/NHL-Advanced-Chess/sourceCode/Chessnt/Content/gamebg.jpeg</File>
     <File>C:/Users/levis/OneDrive/Dokumentumok/GitHub/NHL-Advanced-Chess/sourceCode/Chessnt/Content/loading_background.png</File>
@@ -25,6 +26,7 @@
     <File>C:/Users/levis/OneDrive/Dokumentumok/GitHub/NHL-Advanced-Chess/sourceCode/Chessnt/Content/WhiteEmpty.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
