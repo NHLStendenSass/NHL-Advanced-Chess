@@ -24,7 +24,7 @@ namespace Chessnt
         private Texture2D _buttonTexture;
         private SpriteFont _buttonFont;
         private Utilities.TextOutline _textOutline;
-        private Texture2D _rawColumn;
+        private Texture2D _rowColumn;
         
         private ChessBoard board;
         private Die _die;
@@ -49,7 +49,7 @@ namespace Chessnt
             _buttonTexture = base.content.Load<Texture2D>("Button");
             _buttonFont = base.content.Load<SpriteFont>("SmallFont");
             _textOutline = new Utilities.TextOutline(_buttonFont);
-            _rawColumn = Globals.Content.Load<Texture2D>("rowColumn");
+            _rowColumn = Globals.Content.Load<Texture2D>("rowColumn");
             currentInput = new Input();
             previousInput = new Input();
             _die = new Die(Globals.Content.Load<Texture2D>("dndWhite"), content);
@@ -89,9 +89,9 @@ namespace Chessnt
             spriteBatch.Draw(_backgroundTexture, new Vector2(0, 0), Color.White);
         }
 
-        public void DrawRawColumn(SpriteBatch spriteBatch)
+        public void DrawRowColumn(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(_rawColumn, new Vector2(480, 30), Color.White);
+            spriteBatch.Draw(_rowColumn, new Vector2(480, 20), Color.White);
         }
 
         public void DrawChessBoard(SpriteBatch spriteBatch)
@@ -129,7 +129,7 @@ namespace Chessnt
             spriteBatch.Begin();
 
             DrawMenuBackground(spriteBatch);
-            DrawRawColumn(spriteBatch);
+            DrawRowColumn(spriteBatch);
             DrawChessBoard(spriteBatch);
             DrawButtons(gameTime, spriteBatch);
             _die.Draw(spriteBatch, Globals.Content.Load<SpriteFont>("diceFont"), Globals.Content.Load<SpriteFont>("diceFontOutline"));
