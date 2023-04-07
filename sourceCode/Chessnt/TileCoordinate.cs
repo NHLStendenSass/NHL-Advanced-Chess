@@ -8,7 +8,7 @@ using Windows.Devices.Bluetooth.Advertisement;
 
 namespace Chessnt
 {
-    public class Bruh
+    public class TileHelper
     {
         private int originX;//a1
         private int originY;
@@ -79,7 +79,7 @@ namespace Chessnt
         public TileCoordinate h8;
         #endregion
 
-        public Bruh()
+        public TileHelper()
         {
             this.originX = 595;
             this.originY = 940;

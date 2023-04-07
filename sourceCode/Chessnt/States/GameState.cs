@@ -12,7 +12,9 @@ using System.Diagnostics;
 using System.Linq;
 using System.Reflection.Metadata;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Timers;
 
 namespace Chessnt
 {
@@ -26,6 +28,8 @@ namespace Chessnt
         private int _dieY;
         private int _dieValue;
         private int _dieRollCount;
+        private bool _repeat;
+        private int _countDown;
 
         private SpriteBatch _spriteBatch;
 
@@ -37,6 +41,9 @@ namespace Chessnt
         private SpriteFont _buttonFont;
         private Utilities.TextOutline _textOutline;
 
+        private System.Timers.Timer _textTimer;
+        private System.Timers.Timer _voiceTimer;
+
         Input currentInput;
         Input previousInput;
 
@@ -45,14 +52,19 @@ namespace Chessnt
         {
             Globals.Content = content;
             board = new ChessBoard(Constants.TILE_NUMBER, Constants.TILE_NUMBER, Constants.TILESIZE);
+            #region Load Content
             _backgroundTexture = Globals.Content.Load<Texture2D>("bg1");
             _buttonTexture = base.content.Load<Texture2D>("Button");
-            _buttonFont = base.content.Load<SpriteFont>("Font");
+            _buttonFont = base.content.Load<SpriteFont>("SmallFont");
             _textOutline = new Utilities.TextOutline(_buttonFont);
+            #endregion
             _voiceCommand = new VoiceCommand(game, graphicsDevice, content);
 
             currentInput = new Input();
             previousInput = new Input();
+
+            _repeat = true;
+            _countDown = 4;
 
             _dieX = 1510;
             _dieY = 390;
@@ -74,7 +86,57 @@ namespace Chessnt
 
         private void VoiceButton_Click(object sender, EventArgs e)
         {
+
+            _repeat = true;
+            this._countDown = 4;
+            this.ActivateVoice();
+            RepeatVoiceRecognition();
+        }
+
+        private void ActivateVoice()
+        {
             _voiceCommand.RecognitionWithMicrophoneAsync().Wait();
+        }
+
+        private void RepeatVoiceRecognition()
+        {
+            _voiceButton.Text = "Ready?";
+            this.ChangeTextPerSecond();
+            VoiceTimer();
+        }
+
+        private void VoiceTimer()
+        {
+            _voiceTimer = new System.Timers.Timer(4000);
+            _voiceTimer.Start();
+            _voiceTimer.Elapsed += new System.Timers.ElapsedEventHandler(ListenAgain);
+        }
+
+        private void ListenAgain(object sender, EventArgs e) {
+            if (_repeat)
+            {
+                _voiceButton.Text = "Go!";
+                this.ActivateVoice();
+                _voiceButton.Text = "Talk";
+                _repeat= false;
+            }
+        }
+
+        private void ChangeTextPerSecond()
+        {
+            _textTimer = new System.Timers.Timer();
+            _textTimer.Interval = 1000;
+            _textTimer.Elapsed += (sender, e) =>
+            {
+                _countDown--;
+                _voiceButton.Text = _countDown.ToString();
+                if (_countDown == 0)
+                {
+                    _textTimer.Dispose();
+                    _voiceButton.Text = "Go!";
+                }
+            };
+            _textTimer.Start();
         }
 
         public void LoadContent()

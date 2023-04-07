@@ -10,25 +10,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using System.Runtime.InteropServices;
-using WindowsInput;
 using System.Threading;
 using SendInputsDemo;
-using System.Security.Cryptography;
 
 namespace Chessnt
 {
     public class VoiceCommand : State
     {
-        private MouseState mouseState;
-        private Bruh tileHelper;
+        private TileHelper tileHelper;
         private int x;
         private int y;
         public VoiceCommand(Game1 game, GraphicsDevice graphicsDevice, ContentManager content)
           : base(game, graphicsDevice, content)
         {
-            mouseState = new MouseState();
-            tileHelper = new Bruh();
+            tileHelper = new TileHelper();
         }
 
         public async Task RecognitionWithMicrophoneAsync()
