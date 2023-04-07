@@ -29,10 +29,10 @@ namespace Chessnt
 
         public override void Update(Input currentInput, Input previousInput)
         {
-            if (Contains(currentInput.GetVirtualMouseLocation()))
+            if (Contains(currentInput.GetVirtualMouseLocation()))//check mouse position on top of button
             {
                 if (currentInput.Mouse.LeftButton == Microsoft.Xna.Framework.Input.ButtonState.Released &&
-                    previousInput.Mouse.LeftButton == Microsoft.Xna.Framework.Input.ButtonState.Pressed)
+                    previousInput.Mouse.LeftButton == Microsoft.Xna.Framework.Input.ButtonState.Pressed)//check if clicked
                 {
                     State = ButtonCondition.Pressed;
                     if (ClickAnimation != null) Animate(ClickAnimation);

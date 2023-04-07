@@ -12,7 +12,9 @@ using System.Diagnostics;
 using System.Linq;
 using System.Reflection.Metadata;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Timers;
 using Windows.ApplicationModel.Contacts;
 
 namespace Chessnt
@@ -28,6 +30,9 @@ namespace Chessnt
         
         private ChessBoard board;
         private Die _die;
+
+        private bool _repeat;
+        private int _countDown;
         private int _dieRollCount = 0;
         private SpecialRules _specialRules;
         private MessageBox _messageBox;
@@ -40,18 +45,31 @@ namespace Chessnt
         Input currentInput;
         Input previousInput;
 
+        private Button _voiceButton;
+        private VoiceCommand _voiceCommand;
+
+        private System.Timers.Timer _textTimer;
+        private System.Timers.Timer _voiceTimer;
+
         public GameState(Game1 main, GraphicsDevice graphicsDevice, ContentManager content)
             : base(main, graphicsDevice, content)
         {
             Globals.Content = content;
             board = new ChessBoard(Constants.TILE_NUMBER, Constants.TILE_NUMBER, Constants.TILESIZE);
+            #region Load Content
             _backgroundTexture = Globals.Content.Load<Texture2D>("bg1");
             _buttonTexture = base.content.Load<Texture2D>("Button");
             _buttonFont = base.content.Load<SpriteFont>("SmallFont");
             _textOutline = new Utilities.TextOutline(_buttonFont);
             _rowColumn = Globals.Content.Load<Texture2D>("rowColumn");
+            #endregion
+            _voiceCommand = new VoiceCommand(game, graphicsDevice, content);
+
             currentInput = new Input();
             previousInput = new Input();
+
+            _repeat = true;
+            _countDown = 4;
             _die = new Die(Globals.Content.Load<Texture2D>("dndWhite"), content);
             _specialRules = new SpecialRules();
             _messageBox = new MessageBox(Globals.Content.Load<Texture2D>("messagebox_bg"), Globals.Content.Load<SpriteFont>("messageFont"), Globals.Content.Load<Texture2D>("ok_button"));
@@ -72,11 +90,74 @@ namespace Chessnt
 
             _restartButton.Click += RestartButton_Click;
 
+            _voiceButton = new Button(_buttonTexture, _buttonFont)
+            {
+                Position = new Vector2(1400, 170),
+                Text = "Talk",
+            };
+            _voiceButton.Click += VoiceButton_Click;
+
             _buttons = new List<Component>()
                   {
                     _backButton,
-                    _restartButton
+                    _restartButton,
+                    _voiceButton
                   };
+        }
+
+        private void VoiceButton_Click(object sender, EventArgs e)
+        {
+
+            _repeat = true;
+            this._countDown = 4;
+            this.ActivateVoice();
+            RepeatVoiceRecognition();
+        }
+
+        private void ActivateVoice()
+        {
+            _voiceCommand.RecognitionWithMicrophoneAsync().Wait();
+        }
+
+        private void RepeatVoiceRecognition()
+        {
+            _voiceButton.Text = "Ready?";
+            this.ChangeTextPerSecond();
+            VoiceTimer();
+        }
+
+        private void VoiceTimer()
+        {
+            _voiceTimer = new System.Timers.Timer(4000);
+            _voiceTimer.Start();
+            _voiceTimer.Elapsed += new System.Timers.ElapsedEventHandler(ListenAgain);
+        }
+
+        private void ListenAgain(object sender, EventArgs e) {
+            if (_repeat)
+            {
+                _voiceButton.Text = "Go!";
+                this.ActivateVoice();
+                _voiceButton.Text = "Talk";
+                _repeat= false;
+            }
+        }
+
+        private void ChangeTextPerSecond()
+        {
+            _textTimer = new System.Timers.Timer();
+            _textTimer.Interval = 1000;
+            _textTimer.Elapsed += (sender, e) =>
+            {
+                _countDown--;
+                _voiceButton.Text = _countDown.ToString();
+                if (_countDown == 0)
+                {
+                    _textTimer.Dispose();
+                    _voiceButton.Text = "Go!";
+                }
+            };
+            _textTimer.Start();
         }
 
         public void LoadContent()

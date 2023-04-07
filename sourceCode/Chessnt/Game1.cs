@@ -11,33 +11,30 @@ namespace Chessnt
         public static Game1 Instance { get; private set; }
         private readonly GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-        private State _currentState;
-
+        public State _currentState;
         private State _nextState;
+        private double timer;
 
         public void ChangeState(State state)
         {
             _nextState = state;
         }
 
-        private State _currentBaseView;
-        private State _nextBaseView;
-
         public Game1()
         {
             Instance = this;
             _graphics = new GraphicsDeviceManager(this);
+            _graphics.SynchronizeWithVerticalRetrace= false;
+            IsFixedTimeStep = false;
             Content.RootDirectory = "Content";
-
+            timer = 0;
+            //Set resolution
+            //_graphics.PreferredBackBufferWidth = 1920;
+            //_graphics.PreferredBackBufferHeight = 1080;
             //_graphics.IsFullScreen = true;
-            _graphics.ApplyChanges();
+
 
             IsMouseVisible = true;
-        }
-
-        public void ChangeView(State baseView)
-        {
-            _nextBaseView = baseView;
         }
 
         protected override void Initialize()
@@ -59,9 +56,8 @@ namespace Chessnt
             _currentState = new LoadingState(this, _graphics.GraphicsDevice, Content);
             Globals.SpriteBatch = _spriteBatch;
             ContentService.Instance.LoadContent(this.Content, GraphicsDevice, _spriteBatch);
-            // Create 1x1 white pixel texture
-            Globals.PixelTexture = new Texture2D(GraphicsDevice, 1, 1);
-            Globals.PixelTexture.SetData(new[] { Color.White });
+            new OptionState(this, _graphics.GraphicsDevice, Content);
+            new GameState(this, _graphics.GraphicsDevice, Content);
 
         }
 
