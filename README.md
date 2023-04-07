@@ -29,6 +29,16 @@ Also Task has 4 different types (task names are same with tasks in Trello board)
 
 # Chessn't Game Rules
 
+When starting a game on a PC, please use the following root to start the C# application: NHL-Advanced-Chess\sourceCode\Chessnt\bin\Debug\net6.0-windows10.0.22621.0
+
+To start the game, double-click the 'Chessnt.exe' file.
+
+If there are still issues with the launch, you must run the project in VS 2023, as detailed below:
+
+1. 
+
+
+
 ### Rules
 
 Chess is a two-player strategy game that is played on a square board consisting of 64 squares, alternating between light and dark colors. The game is played with 16 pieces, each player having one king, one queen, two rooks, two knights, two bishops, and eight pawns. There are countless possible moves and combinations of moves.
