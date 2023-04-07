@@ -35,9 +35,15 @@ To start the game, double-click the 'Chessnt.exe' file.
 
 If there are still issues with the launch, you must run the project in VS 2023, as detailed below:
 
-1. 
+1. Add extension if Monogame doesn't load:
 
+   ![addExtension](D:\Github\NHL-Advanced-Chess\documents\addExtension.png)
 
+2. Check Content tool: Content->Content.mgcb and click it. See if you have all those fonts and images:
+
+   ![graph](D:\Github\NHL-Advanced-Chess\documents\graph.png)
+
+   Also make sure you click build to make sure that images and fonts are built successfully!
 
 ### Rules
 
