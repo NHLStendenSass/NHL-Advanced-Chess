@@ -71,7 +71,7 @@ namespace Chessnt
             spriteBatch.Begin();
 
             DrawMenuBackground(spriteBatch);
-           
+
             DrawMenuTexts("Chessn't", 180, 140, 1.015f, spriteBatch);
             DrawComponents(gameTime, spriteBatch);
 

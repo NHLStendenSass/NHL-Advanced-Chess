@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>C:/Users/Tung Xuan Do/Documents/GitHub/NHL-Advanced-Chess/sourceCode/Chessnt/Content/loading_background.png</SourceFile>
-  <SourceTime>2023-03-22T15:47:19.549257+01:00</SourceTime>
-  <DestFile>C:/Users/Tung Xuan Do/Documents/GitHub/NHL-Advanced-Chess/sourceCode/Chessnt/Content/bin/DesktopGL/loading_background.xnb</DestFile>
-  <DestTime>2023-03-28T16:04:25.6230074+02:00</DestTime>
+  <SourceFile>C:/Users/Gebruiker/Documents/GitHub/AdvancedChess/NHL-Advanced-Chess/sourceCode/Chessnt/Content/loading_background.png</SourceFile>
+  <SourceTime>2023-03-24T14:21:10.6300128+01:00</SourceTime>
+  <DestFile>C:/Users/Gebruiker/Documents/GitHub/AdvancedChess/NHL-Advanced-Chess/sourceCode/Chessnt/Content/bin/DesktopGL/loading_background.xnb</DestFile>
+  <DestTime>2023-04-07T10:38:20.8983171+02:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2022-07-26T13:44:56+02:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
