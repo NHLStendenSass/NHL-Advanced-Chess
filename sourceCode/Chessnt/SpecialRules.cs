@@ -639,8 +639,8 @@ namespace Chessnt
         }
 
         public void doRuleTen(ChessBoard board)
-        //{
-            /*List<Piece> nonKingPieces = new List<Piece>();
+        {
+            List<Piece> nonKingPieces = new List<Piece>();
             foreach (Piece piece in board)
             {
                 if (!(piece is King))
@@ -664,6 +664,6 @@ namespace Chessnt
             {
                 Pieces.Remove(blackPiece);
             }
-        }*/
+        }
     }
 }
