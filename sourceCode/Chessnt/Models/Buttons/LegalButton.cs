@@ -5,15 +5,15 @@ using System;
 namespace Chessnt
 {
 
-    public enum OptionButtonState
+    public enum LegalButtonState
     {
         Unmarked,
         Marked
     }
 
-    public class OptionsButton : ChessButton
+    public class LegalButton : ChessButton
     {
-        public OptionButtonState MarkedState { get; private set; }
+        public LegalButtonState MarkedState { get; private set; }
 
         public ButtonAnimation MarkAnimation { get; set; }
         public ButtonAnimation UnMarkAnimation { get; set; }
@@ -23,7 +23,7 @@ namespace Chessnt
 
         public bool AllowClickToUnmark = true;
 
-        public OptionsButton(Sprite2D sprite) : base(sprite)
+        public LegalButton(Sprite2D sprite) : base(sprite)
         {
         }
 
@@ -36,17 +36,17 @@ namespace Chessnt
                 {
                     State = ButtonCondition.Pressed;
                     if (ClickAnimation != null) Animate(ClickAnimation);
-                    if (AllowClickToUnmark && MarkedState == OptionButtonState.Marked)
+                    if (AllowClickToUnmark && MarkedState == LegalButtonState.Marked)
                     {
                         UnMark();
                     }
-                    else if (MarkedState != OptionButtonState.Marked)
+                    else if (MarkedState != LegalButtonState.Marked)
                     {
                         Mark();
                     }
                     OnClick(EventArgs.Empty);
                 }
-                else if (State != ButtonCondition.Hovered && MarkedState != OptionButtonState.Marked)
+                else if (State != ButtonCondition.Hovered && MarkedState != LegalButtonState.Marked)
                 {
                     if (State == ButtonCondition.None)
                     {
@@ -56,7 +56,7 @@ namespace Chessnt
                     State = ButtonCondition.Hovered;
                 }
             }
-            else if (State != ButtonCondition.None && MarkedState != OptionButtonState.Marked)
+            else if (State != ButtonCondition.None && MarkedState != LegalButtonState.Marked)
             {
                 if (UnHoverAnimation != null) Animate(UnHoverAnimation);
                 OnUnHover(EventArgs.Empty);
@@ -73,17 +73,17 @@ namespace Chessnt
                 {
                     State = ButtonCondition.Pressed;
                     if (ClickAnimation != null) Animate(ClickAnimation);
-                    if (AllowClickToUnmark && MarkedState == OptionButtonState.Marked)
+                    if (AllowClickToUnmark && MarkedState == LegalButtonState.Marked)
                     {
                         UnMark();
                     }
-                    else if (MarkedState != OptionButtonState.Marked)
+                    else if (MarkedState != LegalButtonState.Marked)
                     {
                         Mark();
                     }
                     OnClick(EventArgs.Empty);
                 }
-                else if (State != ButtonCondition.Hovered && MarkedState != OptionButtonState.Marked)
+                else if (State != ButtonCondition.Hovered && MarkedState != LegalButtonState.Marked)
                 {
                     if (State == ButtonCondition.None)
                     {
@@ -93,7 +93,7 @@ namespace Chessnt
                     State = ButtonCondition.Hovered;
                 }
             }
-            else if (State != ButtonCondition.None && MarkedState != OptionButtonState.Marked)
+            else if (State != ButtonCondition.None && MarkedState != LegalButtonState.Marked)
             {
                 if (UnHoverAnimation != null) Animate(UnHoverAnimation);
                 OnUnHover(EventArgs.Empty);
@@ -104,7 +104,7 @@ namespace Chessnt
         public void Mark()
         {
             if (MarkAnimation != null) Animate(MarkAnimation);
-            MarkedState = OptionButtonState.Marked;
+            MarkedState = LegalButtonState.Marked;
             OnMarked(EventArgs.Empty);
 
         }
@@ -112,7 +112,7 @@ namespace Chessnt
         public void UnMark()
         {
             if (UnMarkAnimation != null) Animate(UnMarkAnimation);
-            MarkedState = OptionButtonState.Unmarked;
+            MarkedState = LegalButtonState.Unmarked;
             OnUnMarked(EventArgs.Empty);
         }
 

@@ -16,7 +16,7 @@ namespace Chessnt
         Queen
     }
 
-    public abstract class Piece : OptionsButton
+    public abstract class Piece : LegalButton
     {
         public int NumberOfMoves { get; private set; } = 0;
         private List<ChessButton> legals;
@@ -45,7 +45,7 @@ namespace Chessnt
 
         public override void Update(Input currentInput, Input previousInput)
         {
-            if (MarkedState == OptionButtonState.Marked)
+            if (MarkedState == LegalButtonState.Marked)
             {
                 for (int i = 0; i < Legals.Count; i++)
                 {
@@ -57,7 +57,7 @@ namespace Chessnt
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            if (this.MarkedState == OptionButtonState.Marked)
+            if (this.MarkedState == LegalButtonState.Marked)
             {
                 DrawLegalMoves(spriteBatch);
             }

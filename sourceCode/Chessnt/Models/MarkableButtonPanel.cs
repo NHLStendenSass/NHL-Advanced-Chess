@@ -9,18 +9,18 @@ namespace Chessnt
 {
     public class MarkableButtonPanel
     {
-        private List<OptionsButton> _panel;
+        private List<LegalButton> _panel;
 
         public MarkableButtonPanel()
         {
-            _panel = new List<OptionsButton>();
+            _panel = new List<LegalButton>();
         }
 
         public int GetMarkedIndex()
         {
             for (int i = 0; i < _panel.Count; i++)
             {
-                if (_panel[i].MarkedState == OptionButtonState.Marked)
+                if (_panel[i].MarkedState == LegalButtonState.Marked)
                 {
                     return i;
                 }
@@ -36,13 +36,13 @@ namespace Chessnt
             }
         }
 
-        public void Add(OptionsButton button)
+        public void Add(LegalButton button)
         {
             _panel.Add(button);
             _panel[_panel.Count - 1].AllowClickToUnmark = false;
         }
 
-        public void Remove(OptionsButton ob)
+        public void Remove(LegalButton ob)
         {
             _panel.Remove(ob);
             UnmarkAll();
@@ -54,8 +54,8 @@ namespace Chessnt
             int marked = -1;
             for (int i = 0; i < _panel.Count; i++)
             {
-                OptionsButton btn = _panel[i];
-                OptionButtonState state = btn.MarkedState;
+                LegalButton btn = _panel[i];
+                LegalButtonState state = btn.MarkedState;
                 btn.Update(current, previous);
                 if (btn.MarkedState != state)
                 {
