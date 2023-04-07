@@ -12,6 +12,7 @@ namespace Chessnt
         private readonly GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         private State _currentState;
+
         private State _nextState;
 
         public void ChangeState(State state)
@@ -48,6 +49,7 @@ namespace Chessnt
             _graphics.PreferredBackBufferWidth = Globals.WindowSize.X;
             _graphics.PreferredBackBufferHeight = Globals.WindowSize.Y;
             _graphics.ApplyChanges();
+
             //Globals.Content = Content;
             //_gameManager = new();
 
@@ -86,9 +88,7 @@ namespace Chessnt
         {
             GraphicsDevice.Clear(Color.Black);
 
-            _spriteBatch.Begin();
             _currentState.Draw(gameTime, _spriteBatch);
-            _spriteBatch.End();
 
             base.Draw(gameTime);
         }

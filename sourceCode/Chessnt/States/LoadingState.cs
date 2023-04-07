@@ -36,10 +36,12 @@ namespace Chessnt
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
+            spriteBatch.Begin();
 
             DrawMenuBackground(spriteBatch);
             DrawLoadingTexts("Chessn't", 600, 140, 1.01f, spriteBatch);
 
+            spriteBatch.End();
         }
 
         private void DrawMenuBackground(SpriteBatch spriteBatch)

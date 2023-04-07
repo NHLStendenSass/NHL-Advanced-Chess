@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <SourceFile>D:/Github/NHL-Advanced-Chess/sourceCode/Chessnt/Content/Font.spritefont</SourceFile>
-  <SourceTime>2023-03-22T16:37:06.7061108+01:00</SourceTime>
+  <SourceTime>2023-03-30T10:20:02.0742349+02:00</SourceTime>
   <DestFile>D:/Github/NHL-Advanced-Chess/sourceCode/Chessnt/Content/bin/DesktopGL/Font.xnb</DestFile>
-  <DestTime>2023-03-22T16:48:08.7483667+01:00</DestTime>
+  <DestTime>2023-04-07T10:22:53.7620844+02:00</DestTime>
   <Importer>FontDescriptionImporter</Importer>
   <ImporterTime>2022-07-26T13:44:56+02:00</ImporterTime>
   <Processor>LocalizedFontProcessor</Processor>

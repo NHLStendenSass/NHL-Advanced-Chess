@@ -68,10 +68,14 @@ namespace Chessnt
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
+            spriteBatch.Begin();
+
             DrawMenuBackground(spriteBatch);
-           
+
             DrawMenuTexts("Chessn't", 180, 140, 1.015f, spriteBatch);
             DrawComponents(gameTime, spriteBatch);
+
+            spriteBatch.End();
         }
 
         private void DrawComponents(GameTime gameTime, SpriteBatch spriteBatch)

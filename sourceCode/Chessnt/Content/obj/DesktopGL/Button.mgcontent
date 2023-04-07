@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <SourceFile>D:/Github/NHL-Advanced-Chess/sourceCode/Chessnt/Content/Button.png</SourceFile>
-  <SourceTime>2023-03-22T16:37:06.7051121+01:00</SourceTime>
+  <SourceTime>2023-04-07T10:22:31.6693042+02:00</SourceTime>
   <DestFile>D:/Github/NHL-Advanced-Chess/sourceCode/Chessnt/Content/bin/DesktopGL/Button.xnb</DestFile>
-  <DestTime>2023-03-22T16:48:08.5899169+01:00</DestTime>
+  <DestTime>2023-04-07T10:22:53.4276799+02:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2022-07-26T13:44:56+02:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
