@@ -1,4 +1,4 @@
-# NHL-StudyTracker
+# Chessn't
 
 You can find the Start Doucment [here](documents/startDoucment.md).
 
@@ -61,7 +61,18 @@ The game can end in a draw if:
 
 The Game further boasts of rules, which impart an element of unpredictability, thus distinguishing it from the conventional chess game. To introduce an element of chance, a dice is employed at the beginning of each player's turn to determine the randomness of the game. The newly implemented rules are outlined as follows:
 
-- 
+- Player's piece turns into another piece. Versions of this:
+  - Pawn to Queen
+  - Pawn to Bishop
+  - Pawn to Knight
+  - Pawn to Rook
+  - Queen to Pawn
+  - Bishop to Pawn
+  - Knight to Pawn
+  - Rook to Pawn
+- Player loses a random piece
+- Player's opponent loses a random piece
+- Player loses their turn
 
 ### Voice Command
 
