@@ -19,6 +19,7 @@
     <File>C:/Users/levis/OneDrive/Dokumentumok/GitHub/NHL-Advanced-Chess/sourceCode/Chessnt/Content/menu_background.png</File>
     <File>C:/Users/levis/OneDrive/Dokumentumok/GitHub/NHL-Advanced-Chess/sourceCode/Chessnt/Content/messagebox_bg.png</File>
     <File>C:/Users/levis/OneDrive/Dokumentumok/GitHub/NHL-Advanced-Chess/sourceCode/Chessnt/Content/messageFont.spritefont</File>
+    <File>C:/Users/levis/OneDrive/Dokumentumok/GitHub/NHL-Advanced-Chess/sourceCode/Chessnt/Content/moveBackground.png</File>
     <File>C:/Users/levis/OneDrive/Dokumentumok/GitHub/NHL-Advanced-Chess/sourceCode/Chessnt/Content/ok_button.png</File>
     <File>C:/Users/levis/OneDrive/Dokumentumok/GitHub/NHL-Advanced-Chess/sourceCode/Chessnt/Content/option_background.png</File>
     <File>C:/Users/levis/OneDrive/Dokumentumok/GitHub/NHL-Advanced-Chess/sourceCode/Chessnt/Content/rowColumn.png</File>
@@ -26,6 +27,7 @@
     <File>C:/Users/levis/OneDrive/Dokumentumok/GitHub/NHL-Advanced-Chess/sourceCode/Chessnt/Content/WhiteEmpty.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

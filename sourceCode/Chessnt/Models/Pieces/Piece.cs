@@ -36,7 +36,7 @@ namespace Chessnt
             Legals = new List<ChessButton>();
             this.Row = row;
             this.Col = col;
-            legalsTexture = ContentService.Instance.Textures["Dot"];
+            legalsTexture = ContentService.Instance.Textures["moveBackground"];
             this.ChessColor = color;
             this.board = board;
             UnMarked += (s, e) => { Center(new Rectangle(Col * 110, Row * 110, 110, 110)); };
