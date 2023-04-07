@@ -118,7 +118,7 @@ namespace Chessnt
 
         private void OptionButton_Click(object sender, EventArgs e)
         {
-            game.ChangeState(new OptionState(game, graphicsDevice, content));
+            game.ChangeState(new RuleState(game, graphicsDevice, content));
         }
 
         private void PlayButton_Click(object sender, EventArgs e)

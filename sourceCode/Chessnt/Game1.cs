@@ -56,7 +56,7 @@ namespace Chessnt
             _currentState = new LoadingState(this, _graphics.GraphicsDevice, Content);
             Globals.SpriteBatch = _spriteBatch;
             ContentService.Instance.LoadContent(this.Content, GraphicsDevice, _spriteBatch);
-            new OptionState(this, _graphics.GraphicsDevice, Content);
+            new RuleState(this, _graphics.GraphicsDevice, Content);
             new GameState(this, _graphics.GraphicsDevice, Content);
 
         }
