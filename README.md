@@ -8,6 +8,12 @@ You can find the Start Document [here](documents/startDocument.md).
 
 **Group members:** Robin Michael Visser, Levente Stieber, Tung Do Xuan, Sander Siimann
 
+# Quick start
+
+**When starting a game on a PC, please use the following root to start the C# application: NHL-Advanced-Chess\sourceCode\Chessnt\bin\Debug\net6.0-windows10.0.22621.0**
+
+**To start the game, double-click the 'Chessnt.exe' file.**
+
 # Scrum rules
 
 Development board have 5 states to move tasks between in Trello.
@@ -81,3 +87,19 @@ The Chessn't application offers a distinctive functionality, whereby players can
 The following table can be used to help player to enunciate letters:
 
 <img src="https://i.imgur.com/iZLkJIL.png" alt="image-20230407111504931" style="zoom:80%;" />
+
+
+
+# Troubleshoot
+
+If there are issues with the launch, you must run the project in VS 2023, as detailed below:
+
+1. Add extension if Monogame doesn't load:
+
+   ![addExtension](D:\Github\NHL-Advanced-Chess\documents\addExtension.png)
+
+2. Check Content tool: Content->Content.mgcb and click it. See if you have all those fonts and images:
+
+   ![graph](D:\Github\NHL-Advanced-Chess\documents\graph.png)
+
+   Also make sure you click build to make sure that images and fonts are built successfully!

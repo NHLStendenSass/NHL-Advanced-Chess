@@ -1,24 +1,51 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Microsoft.VisualBasic;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Chessnt.Chess.Managers;
 
 namespace Chessnt
 {
     public class Game1 : Game
     {
-        private GraphicsDeviceManager _graphics;
+        public static Game1 Instance { get; private set; }
+        private readonly GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
+        public State _currentState;
+        private State _nextState;
+        private double timer;
+
+        public void ChangeState(State state)
+        {
+            _nextState = state;
+        }
 
         public Game1()
         {
+            Instance = this;
             _graphics = new GraphicsDeviceManager(this);
+            _graphics.SynchronizeWithVerticalRetrace= false;
+            IsFixedTimeStep = false;
             Content.RootDirectory = "Content";
+            timer = 0;
+            //Set resolution
+            //_graphics.PreferredBackBufferWidth = 1920;
+            //_graphics.PreferredBackBufferHeight = 1080;
+            //_graphics.IsFullScreen = true;
+
+
             IsMouseVisible = true;
         }
 
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
+            Globals.WindowSize = new(1920, 1080);
+            _graphics.PreferredBackBufferWidth = Globals.WindowSize.X;
+            _graphics.PreferredBackBufferHeight = Globals.WindowSize.Y;
+            _graphics.ApplyChanges();
+
+            //Globals.Content = Content;
+            //_gameManager = new();
 
             base.Initialize();
         }
@@ -26,25 +53,35 @@ namespace Chessnt
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
+            _currentState = new LoadingState(this, _graphics.GraphicsDevice, Content);
+            Globals.SpriteBatch = _spriteBatch;
+            ContentService.Instance.LoadContent(this.Content, GraphicsDevice, _spriteBatch);
+            new RuleState(this, _graphics.GraphicsDevice, Content);
+            new GameState(this, _graphics.GraphicsDevice, Content);
 
-            // TODO: use this.Content to load your game content here
         }
 
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
+            if (_nextState != null)
+            {
+                _currentState = _nextState;
 
-            // TODO: Add your update logic here
+                _nextState = null;
+            }
+
+            _currentState.Update(gameTime);
+
+            _currentState.PostUpdate(gameTime);
 
             base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Black);
 
-            // TODO: Add your drawing code here
+            _currentState.Draw(gameTime, _spriteBatch);
 
             base.Draw(gameTime);
         }

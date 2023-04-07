@@ -348,3 +348,10 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+sourceCode/Chessnt/Content/obj/DesktopGL/net6.0-windows10.0.22621.0/Content/.mgcontent
+sourceCode/Chessnt/Content/obj/DesktopGL/net6.0-windows10.0.22621.0/Content/.mgstats
+sourceCode/Chessnt/Content/obj/DesktopGL/net6.0-windows10.0.22621.0/Content/Button.mgcontent
+sourceCode/Chessnt/Content/obj/DesktopGL/net6.0-windows10.0.22621.0/Content/Font.mgcontent
+sourceCode/Chessnt/Content/obj/DesktopGL/net6.0-windows10.0.22621.0/Content/loading_background.mgcontent
+sourceCode/Chessnt/Content/obj/DesktopGL/net6.0-windows10.0.22621.0/Content/menu_background.mgcontent
+sourceCode/Chessnt/Content/obj/DesktopGL/net6.0-windows10.0.22621.0/Content/option_background.mgcontent
