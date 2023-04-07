@@ -27,7 +27,7 @@ namespace Chessnt
         public RuleState(Game1 game, GraphicsDevice graphicsDevice, ContentManager content)
           : base(game, graphicsDevice, content)
         {
-            _url = "https://github.com/NHLStendenSass/NHL-Advanced-Chess";
+            _url = "https://github.com/NHLStendenSass/NHL-Advanced-Chess/blob/main/README.md";
             _backgroundTexture = base.content.Load<Texture2D>("option_background");
             _buttonTexture = base.content.Load<Texture2D>("Button");
             _buttonFont = base.content.Load<SpriteFont>("Font");
