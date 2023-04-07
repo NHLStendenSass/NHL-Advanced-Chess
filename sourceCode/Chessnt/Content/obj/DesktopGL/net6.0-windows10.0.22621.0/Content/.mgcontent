@@ -4,20 +4,20 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/Users/Gebruiker/Documents/GitHub/AdvancedChess/NHL-Advanced-Chess/sourceCode/Chessnt/Content/bg1.jpeg</File>
-    <File>C:/Users/Gebruiker/Documents/GitHub/AdvancedChess/NHL-Advanced-Chess/sourceCode/Chessnt/Content/Button.png</File>
-    <File>C:/Users/Gebruiker/Documents/GitHub/AdvancedChess/NHL-Advanced-Chess/sourceCode/Chessnt/Content/ChessPieces.png</File>
-    <File>C:/Users/Gebruiker/Documents/GitHub/AdvancedChess/NHL-Advanced-Chess/sourceCode/Chessnt/Content/Circle.png</File>
-    <File>C:/Users/Gebruiker/Documents/GitHub/AdvancedChess/NHL-Advanced-Chess/sourceCode/Chessnt/Content/diceFont.spritefont</File>
-    <File>C:/Users/Gebruiker/Documents/GitHub/AdvancedChess/NHL-Advanced-Chess/sourceCode/Chessnt/Content/diceFontOutline.spritefont</File>
-    <File>C:/Users/Gebruiker/Documents/GitHub/AdvancedChess/NHL-Advanced-Chess/sourceCode/Chessnt/Content/dnd.png</File>
-    <File>C:/Users/Gebruiker/Documents/GitHub/AdvancedChess/NHL-Advanced-Chess/sourceCode/Chessnt/Content/dndwhite.png</File>
-    <File>C:/Users/Gebruiker/Documents/GitHub/AdvancedChess/NHL-Advanced-Chess/sourceCode/Chessnt/Content/Font.spritefont</File>
-    <File>C:/Users/Gebruiker/Documents/GitHub/AdvancedChess/NHL-Advanced-Chess/sourceCode/Chessnt/Content/gamebg.jpeg</File>
-    <File>C:/Users/Gebruiker/Documents/GitHub/AdvancedChess/NHL-Advanced-Chess/sourceCode/Chessnt/Content/loading_background.png</File>
-    <File>C:/Users/Gebruiker/Documents/GitHub/AdvancedChess/NHL-Advanced-Chess/sourceCode/Chessnt/Content/menu_background.png</File>
-    <File>C:/Users/Gebruiker/Documents/GitHub/AdvancedChess/NHL-Advanced-Chess/sourceCode/Chessnt/Content/option_background.png</File>
-    <File>C:/Users/Gebruiker/Documents/GitHub/AdvancedChess/NHL-Advanced-Chess/sourceCode/Chessnt/Content/rowColumn.png</File>
+    <File>D:/Github/NHL-Advanced-Chess/sourceCode/Chessnt/Content/bg1.jpeg</File>
+    <File>D:/Github/NHL-Advanced-Chess/sourceCode/Chessnt/Content/Button.png</File>
+    <File>D:/Github/NHL-Advanced-Chess/sourceCode/Chessnt/Content/ChessPieces.png</File>
+    <File>D:/Github/NHL-Advanced-Chess/sourceCode/Chessnt/Content/Circle.png</File>
+    <File>D:/Github/NHL-Advanced-Chess/sourceCode/Chessnt/Content/diceFont.spritefont</File>
+    <File>D:/Github/NHL-Advanced-Chess/sourceCode/Chessnt/Content/diceFontOutline.spritefont</File>
+    <File>D:/Github/NHL-Advanced-Chess/sourceCode/Chessnt/Content/dnd.png</File>
+    <File>D:/Github/NHL-Advanced-Chess/sourceCode/Chessnt/Content/dndwhite.png</File>
+    <File>D:/Github/NHL-Advanced-Chess/sourceCode/Chessnt/Content/Font.spritefont</File>
+    <File>D:/Github/NHL-Advanced-Chess/sourceCode/Chessnt/Content/gamebg.jpeg</File>
+    <File>D:/Github/NHL-Advanced-Chess/sourceCode/Chessnt/Content/loading_background.png</File>
+    <File>D:/Github/NHL-Advanced-Chess/sourceCode/Chessnt/Content/menu_background.png</File>
+    <File>D:/Github/NHL-Advanced-Chess/sourceCode/Chessnt/Content/option_background.png</File>
+    <File>D:/Github/NHL-Advanced-Chess/sourceCode/Chessnt/Content/rowColumn.png</File>
   </SourceFiles>
   <DestFiles>
     <File xsi:nil="true" />
