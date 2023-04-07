@@ -24,7 +24,7 @@ namespace Chessnt
         private int _maxRollCount = 100;
         private int _width = 260;
         private int _height = 300;
-        private int _maxValue = 9;
+        private int _maxValue = 11;
         private TextOutline _textOutline;
         private SpriteFont _font;
         private int _dieRolledCount = 0;

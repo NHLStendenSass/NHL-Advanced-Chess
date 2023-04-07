@@ -55,6 +55,14 @@ namespace Chessnt
                     doRuleNine(board);
                     messageBox.Message = "You lose your turn.\nUnfortunate.";
                     break;
+                case 10:
+                    doRuleTen(board);
+                    messageBox.Message = "You lose a random piece.\nIf you have any.";
+                    break;
+                case 11:
+                    doRuleEleven(board);
+                    messageBox.Message = "Your opponent loses a random piece.\nIf they have any.";
+                    break;
             }
         }
 
@@ -634,5 +642,104 @@ namespace Chessnt
             else board.Turn = Turn.Player1;
         }
 
+        public void doRuleTen(ChessBoard board)
+        {
+            List<Piece> pieceToRemove = new List<Piece>();
+            Piece chosenPiece = null;
+            for (int i = 0; i < 8; i++)
+            {
+                for (int j = 0; j < 8; j++)
+                {
+                    if (board.getBoard()[i, j] != null)
+                    {
+                        if (board.Turn == Turn.Player1)
+                        {
+                            if (board.GetPiece(i, j) is not King && board.GetPiece(i, j).ChessColor == ChessColor.White)
+                            {
+                                pieceToRemove.Add(board.GetPiece(i, j));
+                            }
+                        }
+
+                        else if (board.Turn == Turn.Player2)
+                        {
+                            if (board.GetPiece(i, j) is not King && board.GetPiece(i, j).ChessColor == ChessColor.Black)
+                            {
+                                pieceToRemove.Add(board.GetPiece(i, j));
+                            }
+                        }
+                    }
+                }
+            }
+            if (board.Turn == Turn.Player1)
+            {
+                if (pieceToRemove.Count > 0)
+                {
+                    chosenPiece = pieceToRemove[new Random().Next(0, pieceToRemove.Count)];
+                    board.getWhites().Remove(board.getBoard()[chosenPiece.Row, chosenPiece.Col]);
+                    pieceToRemove.Clear();
+                    chosenPiece = null;
+                }
+            }
+            else if (board.Turn == Turn.Player2)
+            {
+                if (pieceToRemove.Count > 0)
+                {
+                    chosenPiece = pieceToRemove[new Random().Next(0, pieceToRemove.Count)];
+                    board.getBlacks().Remove(board.getBoard()[chosenPiece.Row, chosenPiece.Col]);
+                    pieceToRemove.Clear();
+                    chosenPiece = null;
+                }
+            }
+        }
+
+        public void doRuleEleven(ChessBoard board)
+        {
+            List<Piece> pieceToRemove = new List<Piece>();
+            Piece chosenPiece = null;
+            for (int i = 0; i < 8; i++)
+            {
+                for (int j = 0; j < 8; j++)
+                {
+                    if (board.getBoard()[i, j] != null)
+                    {
+                        if (board.Turn == Turn.Player1)
+                        {
+                            if (board.GetPiece(i, j) is not King && board.GetPiece(i, j).ChessColor == ChessColor.Black)
+                            {
+                                pieceToRemove.Add(board.GetPiece(i, j));
+                            }
+                        }
+
+                        else if (board.Turn == Turn.Player2)
+                        {
+                            if (board.GetPiece(i, j) is not King && board.GetPiece(i, j).ChessColor == ChessColor.White)
+                            {
+                                pieceToRemove.Add(board.GetPiece(i, j));
+                            }
+                        }
+                    }
+                }
+            }
+            if (board.Turn == Turn.Player1)
+            {
+                if (pieceToRemove.Count > 0)
+                {
+                    chosenPiece = pieceToRemove[new Random().Next(0, pieceToRemove.Count)];
+                    board.getBlacks().Remove(board.getBoard()[chosenPiece.Row, chosenPiece.Col]);
+                    pieceToRemove.Clear();
+                    chosenPiece = null;
+                }
+            }
+            else if (board.Turn == Turn.Player2)
+            {
+                if (pieceToRemove.Count > 0)
+                {
+                    chosenPiece = pieceToRemove[new Random().Next(0, pieceToRemove.Count)];
+                    board.getWhites().Remove(board.getBoard()[chosenPiece.Row, chosenPiece.Col]);
+                    pieceToRemove.Clear();
+                    chosenPiece = null;
+                }
+            }
+        }
     }
 }

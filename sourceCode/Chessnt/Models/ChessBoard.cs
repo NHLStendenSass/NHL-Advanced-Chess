@@ -186,6 +186,90 @@ namespace Chessnt
 
         public void Update(GameTime gameTime, Input curInput, Input prevInput)
         {
+            int whiteTotalPieces = 1;
+            int whitePawnCount = 0;
+            int whiteRookCount = 0;
+            int whiteKnightCount = 0;
+            int whiteBishopCount = 0;
+            int whiteQueenCount = 0;
+            int blackTotalPieces = 1;
+            int blackPawnCount = 0;
+            int blackRookCount = 0;
+            int blackKnightCount = 0;
+            int blackBishopCount = 0;
+            int blackQueenCount = 0;
+
+            for (int i = 0; i < 8; i++)
+            {
+                for (int j = 0; j < 8; j++)
+                {
+                    if (board[i, j] != null)
+                    {
+                        if (board[i, j].ChessColor == ChessColor.White)
+                        {
+                            if (board[i, j] is Pawn)
+                            {
+                                whitePawnCount++;
+                                whiteTotalPieces++;
+                            }
+                            else if (board[i, j] is Rook)
+                            {
+                                whiteRookCount++;
+                                whiteTotalPieces++;
+                            }
+                            else if (board[i, j] is Knight)
+                            {
+                                whiteKnightCount++;
+                                whiteTotalPieces++;
+                            }
+                            else if (board[i, j] is Bishop)
+                            {
+                                whiteBishopCount++;
+                                whiteTotalPieces++;
+                            }
+                            else if (board[i, j] is Queen)
+                            {
+                                whiteQueenCount++;
+                                whiteTotalPieces++;
+                            }
+                        }
+                        else if (board[i, j].ChessColor == ChessColor.Black)
+                        {
+                            if (board[i, j] is Pawn)
+                            {
+                                blackPawnCount++;
+                                blackTotalPieces++;
+                            }
+                            else if (board[i, j] is Rook)
+                            {
+                                blackRookCount++;
+                                blackTotalPieces++;
+                            }
+                            else if (board[i, j] is Knight)
+                            {
+                                blackKnightCount++;
+                                blackTotalPieces++;
+                            }
+                            else if (board[i, j] is Bishop)
+                            {
+                                blackBishopCount++;
+                                blackTotalPieces++;
+                            }
+                            else if (board[i, j] is Queen)
+                            {
+                                blackQueenCount++;
+                                blackTotalPieces++;
+                            }
+                        }
+                    }
+                }
+            }
+            if ((whiteTotalPieces == 1 && blackTotalPieces == 1) || (whiteTotalPieces == 1 && blackTotalPieces == 2 && blackBishopCount == 1) || (blackTotalPieces == 1 && whiteTotalPieces == 2 && whiteBishopCount == 1) || (whiteTotalPieces == 1 && blackTotalPieces == 2 && blackKnightCount == 1) || (blackTotalPieces == 1 && whiteTotalPieces == 2 && whiteKnightCount == 1))
+            {
+                IsStaleMate = true;
+                InitializePieces();
+            }
+
             switch (Turn)
             {
                 case Turn.Player2:
