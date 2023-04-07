@@ -58,7 +58,7 @@ namespace Chessnt
 
             _backButton = new Button(_buttonTexture, _buttonFont)
             {
-                Position = new Vector2(20, 700),
+                Position = new Vector2(10, 700),
                 Text = "Back",
             };
 
@@ -66,7 +66,7 @@ namespace Chessnt
 
             _restartButton = new Button(_buttonTexture, _buttonFont)
             {
-                Position = new Vector2(20, 300),
+                Position = new Vector2(10, 300),
                 Text = "Restart",
             };
 

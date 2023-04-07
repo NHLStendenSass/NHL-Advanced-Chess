@@ -16,7 +16,7 @@ namespace Chessnt
         private Texture2D _texture;
         private int _value = 1;
         private Vector2 _position;
-        private int positionX = 1510;
+        private int positionX = 1550;
         private int positionY = 390;
         private bool _isRolling = false;
         private int _rollCounter = 0;
