@@ -46,7 +46,7 @@
                 _content = Content;
 
                 AddTexture("WhiteEmpty", "Empty");
-                AddTexture("Circle", "Circle");
+                AddTexture("moveBackground", "moveBackground");
 
                 Texture2D texture = _content.Load<Texture2D>("ChessPieces");
 

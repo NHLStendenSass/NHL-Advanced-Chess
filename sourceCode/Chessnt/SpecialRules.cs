@@ -53,7 +53,7 @@ namespace Chessnt
                     break;
                 case 9:
                     doRuleNine(board);
-                    messageBox.Message = "You lose your turn.\nUnfortunate.";
+                    messageBox.Message = "You lose your turn. Unfortunate.\nIn return, your opponent has no rolls this turn.";
                     break;
                 case 10:
                     doRuleTen(board);
@@ -68,571 +68,37 @@ namespace Chessnt
 
         public void doRuleOne(ChessBoard board)
         {
-            List<Piece> pieceToReplace = new List<Piece>();
-            Piece chosenPiece = null;
-            for (int i = 0; i < 8; i++)
-            {
-                for (int j = 0; j < 8; j++)
-                {
-                    if (board.getBoard()[i, j] != null)
-                    {
-                        if (board.Turn == Turn.Player1)
-                        {
-                            if (board.GetPiece(i, j) is Pawn && board.GetPiece(i, j).ChessColor == ChessColor.White)
-                            {
-                                pieceToReplace.Add(board.GetPiece(i, j));
-                            }
-                        }
-
-                        else if (board.Turn == Turn.Player2)
-                        {
-                            if (board.GetPiece(i, j) is Pawn && board.GetPiece(i, j).ChessColor == ChessColor.Black)
-                            {
-                                pieceToReplace.Add(board.GetPiece(i, j));
-                            }
-                        }
-                    }
-                }
-            }
-            if (board.Turn == Turn.Player1)
-            {
-                if (pieceToReplace.Count > 0)
-                {
-                    chosenPiece = pieceToReplace[new Random().Next(0, pieceToReplace.Count)];
-                    board.getWhites().Remove(board.getBoard()[chosenPiece.Row, chosenPiece.Col]);
-                    Piece x = new Queen(new Sprite2D(ContentService.Instance.Textures["WhiteQueen"], new Rectangle(0, 0, Constants.PIECESIZE, Constants.PIECESIZE)), chosenPiece.Row, chosenPiece.Col, ChessColor.White, board);
-                    x.Center(board.Grid[chosenPiece.Row, chosenPiece.Col].Bounds);
-                    board.getBoard()[chosenPiece.Row, chosenPiece.Col] = x;
-                    board.getWhites().Add(x);
-                    board.getBoard()[chosenPiece.Row, chosenPiece.Col].MarkAnimation = new ButtonAnimation(null, new Rectangle(board.getBoard()[chosenPiece.Row, chosenPiece.Col].Bounds.Location, new Point(Constants.MARKED_PIECESIZE, Constants.MARKED_PIECESIZE)), null, true);
-                    board.getBoard()[chosenPiece.Row, chosenPiece.Col].UnMarkAnimation = new ButtonAnimation(null, new Rectangle(board.getBoard()[chosenPiece.Row, chosenPiece.Col].Bounds.Location, new Point(Constants.PIECESIZE, Constants.PIECESIZE)), null, true);
-                    board.getBoard()[chosenPiece.Row, chosenPiece.Col].CalculateLegalMoves();
-                    pieceToReplace.Clear();
-                    chosenPiece = null;
-                }
-                else
-                {
-                    Trace.WriteLine("No pawns left");
-                }
-            }
-            else if (board.Turn == Turn.Player2)
-            {
-                if (pieceToReplace.Count > 0)
-                {
-                    chosenPiece = pieceToReplace[new Random().Next(0, pieceToReplace.Count)];
-                    board.getBlacks().Remove(board.getBoard()[chosenPiece.Row, chosenPiece.Col]);
-                    Piece x = new Queen(new Sprite2D(ContentService.Instance.Textures["BlackQueen"], new Rectangle(0, 0, Constants.PIECESIZE, Constants.PIECESIZE)), chosenPiece.Row, chosenPiece.Col, ChessColor.Black, board);
-                    x.Center(board.Grid[chosenPiece.Row, chosenPiece.Col].Bounds);
-                    board.getBoard()[chosenPiece.Row, chosenPiece.Col] = x;
-                    board.getBlacks().Add(x);
-                    board.getBoard()[chosenPiece.Row, chosenPiece.Col].MarkAnimation = new ButtonAnimation(null, new Rectangle(board.getBoard()[chosenPiece.Row, chosenPiece.Col].Bounds.Location, new Point(Constants.MARKED_PIECESIZE, Constants.MARKED_PIECESIZE)), null, true);
-                    board.getBoard()[chosenPiece.Row, chosenPiece.Col].UnMarkAnimation = new ButtonAnimation(null, new Rectangle(board.getBoard()[chosenPiece.Row, chosenPiece.Col].Bounds.Location, new Point(Constants.PIECESIZE, Constants.PIECESIZE)), null, true);
-                    board.getBoard()[chosenPiece.Row, chosenPiece.Col].CalculateLegalMoves();
-                    pieceToReplace.Clear();
-                    chosenPiece = null;
-                }
-                else
-                {
-                    Trace.WriteLine("No pawns left");
-                }
-            }
+            replacePiece(board, ChessPiece.Pawn, ChessPiece.Queen);
         }
         public void doRuleTwo(ChessBoard board)
         {
-            List<Piece> pieceToReplace = new List<Piece>();
-            Piece chosenPiece = null;
-            for (int i = 0; i < 8; i++)
-            {
-                for (int j = 0; j < 8; j++)
-                {
-                    if (board.getBoard()[i, j] != null)
-                    {
-                        if (board.Turn == Turn.Player1)
-                        {
-                            if (board.GetPiece(i, j) is Pawn && board.GetPiece(i, j).ChessColor == ChessColor.White)
-                            {
-                                pieceToReplace.Add(board.GetPiece(i, j));
-                            }
-                        }
-
-                        else if (board.Turn == Turn.Player2)
-                        {
-                            if (board.GetPiece(i, j) is Pawn && board.GetPiece(i, j).ChessColor == ChessColor.Black)
-                            {
-                                pieceToReplace.Add(board.GetPiece(i, j));
-                            }
-                        }
-                    }
-                }
-            }
-            if (board.Turn == Turn.Player1)
-            {
-                if (pieceToReplace.Count > 0)
-                {
-                    chosenPiece = pieceToReplace[new Random().Next(0, pieceToReplace.Count)];
-                    board.getWhites().Remove(board.getBoard()[chosenPiece.Row, chosenPiece.Col]);
-                    Piece x = new Rook(new Sprite2D(ContentService.Instance.Textures["WhiteRook"], new Rectangle(0, 0, Constants.PIECESIZE, Constants.PIECESIZE)), chosenPiece.Row, chosenPiece.Col, ChessColor.White, board);
-                    x.Center(board.Grid[chosenPiece.Row, chosenPiece.Col].Bounds);
-                    board.getBoard()[chosenPiece.Row, chosenPiece.Col] = x;
-                    board.getWhites().Add(x);
-                    board.getBoard()[chosenPiece.Row, chosenPiece.Col].MarkAnimation = new ButtonAnimation(null, new Rectangle(board.getBoard()[chosenPiece.Row, chosenPiece.Col].Bounds.Location, new Point(Constants.MARKED_PIECESIZE, Constants.MARKED_PIECESIZE)), null, true);
-                    board.getBoard()[chosenPiece.Row, chosenPiece.Col].UnMarkAnimation = new ButtonAnimation(null, new Rectangle(board.getBoard()[chosenPiece.Row, chosenPiece.Col].Bounds.Location, new Point(Constants.PIECESIZE, Constants.PIECESIZE)), null, true);
-                    board.getBoard()[chosenPiece.Row, chosenPiece.Col].CalculateLegalMoves();
-                    pieceToReplace.Clear();
-                    chosenPiece = null;
-                }
-                else
-                {
-                    Trace.WriteLine("No pawns left");
-                }
-            }
-            else if (board.Turn == Turn.Player2)
-            {
-                if (pieceToReplace.Count > 0)
-                {
-                    chosenPiece = pieceToReplace[new Random().Next(0, pieceToReplace.Count)];
-                    board.getBlacks().Remove(board.getBoard()[chosenPiece.Row, chosenPiece.Col]);
-                    Piece x = new Rook(new Sprite2D(ContentService.Instance.Textures["BlackRook"], new Rectangle(0, 0, Constants.PIECESIZE, Constants.PIECESIZE)), chosenPiece.Row, chosenPiece.Col, ChessColor.Black, board);
-                    x.Center(board.Grid[chosenPiece.Row, chosenPiece.Col].Bounds);
-                    board.getBoard()[chosenPiece.Row, chosenPiece.Col] = x;
-                    board.getBlacks().Add(x);
-                    board.getBoard()[chosenPiece.Row, chosenPiece.Col].MarkAnimation = new ButtonAnimation(null, new Rectangle(board.getBoard()[chosenPiece.Row, chosenPiece.Col].Bounds.Location, new Point(Constants.MARKED_PIECESIZE, Constants.MARKED_PIECESIZE)), null, true);
-                    board.getBoard()[chosenPiece.Row, chosenPiece.Col].UnMarkAnimation = new ButtonAnimation(null, new Rectangle(board.getBoard()[chosenPiece.Row, chosenPiece.Col].Bounds.Location, new Point(Constants.PIECESIZE, Constants.PIECESIZE)), null, true);
-                    board.getBoard()[chosenPiece.Row, chosenPiece.Col].CalculateLegalMoves();
-                    pieceToReplace.Clear();
-                    chosenPiece = null;
-                }
-                else
-                {
-                    Trace.WriteLine("No pawns left");
-                }
-            }
+            replacePiece(board, ChessPiece.Pawn, ChessPiece.Rook);
         }
         public void doRuleThree(ChessBoard board)
         {
-            List<Piece> pieceToReplace = new List<Piece>();
-            Piece chosenPiece = null;
-            for (int i = 0; i < 8; i++)
-            {
-                for (int j = 0; j < 8; j++)
-                {
-                    if (board.getBoard()[i, j] != null)
-                    {
-                        if (board.Turn == Turn.Player1)
-                        {
-                            if (board.GetPiece(i, j) is Pawn && board.GetPiece(i, j).ChessColor == ChessColor.White)
-                            {
-                                pieceToReplace.Add(board.GetPiece(i, j));
-                            }
-                        }
-
-                        else if (board.Turn == Turn.Player2)
-                        {
-                            if (board.GetPiece(i, j) is Pawn && board.GetPiece(i, j).ChessColor == ChessColor.Black)
-                            {
-                                pieceToReplace.Add(board.GetPiece(i, j));
-                            }
-                        }
-                    }
-                }
-            }
-            if (board.Turn == Turn.Player1)
-            {
-                if (pieceToReplace.Count > 0)
-                {
-                    chosenPiece = pieceToReplace[new Random().Next(0, pieceToReplace.Count)];
-                    board.getWhites().Remove(board.getBoard()[chosenPiece.Row, chosenPiece.Col]);
-                    Piece x = new Bishop(new Sprite2D(ContentService.Instance.Textures["WhiteBishop"], new Rectangle(0, 0, Constants.PIECESIZE, Constants.PIECESIZE)), chosenPiece.Row, chosenPiece.Col, ChessColor.White, board);
-                    x.Center(board.Grid[chosenPiece.Row, chosenPiece.Col].Bounds);
-                    board.getBoard()[chosenPiece.Row, chosenPiece.Col] = x;
-                    board.getWhites().Add(x);
-                    board.getBoard()[chosenPiece.Row, chosenPiece.Col].MarkAnimation = new ButtonAnimation(null, new Rectangle(board.getBoard()[chosenPiece.Row, chosenPiece.Col].Bounds.Location, new Point(Constants.MARKED_PIECESIZE, Constants.MARKED_PIECESIZE)), null, true);
-                    board.getBoard()[chosenPiece.Row, chosenPiece.Col].UnMarkAnimation = new ButtonAnimation(null, new Rectangle(board.getBoard()[chosenPiece.Row, chosenPiece.Col].Bounds.Location, new Point(Constants.PIECESIZE, Constants.PIECESIZE)), null, true);
-                    board.getBoard()[chosenPiece.Row, chosenPiece.Col].CalculateLegalMoves();
-                    pieceToReplace.Clear();
-                    chosenPiece = null;
-                }
-                else
-                {
-                    Trace.WriteLine("No pawns left");
-                }
-            }
-            else if (board.Turn == Turn.Player2)
-            {
-                if (pieceToReplace.Count > 0)
-                {
-                    chosenPiece = pieceToReplace[new Random().Next(0, pieceToReplace.Count)];
-                    board.getBlacks().Remove(board.getBoard()[chosenPiece.Row, chosenPiece.Col]);
-                    Piece x = new Bishop(new Sprite2D(ContentService.Instance.Textures["BlackBishop"], new Rectangle(0, 0, Constants.PIECESIZE, Constants.PIECESIZE)), chosenPiece.Row, chosenPiece.Col, ChessColor.Black, board);
-                    x.Center(board.Grid[chosenPiece.Row, chosenPiece.Col].Bounds);
-                    board.getBoard()[chosenPiece.Row, chosenPiece.Col] = x;
-                    board.getBlacks().Add(x);
-                    board.getBoard()[chosenPiece.Row, chosenPiece.Col].MarkAnimation = new ButtonAnimation(null, new Rectangle(board.getBoard()[chosenPiece.Row, chosenPiece.Col].Bounds.Location, new Point(Constants.MARKED_PIECESIZE, Constants.MARKED_PIECESIZE)), null, true);
-                    board.getBoard()[chosenPiece.Row, chosenPiece.Col].UnMarkAnimation = new ButtonAnimation(null, new Rectangle(board.getBoard()[chosenPiece.Row, chosenPiece.Col].Bounds.Location, new Point(Constants.PIECESIZE, Constants.PIECESIZE)), null, true);
-                    board.getBoard()[chosenPiece.Row, chosenPiece.Col].CalculateLegalMoves();
-                    pieceToReplace.Clear();
-                    chosenPiece = null;
-                }
-                else
-                {
-                    Trace.WriteLine("No pawns left");
-                }
-            }
+            replacePiece(board, ChessPiece.Pawn, ChessPiece.Bishop);
         }
         public void doRuleFour(ChessBoard board)
         {
-            List<Piece> pieceToReplace = new List<Piece>();
-            Piece chosenPiece = null;
-            for (int i = 0; i < 8; i++)
-            {
-                for (int j = 0; j < 8; j++)
-                {
-                    if (board.getBoard()[i, j] != null)
-                    {
-                        if (board.Turn == Turn.Player1)
-                        {
-                            if (board.GetPiece(i, j) is Pawn && board.GetPiece(i, j).ChessColor == ChessColor.White)
-                            {
-                                pieceToReplace.Add(board.GetPiece(i, j));
-                            }
-                        }
-
-                        else if (board.Turn == Turn.Player2)
-                        {
-                            if (board.GetPiece(i, j) is Pawn && board.GetPiece(i, j).ChessColor == ChessColor.Black)
-                            {
-                                pieceToReplace.Add(board.GetPiece(i, j));
-                            }
-                        }
-                    }
-                }
-            }
-            if (board.Turn == Turn.Player1)
-            {
-                if (pieceToReplace.Count > 0)
-                {
-                    chosenPiece = pieceToReplace[new Random().Next(0, pieceToReplace.Count)];
-                    board.getWhites().Remove(board.getBoard()[chosenPiece.Row, chosenPiece.Col]);
-                    Piece x = new Knight(new Sprite2D(ContentService.Instance.Textures["WhiteKnight"], new Rectangle(0, 0, Constants.PIECESIZE, Constants.PIECESIZE)), chosenPiece.Row, chosenPiece.Col, ChessColor.White, board);
-                    x.Center(board.Grid[chosenPiece.Row, chosenPiece.Col].Bounds);
-                    board.getBoard()[chosenPiece.Row, chosenPiece.Col] = x;
-                    board.getWhites().Add(x);
-                    board.getBoard()[chosenPiece.Row, chosenPiece.Col].MarkAnimation = new ButtonAnimation(null, new Rectangle(board.getBoard()[chosenPiece.Row, chosenPiece.Col].Bounds.Location, new Point(Constants.MARKED_PIECESIZE, Constants.MARKED_PIECESIZE)), null, true);
-                    board.getBoard()[chosenPiece.Row, chosenPiece.Col].UnMarkAnimation = new ButtonAnimation(null, new Rectangle(board.getBoard()[chosenPiece.Row, chosenPiece.Col].Bounds.Location, new Point(Constants.PIECESIZE, Constants.PIECESIZE)), null, true);
-                    board.getBoard()[chosenPiece.Row, chosenPiece.Col].CalculateLegalMoves();
-                    pieceToReplace.Clear();
-                    chosenPiece = null;
-                }
-                else
-                {
-                    Trace.WriteLine("No pawns left");
-                }
-            }
-            else if (board.Turn == Turn.Player2)
-            {
-                if (pieceToReplace.Count > 0)
-                {
-                    chosenPiece = pieceToReplace[new Random().Next(0, pieceToReplace.Count)];
-                    board.getBlacks().Remove(board.getBoard()[chosenPiece.Row, chosenPiece.Col]);
-                    Piece x = new Knight(new Sprite2D(ContentService.Instance.Textures["BlackKnight"], new Rectangle(0, 0, Constants.PIECESIZE, Constants.PIECESIZE)), chosenPiece.Row, chosenPiece.Col, ChessColor.Black, board);
-                    x.Center(board.Grid[chosenPiece.Row, chosenPiece.Col].Bounds);
-                    board.getBoard()[chosenPiece.Row, chosenPiece.Col] = x;
-                    board.getBlacks().Add(x);
-                    board.getBoard()[chosenPiece.Row, chosenPiece.Col].MarkAnimation = new ButtonAnimation(null, new Rectangle(board.getBoard()[chosenPiece.Row, chosenPiece.Col].Bounds.Location, new Point(Constants.MARKED_PIECESIZE, Constants.MARKED_PIECESIZE)), null, true);
-                    board.getBoard()[chosenPiece.Row, chosenPiece.Col].UnMarkAnimation = new ButtonAnimation(null, new Rectangle(board.getBoard()[chosenPiece.Row, chosenPiece.Col].Bounds.Location, new Point(Constants.PIECESIZE, Constants.PIECESIZE)), null, true);
-                    board.getBoard()[chosenPiece.Row, chosenPiece.Col].CalculateLegalMoves();
-                    pieceToReplace.Clear();
-                    chosenPiece = null;
-                }
-                else
-                {
-                    Trace.WriteLine("No pawns left");
-                }
-            }
+            replacePiece(board, ChessPiece.Pawn, ChessPiece.Knight);
         }
         public void doRuleFive(ChessBoard board)
         {
-            List<Piece> pieceToReplace = new List<Piece>();
-            Piece chosenPiece = null;
-            for (int i = 0; i < 8; i++)
-            {
-                for (int j = 0; j < 8; j++)
-                {
-                    if (board.getBoard()[i, j] != null)
-                    {
-                        if (board.Turn == Turn.Player1)
-                        {
-                            if (board.GetPiece(i, j) is Queen && board.GetPiece(i, j).ChessColor == ChessColor.White)
-                            {
-                                pieceToReplace.Add(board.GetPiece(i, j));
-                            }
-                        }
+            replacePiece(board, ChessPiece.Queen, ChessPiece.Pawn);
 
-                        else if (board.Turn == Turn.Player2)
-                        {
-                            if (board.GetPiece(i, j) is Queen && board.GetPiece(i, j).ChessColor == ChessColor.Black)
-                            {
-                                pieceToReplace.Add(board.GetPiece(i, j));
-                            }
-                        }
-                    }
-                }
-            }
-            if (board.Turn == Turn.Player1)
-            {
-                if (pieceToReplace.Count > 0)
-                {
-                    chosenPiece = pieceToReplace[new Random().Next(0, pieceToReplace.Count)];
-                    board.getWhites().Remove(board.getBoard()[chosenPiece.Row, chosenPiece.Col]);
-                    Piece x = new Pawn(new Sprite2D(ContentService.Instance.Textures["WhitePawn"], new Rectangle(0, 0, Constants.PIECESIZE, Constants.PIECESIZE)), chosenPiece.Row, chosenPiece.Col, ChessColor.White, board);
-                    x.Center(board.Grid[chosenPiece.Row, chosenPiece.Col].Bounds);
-                    board.getBoard()[chosenPiece.Row, chosenPiece.Col] = x;
-                    board.getWhites().Add(x);
-                    board.getBoard()[chosenPiece.Row, chosenPiece.Col].MarkAnimation = new ButtonAnimation(null, new Rectangle(board.getBoard()[chosenPiece.Row, chosenPiece.Col].Bounds.Location, new Point(Constants.MARKED_PIECESIZE, Constants.MARKED_PIECESIZE)), null, true);
-                    board.getBoard()[chosenPiece.Row, chosenPiece.Col].UnMarkAnimation = new ButtonAnimation(null, new Rectangle(board.getBoard()[chosenPiece.Row, chosenPiece.Col].Bounds.Location, new Point(Constants.PIECESIZE, Constants.PIECESIZE)), null, true);
-                    board.getBoard()[chosenPiece.Row, chosenPiece.Col].CalculateLegalMoves();
-                    pieceToReplace.Clear();
-                    chosenPiece = null;
-                }
-                else
-                {
-                    Trace.WriteLine("No queens left");
-                }
-            }
-            else if (board.Turn == Turn.Player2)
-            {
-                if (pieceToReplace.Count > 0)
-                {
-                    chosenPiece = pieceToReplace[new Random().Next(0, pieceToReplace.Count)];
-                    board.getBlacks().Remove(board.getBoard()[chosenPiece.Row, chosenPiece.Col]);
-                    Piece x = new Pawn(new Sprite2D(ContentService.Instance.Textures["BlackPawn"], new Rectangle(0, 0, Constants.PIECESIZE, Constants.PIECESIZE)), chosenPiece.Row, chosenPiece.Col, ChessColor.Black, board);
-                    x.Center(board.Grid[chosenPiece.Row, chosenPiece.Col].Bounds);
-                    board.getBoard()[chosenPiece.Row, chosenPiece.Col] = x;
-                    board.getBlacks().Add(x);
-                    board.getBoard()[chosenPiece.Row, chosenPiece.Col].MarkAnimation = new ButtonAnimation(null, new Rectangle(board.getBoard()[chosenPiece.Row, chosenPiece.Col].Bounds.Location, new Point(Constants.MARKED_PIECESIZE, Constants.MARKED_PIECESIZE)), null, true);
-                    board.getBoard()[chosenPiece.Row, chosenPiece.Col].UnMarkAnimation = new ButtonAnimation(null, new Rectangle(board.getBoard()[chosenPiece.Row, chosenPiece.Col].Bounds.Location, new Point(Constants.PIECESIZE, Constants.PIECESIZE)), null, true);
-                    board.getBoard()[chosenPiece.Row, chosenPiece.Col].CalculateLegalMoves();
-                    pieceToReplace.Clear();
-                    chosenPiece = null;
-                }
-                else
-                {
-                    Trace.WriteLine("No queens left");
-                }
-            }
         }
         public void doRuleSix(ChessBoard board)
         {
-            List<Piece> pieceToReplace = new List<Piece>();
-            Piece chosenPiece = null;
-            for (int i = 0; i < 8; i++)
-            {
-                for (int j = 0; j < 8; j++)
-                {
-                    if (board.getBoard()[i, j] != null)
-                    {
-                        if (board.Turn == Turn.Player1)
-                        {
-                            if (board.GetPiece(i, j) is Rook && board.GetPiece(i, j).ChessColor == ChessColor.White)
-                            {
-                                pieceToReplace.Add(board.GetPiece(i, j));
-                            }
-                        }
+            replacePiece(board, ChessPiece.Rook, ChessPiece.Pawn);
 
-                        else if (board.Turn == Turn.Player2)
-                        {
-                            if (board.GetPiece(i, j) is Rook && board.GetPiece(i, j).ChessColor == ChessColor.Black)
-                            {
-                                pieceToReplace.Add(board.GetPiece(i, j));
-                            }
-                        }
-                    }
-                }
-            }
-            if (board.Turn == Turn.Player1)
-            {
-                if (pieceToReplace.Count > 0)
-                {
-                    chosenPiece = pieceToReplace[new Random().Next(0, pieceToReplace.Count)];
-                    board.getWhites().Remove(board.getBoard()[chosenPiece.Row, chosenPiece.Col]);
-                    Piece x = new Pawn(new Sprite2D(ContentService.Instance.Textures["WhitePawn"], new Rectangle(0, 0, Constants.PIECESIZE, Constants.PIECESIZE)), chosenPiece.Row, chosenPiece.Col, ChessColor.White, board);
-                    x.Center(board.Grid[chosenPiece.Row, chosenPiece.Col].Bounds);
-                    board.getBoard()[chosenPiece.Row, chosenPiece.Col] = x;
-                    board.getWhites().Add(x);
-                    board.getBoard()[chosenPiece.Row, chosenPiece.Col].MarkAnimation = new ButtonAnimation(null, new Rectangle(board.getBoard()[chosenPiece.Row, chosenPiece.Col].Bounds.Location, new Point(Constants.MARKED_PIECESIZE, Constants.MARKED_PIECESIZE)), null, true);
-                    board.getBoard()[chosenPiece.Row, chosenPiece.Col].UnMarkAnimation = new ButtonAnimation(null, new Rectangle(board.getBoard()[chosenPiece.Row, chosenPiece.Col].Bounds.Location, new Point(Constants.PIECESIZE, Constants.PIECESIZE)), null, true);
-                    board.getBoard()[chosenPiece.Row, chosenPiece.Col].CalculateLegalMoves();
-                    pieceToReplace.Clear();
-                    chosenPiece = null;
-                }
-                else
-                {
-                    Trace.WriteLine("No queens left");
-                }
-            }
-            else if (board.Turn == Turn.Player2)
-            {
-                if (pieceToReplace.Count > 0)
-                {
-                    chosenPiece = pieceToReplace[new Random().Next(0, pieceToReplace.Count)];
-                    board.getBlacks().Remove(board.getBoard()[chosenPiece.Row, chosenPiece.Col]);
-                    Piece x = new Pawn(new Sprite2D(ContentService.Instance.Textures["BlackPawn"], new Rectangle(0, 0, Constants.PIECESIZE, Constants.PIECESIZE)), chosenPiece.Row, chosenPiece.Col, ChessColor.Black, board);
-                    x.Center(board.Grid[chosenPiece.Row, chosenPiece.Col].Bounds);
-                    board.getBoard()[chosenPiece.Row, chosenPiece.Col] = x;
-                    board.getBlacks().Add(x);
-                    board.getBoard()[chosenPiece.Row, chosenPiece.Col].MarkAnimation = new ButtonAnimation(null, new Rectangle(board.getBoard()[chosenPiece.Row, chosenPiece.Col].Bounds.Location, new Point(Constants.MARKED_PIECESIZE, Constants.MARKED_PIECESIZE)), null, true);
-                    board.getBoard()[chosenPiece.Row, chosenPiece.Col].UnMarkAnimation = new ButtonAnimation(null, new Rectangle(board.getBoard()[chosenPiece.Row, chosenPiece.Col].Bounds.Location, new Point(Constants.PIECESIZE, Constants.PIECESIZE)), null, true);
-                    board.getBoard()[chosenPiece.Row, chosenPiece.Col].CalculateLegalMoves();
-                    pieceToReplace.Clear();
-                    chosenPiece = null;
-                }
-                else
-                {
-                    Trace.WriteLine("No queens left");
-                }
-            }
         }
         public void doRuleSeven(ChessBoard board)
         {
-            List<Piece> pieceToReplace = new List<Piece>();
-            Piece chosenPiece = null;
-            for (int i = 0; i < 8; i++)
-            {
-                for (int j = 0; j < 8; j++)
-                {
-                    if (board.getBoard()[i, j] != null)
-                    {
-                        if (board.Turn == Turn.Player1)
-                        {
-                            if (board.GetPiece(i, j) is Bishop && board.GetPiece(i, j).ChessColor == ChessColor.White)
-                            {
-                                pieceToReplace.Add(board.GetPiece(i, j));
-                            }
-                        }
-
-                        else if (board.Turn == Turn.Player2)
-                        {
-                            if (board.GetPiece(i, j) is Bishop && board.GetPiece(i, j).ChessColor == ChessColor.Black)
-                            {
-                                pieceToReplace.Add(board.GetPiece(i, j));
-                            }
-                        }
-                    }
-                }
-            }
-            if (board.Turn == Turn.Player1)
-            {
-                if (pieceToReplace.Count > 0)
-                {
-                    chosenPiece = pieceToReplace[new Random().Next(0, pieceToReplace.Count)];
-                    board.getWhites().Remove(board.getBoard()[chosenPiece.Row, chosenPiece.Col]);
-                    Piece x = new Pawn(new Sprite2D(ContentService.Instance.Textures["WhitePawn"], new Rectangle(0, 0, Constants.PIECESIZE, Constants.PIECESIZE)), chosenPiece.Row, chosenPiece.Col, ChessColor.White, board);
-                    x.Center(board.Grid[chosenPiece.Row, chosenPiece.Col].Bounds);
-                    board.getBoard()[chosenPiece.Row, chosenPiece.Col] = x;
-                    board.getWhites().Add(x);
-                    board.getBoard()[chosenPiece.Row, chosenPiece.Col].MarkAnimation = new ButtonAnimation(null, new Rectangle(board.getBoard()[chosenPiece.Row, chosenPiece.Col].Bounds.Location, new Point(Constants.MARKED_PIECESIZE, Constants.MARKED_PIECESIZE)), null, true);
-                    board.getBoard()[chosenPiece.Row, chosenPiece.Col].UnMarkAnimation = new ButtonAnimation(null, new Rectangle(board.getBoard()[chosenPiece.Row, chosenPiece.Col].Bounds.Location, new Point(Constants.PIECESIZE, Constants.PIECESIZE)), null, true);
-                    board.getBoard()[chosenPiece.Row, chosenPiece.Col].CalculateLegalMoves();
-                    pieceToReplace.Clear();
-                    chosenPiece = null;
-                }
-                else
-                {
-                    Trace.WriteLine("No queens left");
-                }
-            }
-            else if (board.Turn == Turn.Player2)
-            {
-                if (pieceToReplace.Count > 0)
-                {
-                    chosenPiece = pieceToReplace[new Random().Next(0, pieceToReplace.Count)];
-                    board.getBlacks().Remove(board.getBoard()[chosenPiece.Row, chosenPiece.Col]);
-                    Piece x = new Pawn(new Sprite2D(ContentService.Instance.Textures["BlackPawn"], new Rectangle(0, 0, Constants.PIECESIZE, Constants.PIECESIZE)), chosenPiece.Row, chosenPiece.Col, ChessColor.Black, board);
-                    x.Center(board.Grid[chosenPiece.Row, chosenPiece.Col].Bounds);
-                    board.getBoard()[chosenPiece.Row, chosenPiece.Col] = x;
-                    board.getBlacks().Add(x);
-                    board.getBoard()[chosenPiece.Row, chosenPiece.Col].MarkAnimation = new ButtonAnimation(null, new Rectangle(board.getBoard()[chosenPiece.Row, chosenPiece.Col].Bounds.Location, new Point(Constants.MARKED_PIECESIZE, Constants.MARKED_PIECESIZE)), null, true);
-                    board.getBoard()[chosenPiece.Row, chosenPiece.Col].UnMarkAnimation = new ButtonAnimation(null, new Rectangle(board.getBoard()[chosenPiece.Row, chosenPiece.Col].Bounds.Location, new Point(Constants.PIECESIZE, Constants.PIECESIZE)), null, true);
-                    board.getBoard()[chosenPiece.Row, chosenPiece.Col].CalculateLegalMoves();
-                    pieceToReplace.Clear();
-                    chosenPiece = null;
-                }
-                else
-                {
-                    Trace.WriteLine("No queens left");
-                }
-            }
+            replacePiece(board, ChessPiece.Bishop, ChessPiece.Pawn);
         }
         public void doRuleEight(ChessBoard board)
         {
-            List<Piece> pieceToReplace = new List<Piece>();
-            Piece chosenPiece = null;
-            for (int i = 0; i < 8; i++)
-            {
-                for (int j = 0; j < 8; j++)
-                {
-                    if (board.getBoard()[i, j] != null)
-                    {
-                        if (board.Turn == Turn.Player1)
-                        {
-                            if (board.GetPiece(i, j) is Knight && board.GetPiece(i, j).ChessColor == ChessColor.White)
-                            {
-                                pieceToReplace.Add(board.GetPiece(i, j));
-                            }
-                        }
-
-                        else if (board.Turn == Turn.Player2)
-                        {
-                            if (board.GetPiece(i, j) is Knight && board.GetPiece(i, j).ChessColor == ChessColor.Black)
-                            {
-                                pieceToReplace.Add(board.GetPiece(i, j));
-                            }
-                        }
-                    }
-                }
-            }
-            if (board.Turn == Turn.Player1)
-            {
-                if (pieceToReplace.Count > 0)
-                {
-                    chosenPiece = pieceToReplace[new Random().Next(0, pieceToReplace.Count)];
-                    board.getWhites().Remove(board.getBoard()[chosenPiece.Row, chosenPiece.Col]);
-                    Piece x = new Pawn(new Sprite2D(ContentService.Instance.Textures["WhitePawn"], new Rectangle(0, 0, Constants.PIECESIZE, Constants.PIECESIZE)), chosenPiece.Row, chosenPiece.Col, ChessColor.White, board);
-                    x.Center(board.Grid[chosenPiece.Row, chosenPiece.Col].Bounds);
-                    board.getBoard()[chosenPiece.Row, chosenPiece.Col] = x;
-                    board.getWhites().Add(x);
-                    board.getBoard()[chosenPiece.Row, chosenPiece.Col].MarkAnimation = new ButtonAnimation(null, new Rectangle(board.getBoard()[chosenPiece.Row, chosenPiece.Col].Bounds.Location, new Point(Constants.MARKED_PIECESIZE, Constants.MARKED_PIECESIZE)), null, true);
-                    board.getBoard()[chosenPiece.Row, chosenPiece.Col].UnMarkAnimation = new ButtonAnimation(null, new Rectangle(board.getBoard()[chosenPiece.Row, chosenPiece.Col].Bounds.Location, new Point(Constants.PIECESIZE, Constants.PIECESIZE)), null, true);
-                    board.getBoard()[chosenPiece.Row, chosenPiece.Col].CalculateLegalMoves();
-                    pieceToReplace.Clear();
-                    chosenPiece = null;
-                }
-                else
-                {
-                    Trace.WriteLine("No queens left");
-                }
-            }
-            else if (board.Turn == Turn.Player2)
-            {
-                if (pieceToReplace.Count > 0)
-                {
-                    chosenPiece = pieceToReplace[new Random().Next(0, pieceToReplace.Count)];
-                    board.getBlacks().Remove(board.getBoard()[chosenPiece.Row, chosenPiece.Col]);
-                    Piece x = new Pawn(new Sprite2D(ContentService.Instance.Textures["BlackPawn"], new Rectangle(0, 0, Constants.PIECESIZE, Constants.PIECESIZE)), chosenPiece.Row, chosenPiece.Col, ChessColor.Black, board);
-                    x.Center(board.Grid[chosenPiece.Row, chosenPiece.Col].Bounds);
-                    board.getBoard()[chosenPiece.Row, chosenPiece.Col] = x;
-                    board.getBlacks().Add(x);
-                    board.getBoard()[chosenPiece.Row, chosenPiece.Col].MarkAnimation = new ButtonAnimation(null, new Rectangle(board.getBoard()[chosenPiece.Row, chosenPiece.Col].Bounds.Location, new Point(Constants.MARKED_PIECESIZE, Constants.MARKED_PIECESIZE)), null, true);
-                    board.getBoard()[chosenPiece.Row, chosenPiece.Col].UnMarkAnimation = new ButtonAnimation(null, new Rectangle(board.getBoard()[chosenPiece.Row, chosenPiece.Col].Bounds.Location, new Point(Constants.PIECESIZE, Constants.PIECESIZE)), null, true);
-                    board.getBoard()[chosenPiece.Row, chosenPiece.Col].CalculateLegalMoves();
-                    pieceToReplace.Clear();
-                    chosenPiece = null;
-                }
-                else
-                {
-                    Trace.WriteLine("No queens left");
-                }
-            }
+            replacePiece(board, ChessPiece.Knight, ChessPiece.Pawn);
         }
         public void doRuleNine(ChessBoard board)
         {
@@ -737,6 +203,133 @@ namespace Chessnt
                     chosenPiece = pieceToRemove[new Random().Next(0, pieceToRemove.Count)];
                     board.getWhites().Remove(board.getBoard()[chosenPiece.Row, chosenPiece.Col]);
                     pieceToRemove.Clear();
+                    chosenPiece = null;
+                }
+            }
+        }
+
+        private void replacePiece(ChessBoard board, ChessPiece piece, ChessPiece newPiece)
+        {
+            List<Piece> pieceToReplace = new List<Piece>();
+            Piece chosenPiece = null;
+            for (int i = 0; i < 8; i++)
+            {
+                for (int j = 0; j < 8; j++)
+                {
+                    if (board.getBoard()[i, j] != null)
+                    {
+                        if (board.Turn == Turn.Player1)
+                        {
+                            if (board.GetPiece(i, j).ChessPiece == piece && board.GetPiece(i, j).ChessColor == ChessColor.White)
+                            {
+                                pieceToReplace.Add(board.GetPiece(i, j));
+                            }
+                        }
+
+                        else if (board.Turn == Turn.Player2)
+                        {
+                            if (board.GetPiece(i, j).ChessPiece == piece && board.GetPiece(i, j).ChessColor == ChessColor.Black)
+                            {
+                                pieceToReplace.Add(board.GetPiece(i, j));
+                            }
+                        }
+                    }
+                }
+            }
+            if (board.Turn == Turn.Player1)
+            {
+                if (pieceToReplace.Count > 0)
+                {
+                    chosenPiece = pieceToReplace[new Random().Next(0, pieceToReplace.Count)];
+                    board.getWhites().Remove(board.getBoard()[chosenPiece.Row, chosenPiece.Col]);
+                    Trace.WriteLine(piece);
+                    Trace.WriteLine(chosenPiece);
+                    switch (newPiece)
+                    {
+                        case ChessPiece.Queen:
+                            Piece x = new Queen(new Sprite2D(ContentService.Instance.Textures["WhiteQueen"], new Rectangle(0, 0, Constants.PIECESIZE, Constants.PIECESIZE)), chosenPiece.Row, chosenPiece.Col, ChessColor.White, board);
+                            x.Center(board.Grid[chosenPiece.Row, chosenPiece.Col].Bounds);
+                            board.getBoard()[chosenPiece.Row, chosenPiece.Col] = x;
+                            board.getWhites().Add(x);
+                            break;
+                        case ChessPiece.Rook:
+                            Piece x1 = new Rook(new Sprite2D(ContentService.Instance.Textures["WhiteRook"], new Rectangle(0, 0, Constants.PIECESIZE, Constants.PIECESIZE)), chosenPiece.Row, chosenPiece.Col, ChessColor.White, board);
+                            x1.Center(board.Grid[chosenPiece.Row, chosenPiece.Col].Bounds);
+                            board.getBoard()[chosenPiece.Row, chosenPiece.Col] = x1;
+                            board.getWhites().Add(x1);
+                            break;
+                        case ChessPiece.Bishop:
+                            Piece x2 = new Bishop(new Sprite2D(ContentService.Instance.Textures["WhiteBishop"], new Rectangle(0, 0, Constants.PIECESIZE, Constants.PIECESIZE)), chosenPiece.Row, chosenPiece.Col, ChessColor.White, board);
+                            x2.Center(board.Grid[chosenPiece.Row, chosenPiece.Col].Bounds);
+                            board.getBoard()[chosenPiece.Row, chosenPiece.Col] = x2;
+                            board.getWhites().Add(x2);
+                            break;
+                        case ChessPiece.Knight:
+                            Piece x3 = new Knight(new Sprite2D(ContentService.Instance.Textures["WhiteKnight"], new Rectangle(0, 0, Constants.PIECESIZE, Constants.PIECESIZE)), chosenPiece.Row, chosenPiece.Col, ChessColor.White, board);
+                            x3.Center(board.Grid[chosenPiece.Row, chosenPiece.Col].Bounds);
+                            board.getBoard()[chosenPiece.Row, chosenPiece.Col] = x3;
+                            board.getWhites().Add(x3);
+                            break;
+                        case ChessPiece.Pawn:
+                            Piece x4 = new Pawn(new Sprite2D(ContentService.Instance.Textures["WhitePawn"], new Rectangle(0, 0, Constants.PIECESIZE, Constants.PIECESIZE)), chosenPiece.Row, chosenPiece.Col, ChessColor.White, board);
+                            x4.Center(board.Grid[chosenPiece.Row, chosenPiece.Col].Bounds);
+                            board.getBoard()[chosenPiece.Row, chosenPiece.Col] = x4;
+                            board.getWhites().Add(x4);
+                            break;
+                    }
+
+                    board.getBoard()[chosenPiece.Row, chosenPiece.Col].MarkAnimation = new ButtonAnimation(null, new Rectangle(board.getBoard()[chosenPiece.Row, chosenPiece.Col].Bounds.Location, new Point(Constants.MARKED_PIECESIZE, Constants.MARKED_PIECESIZE)), null, true);
+                    board.getBoard()[chosenPiece.Row, chosenPiece.Col].UnMarkAnimation = new ButtonAnimation(null, new Rectangle(board.getBoard()[chosenPiece.Row, chosenPiece.Col].Bounds.Location, new Point(Constants.PIECESIZE, Constants.PIECESIZE)), null, true);
+                    board.getBoard()[chosenPiece.Row, chosenPiece.Col].CalculateLegalMoves();
+                    Trace.WriteLine(pieceToReplace.Count);
+                    pieceToReplace.Clear();
+                    chosenPiece = null;
+                }
+            }
+            else if (board.Turn == Turn.Player2)
+            {
+                if (pieceToReplace.Count > 0)
+                {
+                    chosenPiece = pieceToReplace[new Random().Next(0, pieceToReplace.Count)];
+                    board.getBlacks().Remove(board.getBoard()[chosenPiece.Row, chosenPiece.Col]);
+                    switch (newPiece)
+                    {
+                        case ChessPiece.Queen:
+                            Piece x = new Queen(new Sprite2D(ContentService.Instance.Textures["BlackQueen"], new Rectangle(0, 0, Constants.PIECESIZE, Constants.PIECESIZE)), chosenPiece.Row, chosenPiece.Col, ChessColor.Black, board);
+                            x.Center(board.Grid[chosenPiece.Row, chosenPiece.Col].Bounds);
+                            board.getBoard()[chosenPiece.Row, chosenPiece.Col] = x;
+                            board.getBlacks().Add(x);
+                            break;
+                        case ChessPiece.Rook:
+                            Piece x1 = new Rook(new Sprite2D(ContentService.Instance.Textures["BlackRook"], new Rectangle(0, 0, Constants.PIECESIZE, Constants.PIECESIZE)), chosenPiece.Row, chosenPiece.Col, ChessColor.Black, board);
+                            x1.Center(board.Grid[chosenPiece.Row, chosenPiece.Col].Bounds);
+                            board.getBoard()[chosenPiece.Row, chosenPiece.Col] = x1;
+                            board.getBlacks().Add(x1);
+                            break;
+                        case ChessPiece.Bishop:
+                            Piece x2 = new Bishop(new Sprite2D(ContentService.Instance.Textures["BlackBishop"], new Rectangle(0, 0, Constants.PIECESIZE, Constants.PIECESIZE)), chosenPiece.Row, chosenPiece.Col, ChessColor.Black, board);
+                            x2.Center(board.Grid[chosenPiece.Row, chosenPiece.Col].Bounds);
+                            board.getBoard()[chosenPiece.Row, chosenPiece.Col] = x2;
+                            board.getBlacks().Add(x2);
+                            break;
+                        case ChessPiece.Knight:
+                            Piece x3 = new Knight(new Sprite2D(ContentService.Instance.Textures["BlackKnight"], new Rectangle(0, 0, Constants.PIECESIZE, Constants.PIECESIZE)), chosenPiece.Row, chosenPiece.Col, ChessColor.Black, board);
+                            x3.Center(board.Grid[chosenPiece.Row, chosenPiece.Col].Bounds);
+                            board.getBoard()[chosenPiece.Row, chosenPiece.Col] = x3;
+                            board.getBlacks().Add(x3);
+                            break;
+                        case ChessPiece.Pawn:
+                            Piece x4 = new Pawn(new Sprite2D(ContentService.Instance.Textures["BlackPawn"], new Rectangle(0, 0, Constants.PIECESIZE, Constants.PIECESIZE)), chosenPiece.Row, chosenPiece.Col, ChessColor.Black, board);
+                            x4.Center(board.Grid[chosenPiece.Row, chosenPiece.Col].Bounds);
+                            board.getBoard()[chosenPiece.Row, chosenPiece.Col] = x4;
+                            board.getBlacks().Add(x4);
+                            break;
+                    }
+
+                    board.getBoard()[chosenPiece.Row, chosenPiece.Col].MarkAnimation = new ButtonAnimation(null, new Rectangle(board.getBoard()[chosenPiece.Row, chosenPiece.Col].Bounds.Location, new Point(Constants.MARKED_PIECESIZE, Constants.MARKED_PIECESIZE)), null, true);
+                    board.getBoard()[chosenPiece.Row, chosenPiece.Col].UnMarkAnimation = new ButtonAnimation(null, new Rectangle(board.getBoard()[chosenPiece.Row, chosenPiece.Col].Bounds.Location, new Point(Constants.PIECESIZE, Constants.PIECESIZE)), null, true);
+                    board.getBoard()[chosenPiece.Row, chosenPiece.Col].CalculateLegalMoves();
+                    pieceToReplace.Clear();
                     chosenPiece = null;
                 }
             }

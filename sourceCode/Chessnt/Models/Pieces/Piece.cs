@@ -16,7 +16,7 @@ namespace Chessnt
         Queen
     }
 
-    public abstract class Piece : OptionsButton
+    public abstract class Piece : LegalButton
     {
         public int NumberOfMoves { get; private set; } = 0;
         private List<ChessButton> legals;
@@ -36,7 +36,7 @@ namespace Chessnt
             Legals = new List<ChessButton>();
             this.Row = row;
             this.Col = col;
-            legalsTexture = ContentService.Instance.Textures["Circle"];
+            legalsTexture = ContentService.Instance.Textures["moveBackground"];
             this.ChessColor = color;
             this.board = board;
             UnMarked += (s, e) => { Center(new Rectangle(Col * 110, Row * 110, 110, 110)); };
@@ -45,7 +45,7 @@ namespace Chessnt
 
         public override void Update(Input currentInput, Input previousInput)
         {
-            if (MarkedState == OptionButtonState.Marked)
+            if (MarkedState == LegalButtonState.Marked)
             {
                 for (int i = 0; i < Legals.Count; i++)
                 {
@@ -57,7 +57,7 @@ namespace Chessnt
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            if (this.MarkedState == OptionButtonState.Marked)
+            if (this.MarkedState == LegalButtonState.Marked)
             {
                 DrawLegalMoves(spriteBatch);
             }
@@ -74,10 +74,10 @@ namespace Chessnt
 
         protected void AddLegalMove(int r, int c)
         {
-            ChessButton b = new ChessButton(new Sprite2D(legalsTexture, new Rectangle(c * 110-5, r * 110-10, 110, 110), Color.DarkSlateGray));
+            ChessButton b = new ChessButton(new Sprite2D(legalsTexture, new Rectangle(c * 110-5, r * 110-10, 110, 110), Color.Red));
             b.Click += (s, e) => { Move(r, c); };
-            b.Hover += (s, e) => { b.Color = Color.Black; };
-            b.UnHover += (s, e) => { b.Color = Color.DarkSlateGray; };
+            b.Hover += (s, e) => { b.Color = Color.DarkRed; };
+            b.UnHover += (s, e) => { b.Color = Color.Red; };
             Legals.Add(b);
         }
 

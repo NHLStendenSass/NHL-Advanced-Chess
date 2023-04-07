@@ -21,7 +21,7 @@ namespace Chessnt
         private bool _isRolling = false;
         private int _rollCounter = 0;
         private int _rollSpeed = 5;
-        private int _maxRollCount = 100;
+        private int _maxRollCount = 500;
         private int _width = 260;
         private int _height = 300;
         private int _maxValue = 11;
