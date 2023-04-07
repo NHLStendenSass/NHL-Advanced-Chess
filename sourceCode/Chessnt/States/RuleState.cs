@@ -21,7 +21,7 @@ namespace Chessnt
         private Button _urlButton;
         private TextOutline _textOutline;
         private String _url;
-        Texture2D _pixelTexture;
+        private Texture2D _pixelTexture;
 
         public RuleState(Game1 game, GraphicsDevice graphicsDevice, ContentManager content)
           : base(game, graphicsDevice, content)
@@ -38,20 +38,20 @@ namespace Chessnt
                 Text = "Go back!",
             };
             _saveButton.Click += SaveButton_Click;
+
             _urlButton = new Button(_buttonTexture, _buttonFont)
             {
                 Position = new Vector2(725, 690),
                 Text = "Open rules!",
             };
-            _urlButton.Click += new EventHandler(UrlButton_Click);
+            _urlButton.Click += UrlButton_Click;
             _components = new List<Component>()
             {
                 _saveButton,
                 _urlButton
             };
 
-            _pixelTexture = new Texture2D(graphicsDevice, 1, 1);
-            _pixelTexture.SetData(new Color[] { Color.White });
+
         }
 
         private void SaveButton_Click(object sender, EventArgs e)
@@ -107,10 +107,8 @@ namespace Chessnt
 
         private void DrawContent(string text, int textX, int textY, float textScale, SpriteBatch spriteBatch)
         {
-
-
-            //_textOutline.DrawTextOutLine(text, textX, textY, textScale, spriteBatch);
-            //spriteBatch.DrawString(_buttonFont, text, new Vector2(textX, textY), Color.White, 0f, Vector2.Zero, textScale, SpriteEffects.None, 0f);
+            _pixelTexture = new Texture2D(graphicsDevice, 1, 1);
+            _pixelTexture.SetData(new Color[] { Color.White });
             Vector2 textSize = _buttonFont.MeasureString(text) * textScale;
             Rectangle rect = new Rectangle(textX, textY, (int)textSize.X + 25, (int)textSize.Y + 25);
 

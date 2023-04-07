@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using static System.Net.Mime.MediaTypeNames;
 using Windows.ApplicationModel.VoiceCommands;
+using Chessnt.Utilities;
 
 namespace Chessnt
 {
@@ -27,7 +28,7 @@ namespace Chessnt
 
         private VoiceCommand _voiceCommand;
 
-        private Utilities.TextOutline _textOutline;
+        private TextOutline _textOutline;
 
         public MenuState(Game1 game, GraphicsDevice graphicsDevice, ContentManager content)
           : base(game, graphicsDevice, content)
@@ -35,7 +36,7 @@ namespace Chessnt
             _backgroundTexture = base.content.Load<Texture2D>("menu_background");
             _buttonTexture = base.content.Load<Texture2D>("Button");
             _buttonFont = base.content.Load<SpriteFont>("Font");
-            _textOutline = new Utilities.TextOutline(_buttonFont);
+            _textOutline = new TextOutline(_buttonFont);
             _voiceCommand = new VoiceCommand(game, graphicsDevice, content);
 
             _playButton = new Button(_buttonTexture, _buttonFont)
