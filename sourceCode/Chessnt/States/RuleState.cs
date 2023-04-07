@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Chessnt.Utilities;
+using static System.Formats.Asn1.AsnWriter;
 
 namespace Chessnt
 {
@@ -56,7 +57,7 @@ namespace Chessnt
             //DrawOptionTexts("Voice:", 150, 250, 0.9f, spriteBatch);
             //DrawOptionTexts("Dice:", 150, 450, 1.015f, spriteBatch);
             //DrawOptionTexts("Bruh:", 150, 650, 1.015f, spriteBatch);
-            DrawContent("Hello World!", 100, 100, 1.0f, spriteBatch);
+            DrawContent("Hello World!", 650, 300, 0.5f, spriteBatch);
 
 
             DrawComponents(gameTime, spriteBatch);
@@ -85,15 +86,11 @@ namespace Chessnt
             }
         }
 
-        public void DrawText(Text text, SpriteBatch spriteBatch)
-        {
-            spriteBatch.DrawString(_buttonFont, text.Content, new Vector2(text.X, text.Y), text.Color, text.Scale, Vector2.Zero, text.FontSize, SpriteEffects.None, 0f);
-        }
-
         private void DrawContent(string text, int textX, int textY, float textScale, SpriteBatch spriteBatch)
         {
-            //_textOutline.DrawTextOutLine(text, textX, textY, textScale, spriteBatch);
+            _textOutline.DrawTextOutLine(text, textX, textY, textScale, spriteBatch);
             spriteBatch.DrawString(_buttonFont, text, new Vector2(textX, textY), Color.White, 0f, Vector2.Zero, textScale, SpriteEffects.None, 0f);
+
         }
 
         private void DrawOptionTexts(string text, int textX, int textY, float textScale, SpriteBatch spriteBatch)
