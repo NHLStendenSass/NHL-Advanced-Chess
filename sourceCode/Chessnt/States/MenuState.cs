@@ -48,8 +48,8 @@ namespace Chessnt
 
             _optionButton = new Button(_buttonTexture, _buttonFont)
             {
-                Position = new Vector2(270, 550),
-                Text = "Option",
+                Position = new Vector2(160, 550),
+                Text = "Rule",
             };
 
             _optionButton.Click += OptionButton_Click;
