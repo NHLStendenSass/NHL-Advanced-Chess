@@ -55,6 +55,10 @@ namespace Chessnt
                     doRuleNine(board);
                     messageBox.Message = "You lose your turn.\nUnfortunate.";
                     break;
+                case 10:
+                    doRuleTen(board);
+                    messageBox.Message = "Oops. One of your pieces disappears, just like your opponents.";
+                    break;
             }
         }
 
@@ -634,5 +638,32 @@ namespace Chessnt
             else board.Turn = Turn.Player1;
         }
 
+        public void doRuleTen(ChessBoard board)
+        //{
+            /*List<Piece> nonKingPieces = new List<Piece>();
+            foreach (Piece piece in board)
+            {
+                if (!(piece is King))
+                {
+                    nonKingPieces.Add(piece);
+                }
+            }
+
+            // Randomly select a non-king piece from white and black
+            Random random = new Random();
+            Piece whitePiece = nonKingPieces.Where(p => p.Color == Color.White).OrderBy(p => random.Next()).FirstOrDefault();
+            Piece blackPiece = nonKingPieces.Where(p => p.Color == Color.Black).OrderBy(p => random.Next()).FirstOrDefault();
+
+            // Remove the selected pieces from the board
+            if (whitePiece != null)
+            {
+                Pieces.Remove(whitePiece);
+            }
+
+            if (blackPiece != null)
+            {
+                Pieces.Remove(blackPiece);
+            }
+        }*/
     }
 }
