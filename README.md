@@ -1,6 +1,6 @@
 # Chessn't
 
-You can find the Start Doucment [here](documents/startDoucment.md).
+You can find the Start Document [here](documents/startDocument.md).
 
 **Subject:** C#2
 
