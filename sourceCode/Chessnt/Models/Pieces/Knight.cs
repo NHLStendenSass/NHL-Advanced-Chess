@@ -16,14 +16,14 @@ namespace Chessnt
         #region  ChessMethods
         public override void CalculateLegalMoves()
         {
-            legals.Clear();
+            Legals.Clear();
             for (int i = Row - 2; i <= Row + 2; i += 4)
             {
                 for (int j = Col - 1; j <= Col + 1; j += 2)
                 {
                     if (board.InGrid(i, j))
                     {
-                        if (board.IsLegalMove(this, i, j))
+                        if (board.IsLegalMove(this, i, j) && board.getBoard()[i, j] is not King)
                         {
                             AddLegalMove(i, j);
                         }
@@ -38,7 +38,7 @@ namespace Chessnt
                     {
                         if (board.InGrid(i, j))
                         {
-                            if (board.IsLegalMove(this, i, j))
+                            if (board.IsLegalMove(this, i, j) && board.getBoard()[i, j] is not King)
                             {
                                 AddLegalMove(i, j);
                             }

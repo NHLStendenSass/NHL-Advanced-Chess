@@ -19,7 +19,7 @@ namespace Chessnt
         #region ChessMethods
         public override void CalculateLegalMoves()
         {
-            legals.Clear();
+            Legals.Clear();
             for (int i = Math.Max(0, Row - 1); i <= Math.Min(7, Row + 1); i++)
             {
                 for (int j = Math.Max(0, Col - 1); j <= Math.Min(7, Col + 1); j++)
@@ -77,7 +77,7 @@ namespace Chessnt
             b.Click += (s, e) => { Move(Row, col); p.Move(Row, secol); };
             b.Hover += (s, e) => { b.Color = Color.Black; };
             b.UnHover += (s, e) => { b.Color = Color.DarkSlateGray; };
-            legals.Add(b);
+            Legals.Add(b);
         }
         #endregion
     }

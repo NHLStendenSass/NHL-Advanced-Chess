@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net.NetworkInformation;
 using System.Text;
@@ -29,20 +30,21 @@ namespace Chessnt
         private MarkableButtonPanel whites;
         private MarkableButtonPanel blacks;
 
-        private readonly int _numRows;
-        private readonly int _numCols;
-        private readonly int _tileSize;
-        private int x;
-        private int y;
-
-        bool moveMade = false;
+        private bool moveMade = false;
+        private bool _diceRollPossible = true;
+        private bool _isCheckMate = false;
+        private bool _isStaleMate = false;
 
         Sprite2D[,] grid;
 
         Piece[,] board;
 
-        public Turn Turn { get; private set; } = Turn.Player1;
+        public Turn Turn { get; set; } = Turn.Player1;
         public Sprite2D[,] Grid { get => grid; set => grid = value; }
+        public bool MoveMade { get => moveMade; set => moveMade = value; }
+        public bool DiceRollPossible { get => _diceRollPossible; set => _diceRollPossible = value; }
+        public bool IsCheckMate { get => _isCheckMate; set => _isCheckMate = value; }
+        public bool IsStaleMate { get => _isStaleMate; set => _isStaleMate = value; }
 
         public Piece[,] getBoard() { return board; }
 
@@ -53,16 +55,10 @@ namespace Chessnt
 
         public ChessBoard(int numRows, int numCols, int tileSize)
         {
-
-            _numRows = numRows;
-            _numCols = numCols;
-            _tileSize = tileSize;
-
             int boardWidth = numCols * tileSize;
             int boardHeight = numRows * tileSize;
-
-            x = (Game1.Instance.GraphicsDevice.Viewport.Width - boardWidth) / 2;
-            y = (Game1.Instance.GraphicsDevice.Viewport.Height - boardHeight) / 2;
+            int x = (Game1.Instance.GraphicsDevice.Viewport.Width - boardWidth) / 2;
+            int y = (Game1.Instance.GraphicsDevice.Viewport.Height - boardHeight) / 2;
 
             Texture2D gridSquares = ContentService.Instance.Textures["Empty"];
             grid = new Sprite2D[numRows, numCols];
@@ -78,75 +74,74 @@ namespace Chessnt
             InitializePieces();
         }
 
-        private void InitializePieces()
+        public void InitializePieces()
         {
             board = new Piece[8, 8];
 
             whites = new MarkableButtonPanel();
             blacks = new MarkableButtonPanel();
 
-            int pieceSize = Constants.PIECESIZE;
-            int markSize = Constants.MARKED_PIECESIZE;
+            Turn = Turn.Player1;
 
             for (int i = 0; i < 8; i++)
             {
-                Piece temp = new Pawn(new Sprite2D(ContentService.Instance.Textures["WhitePawn"], new Rectangle(0, 0, pieceSize, pieceSize)), 6, i, ChessColor.White, this);
+                Piece temp = new Pawn(new Sprite2D(ContentService.Instance.Textures["WhitePawn"], new Rectangle(0, 0, Constants.PIECESIZE, Constants.PIECESIZE)), 6, i, ChessColor.White, this);
                 temp.Center(grid[6, i].Bounds);
                 board[6, i] = temp;
             }
-            Piece x = new Rook(new Sprite2D(ContentService.Instance.Textures["WhiteRook"], new Rectangle(0, 0, pieceSize, pieceSize)), 7, 0, ChessColor.White, this);
+            Piece x = new Rook(new Sprite2D(ContentService.Instance.Textures["WhiteRook"], new Rectangle(0, 0, Constants.PIECESIZE, Constants.PIECESIZE)), 7, 0, ChessColor.White, this);
             x.Center(grid[7, 0].Bounds);
             board[7, 0] = x;
-            x = new Rook(new Sprite2D(ContentService.Instance.Textures["WhiteRook"], new Rectangle(0, 0, pieceSize, pieceSize)), 7, 7, ChessColor.White, this);
+            x = new Rook(new Sprite2D(ContentService.Instance.Textures["WhiteRook"], new Rectangle(0, 0, Constants.PIECESIZE, Constants.PIECESIZE)), 7, 7, ChessColor.White, this);
             x.Center(grid[7, 7].Bounds);
             board[7, 7] = x;
-            x = new Knight(new Sprite2D(ContentService.Instance.Textures["WhiteKnight"], new Rectangle(0, 0, pieceSize, pieceSize)), 7, 1, ChessColor.White, this);
+            x = new Knight(new Sprite2D(ContentService.Instance.Textures["WhiteKnight"], new Rectangle(0, 0, Constants.PIECESIZE, Constants.PIECESIZE)), 7, 1, ChessColor.White, this);
             x.Center(grid[7, 1].Bounds);
             board[7, 1] = x;
-            x = new Knight(new Sprite2D(ContentService.Instance.Textures["WhiteKnight"], new Rectangle(0, 0, pieceSize, pieceSize)), 7, 6, ChessColor.White, this);
+            x = new Knight(new Sprite2D(ContentService.Instance.Textures["WhiteKnight"], new Rectangle(0, 0, Constants.PIECESIZE, Constants.PIECESIZE)), 7, 6, ChessColor.White, this);
             x.Center(grid[7, 6].Bounds);
             board[7, 6] = x;
-            x = new Bishop(new Sprite2D(ContentService.Instance.Textures["WhiteBishop"], new Rectangle(0, 0, pieceSize, pieceSize)), 7, 2, ChessColor.White, this);
+            x = new Bishop(new Sprite2D(ContentService.Instance.Textures["WhiteBishop"], new Rectangle(0, 0, Constants.PIECESIZE, Constants.PIECESIZE)), 7, 2, ChessColor.White, this);
             x.Center(grid[7, 2].Bounds);
             board[7, 2] = x;
-            x = new Bishop(new Sprite2D(ContentService.Instance.Textures["WhiteBishop"], new Rectangle(0, 0, pieceSize, pieceSize)), 7, 5, ChessColor.White, this);
+            x = new Bishop(new Sprite2D(ContentService.Instance.Textures["WhiteBishop"], new Rectangle(0, 0, Constants.PIECESIZE, Constants.PIECESIZE)), 7, 5, ChessColor.White, this);
             x.Center(grid[7, 5].Bounds);
             board[7, 5] = x;
-            x = new Queen(new Sprite2D(ContentService.Instance.Textures["WhiteQueen"], new Rectangle(0, 0, pieceSize, pieceSize)), 7, 3, ChessColor.White, this);
+            x = new Queen(new Sprite2D(ContentService.Instance.Textures["WhiteQueen"], new Rectangle(0, 0, Constants.PIECESIZE, Constants.PIECESIZE)), 7, 3, ChessColor.White, this);
             x.Center(grid[7, 3].Bounds);
             board[7, 3] = x;
-            x = new King(new Sprite2D(ContentService.Instance.Textures["WhiteKing"], new Rectangle(0, 0, pieceSize, pieceSize)), 7, 4, ChessColor.White, this);
+            x = new King(new Sprite2D(ContentService.Instance.Textures["WhiteKing"], new Rectangle(0, 0, Constants.PIECESIZE, Constants.PIECESIZE)), 7, 4, ChessColor.White, this);
             x.Center(grid[7, 4].Bounds);
             board[7, 4] = x;
 
             for (int i = 0; i < 8; i++)
             {
-                Piece temp = new Pawn(new Sprite2D(ContentService.Instance.Textures["BlackPawn"], new Rectangle(0, 0, pieceSize, pieceSize)), 1, i, ChessColor.Black, this);
+                Piece temp = new Pawn(new Sprite2D(ContentService.Instance.Textures["BlackPawn"], new Rectangle(0, 0, Constants.PIECESIZE, Constants.PIECESIZE)), 1, i, ChessColor.Black, this);
                 temp.Center(grid[1, i].Bounds);
                 board[1, i] = temp;
             }
-            x = new Rook(new Sprite2D(ContentService.Instance.Textures["BlackRook"], new Rectangle(0, 0, pieceSize, pieceSize)), 0, 0, ChessColor.Black, this);
+            x = new Rook(new Sprite2D(ContentService.Instance.Textures["BlackRook"], new Rectangle(0, 0, Constants.PIECESIZE, Constants.PIECESIZE)), 0, 0, ChessColor.Black, this);
             x.Center(grid[0, 0].Bounds);
             board[0, 0] = x;
-            x = new Rook(new Sprite2D(ContentService.Instance.Textures["BlackRook"], new Rectangle(0, 0, pieceSize, pieceSize)), 0, 7, ChessColor.Black, this);
+            x = new Rook(new Sprite2D(ContentService.Instance.Textures["BlackRook"], new Rectangle(0, 0, Constants.PIECESIZE, Constants.PIECESIZE)), 0, 7, ChessColor.Black, this);
             x.Center(grid[0, 7].Bounds);
             board[0, 7] = x;
-            x = new Knight(new Sprite2D(ContentService.Instance.Textures["BlackKnight"], new Rectangle(0, 0, pieceSize, pieceSize)), 0, 1, ChessColor.Black, this);
+            x = new Knight(new Sprite2D(ContentService.Instance.Textures["BlackKnight"], new Rectangle(0, 0, Constants.PIECESIZE, Constants.PIECESIZE)), 0, 1, ChessColor.Black, this);
             x.Center(grid[0, 1].Bounds);
             board[0, 1] = x;
-            x = new Knight(new Sprite2D(ContentService.Instance.Textures["BlackKnight"], new Rectangle(0, 0, pieceSize, pieceSize)), 0, 6, ChessColor.Black, this);
+            x = new Knight(new Sprite2D(ContentService.Instance.Textures["BlackKnight"], new Rectangle(0, 0, Constants.PIECESIZE, Constants.PIECESIZE)), 0, 6, ChessColor.Black, this);
             x.Center(grid[0, 6].Bounds);
             board[0, 6] = x;
-            x = new Bishop(new Sprite2D(ContentService.Instance.Textures["BlackBishop"], new Rectangle(0, 0, pieceSize, pieceSize)), 0, 2, ChessColor.Black, this);
+            x = new Bishop(new Sprite2D(ContentService.Instance.Textures["BlackBishop"], new Rectangle(0, 0, Constants.PIECESIZE, Constants.PIECESIZE)), 0, 2, ChessColor.Black, this);
             x.Center(grid[0, 2].Bounds);
             board[0, 2] = x;
-            x = new Bishop(new Sprite2D(ContentService.Instance.Textures["BlackBishop"], new Rectangle(0, 0, pieceSize, pieceSize)), 0, 5, ChessColor.Black, this);
+            x = new Bishop(new Sprite2D(ContentService.Instance.Textures["BlackBishop"], new Rectangle(0, 0, Constants.PIECESIZE, Constants.PIECESIZE)), 0, 5, ChessColor.Black, this);
             x.Center(grid[0, 5].Bounds);
             board[0, 5] = x;
-            x = new Queen(new Sprite2D(ContentService.Instance.Textures["BlackQueen"], new Rectangle(0, 0, pieceSize, pieceSize)), 0, 3, ChessColor.Black, this);
+            x = new Queen(new Sprite2D(ContentService.Instance.Textures["BlackQueen"], new Rectangle(0, 0, Constants.PIECESIZE, Constants.PIECESIZE)), 0, 3, ChessColor.Black, this);
             x.Center(grid[0, 3].Bounds);
             board[0, 3] = x;
-            x = new King(new Sprite2D(ContentService.Instance.Textures["BlackKing"], new Rectangle(0, 0, pieceSize, pieceSize)), 0, 4, ChessColor.Black, this);
+            x = new King(new Sprite2D(ContentService.Instance.Textures["BlackKing"], new Rectangle(0, 0, Constants.PIECESIZE, Constants.PIECESIZE)), 0, 4, ChessColor.Black, this);
             x.Center(grid[0, 4].Bounds);
             board[0, 4] = x;
 
@@ -155,8 +150,8 @@ namespace Chessnt
                 for (int j = 0; j < 8; j++)
                 {
                     if (board[i, j] == null) continue;
-                    board[i, j].MarkAnimation = new ButtonAnimation(null, new Rectangle(board[i, j].Bounds.Location, new Point(markSize, markSize)), null, true);
-                    board[i, j].UnMarkAnimation = new ButtonAnimation(null, new Rectangle(board[i, j].Bounds.Location, new Point(pieceSize, pieceSize)), null, true);
+                    board[i, j].MarkAnimation = new ButtonAnimation(null, new Rectangle(board[i, j].Bounds.Location, new Point(Constants.MARKED_PIECESIZE, Constants.MARKED_PIECESIZE)), null, true);
+                    board[i, j].UnMarkAnimation = new ButtonAnimation(null, new Rectangle(board[i, j].Bounds.Location, new Point(Constants.PIECESIZE, Constants.PIECESIZE)), null, true);
                     if (board[i, j].ChessColor == ChessColor.Black) blacks.Add(board[i, j]);
                     else whites.Add(board[i, j]);
                 }
@@ -191,24 +186,199 @@ namespace Chessnt
 
         public void Update(GameTime gameTime, Input curInput, Input prevInput)
         {
+            int whiteTotalPieces = 1;
+            int whitePawnCount = 0;
+            int whiteRookCount = 0;
+            int whiteKnightCount = 0;
+            int whiteBishopCount = 0;
+            int whiteQueenCount = 0;
+            int blackTotalPieces = 1;
+            int blackPawnCount = 0;
+            int blackRookCount = 0;
+            int blackKnightCount = 0;
+            int blackBishopCount = 0;
+            int blackQueenCount = 0;
+
+            for (int i = 0; i < 8; i++)
+            {
+                for (int j = 0; j < 8; j++)
+                {
+                    if (board[i, j] != null)
+                    {
+                        if (board[i, j].ChessColor == ChessColor.White)
+                        {
+                            if (board[i, j] is Pawn)
+                            {
+                                whitePawnCount++;
+                                whiteTotalPieces++;
+                            }
+                            else if (board[i, j] is Rook)
+                            {
+                                whiteRookCount++;
+                                whiteTotalPieces++;
+                            }
+                            else if (board[i, j] is Knight)
+                            {
+                                whiteKnightCount++;
+                                whiteTotalPieces++;
+                            }
+                            else if (board[i, j] is Bishop)
+                            {
+                                whiteBishopCount++;
+                                whiteTotalPieces++;
+                            }
+                            else if (board[i, j] is Queen)
+                            {
+                                whiteQueenCount++;
+                                whiteTotalPieces++;
+                            }
+                        }
+                        else if (board[i, j].ChessColor == ChessColor.Black)
+                        {
+                            if (board[i, j] is Pawn)
+                            {
+                                blackPawnCount++;
+                                blackTotalPieces++;
+                            }
+                            else if (board[i, j] is Rook)
+                            {
+                                blackRookCount++;
+                                blackTotalPieces++;
+                            }
+                            else if (board[i, j] is Knight)
+                            {
+                                blackKnightCount++;
+                                blackTotalPieces++;
+                            }
+                            else if (board[i, j] is Bishop)
+                            {
+                                blackBishopCount++;
+                                blackTotalPieces++;
+                            }
+                            else if (board[i, j] is Queen)
+                            {
+                                blackQueenCount++;
+                                blackTotalPieces++;
+                            }
+                        }
+                    }
+                }
+            }
+            if ((whiteTotalPieces == 1 && blackTotalPieces == 1) || (whiteTotalPieces == 1 && blackTotalPieces == 2 && blackBishopCount == 1) || (blackTotalPieces == 1 && whiteTotalPieces == 2 && whiteBishopCount == 1) || (whiteTotalPieces == 1 && blackTotalPieces == 2 && blackKnightCount == 1) || (blackTotalPieces == 1 && whiteTotalPieces == 2 && whiteKnightCount == 1))
+            {
+                IsStaleMate = true;
+                InitializePieces();
+            }
+
             switch (Turn)
             {
                 case Turn.Player2:
                     blacks.Update(curInput, prevInput);
-                    //Use stockfish to calculate next oponent move
-                    //https://github.com/official-stockfish/Stockfish
+                    bool blackHasAnyMoves = false;
+                    bool isBlackChecked = false;
+                    for (int i = 0; i < 8; i++)
+                    {
+                        for (int j = 0; j < 8; j++)
+                        {
+                            if (board[i, j] != null)
+                            {
+                                if (board[i, j].ChessColor == ChessColor.Black)
+                                {
+                                    if (board[i, j].Legals.Count > 0)
+                                    {
+                                        blackHasAnyMoves = true;
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    for (int i = 0; i < 8; i++)
+                    {
+                        for (int j = 0; j < 8; j++)
+                        {
+                            if (board[i, j] != null)
+                            {
+                                if (board[i, j].ChessColor == ChessColor.White)
+                                {
+                                    if (board[i, j].SetsCheck())
+                                    {
+                                        isBlackChecked = true;
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    if (!blackHasAnyMoves && !isBlackChecked)
+                    {
+                        _isStaleMate = true;
+                        InitializePieces();
+                    }
+                    else if (!blackHasAnyMoves)
+                    {
+                        _isCheckMate = true;
+                        InitializePieces();
+                    }
+                    
                     break;
                 case Turn.Player1:
                     whites.Update(curInput, prevInput);
+                    bool whiteHasAnyMoves = false;
+                    bool isWhiteChecked = false;
+                    for (int i = 0; i < 8; i++)
+                    {
+                        for (int j = 0; j < 8; j++)
+                        {
+                            if (board[i, j] != null)
+                            {
+                                if (board[i, j].ChessColor == ChessColor.White)
+                                {
+                                    if (board[i, j].Legals.Count > 0)
+                                    {
+                                        whiteHasAnyMoves = true;
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    for (int i = 0; i < 8; i++)
+                    {
+                        for (int j = 0; j < 8; j++)
+                        {
+                            if (board[i, j] != null)
+                            {
+                                if (board[i, j].ChessColor == ChessColor.Black)
+                                {
+                                    if (board[i, j].SetsCheck())
+                                    {
+                                        isWhiteChecked = true;
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    if (!whiteHasAnyMoves && !isWhiteChecked)
+                    {
+                        _isStaleMate = true;
+                        InitializePieces();
+                    }
+                    else if (!whiteHasAnyMoves)
+                    {
+                        _isCheckMate = true;
+                        InitializePieces();
+                    }
                     break;
             }
-            if (moveMade)
+            if (MoveMade)
             {
                 whites.UnmarkAll();
                 blacks.UnmarkAll();
                 if (Turn == Turn.Player1) Turn = Turn.Player2;
                 else Turn = Turn.Player1;
-                moveMade = false;
+                MoveMade = false;
             }
         }
 
@@ -318,7 +488,8 @@ namespace Chessnt
                     }
                 }
             }
-            moveMade = true;
+            MoveMade = true;
+            _diceRollPossible = true;
 
         }
 

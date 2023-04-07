@@ -142,6 +142,37 @@
 /processorParam:TextureFormat=Color
 /build:menu_background.png
 
+#begin messagebox_bg.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:messagebox_bg.png
+
+#begin messageFont.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:messageFont.spritefont
+
+#begin ok_button.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:ok_button.png
+
 #begin option_background.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -153,6 +184,15 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:option_background.png
+
+#begin SmallFont.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:SmallFont.spritefont
+
+#begin WhiteEmpty.png
 
 #begin rowColumn.png
 /importer:TextureImporter
