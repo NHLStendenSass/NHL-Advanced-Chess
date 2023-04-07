@@ -83,7 +83,7 @@ namespace Chessnt
                     game.ChangeState(new GameState(game, graphicsDevice, content));
                     break;
 
-                case "Option.":
+                case "Rule.":
                     game.ChangeState(new RuleState(game, graphicsDevice, content));
                     break;
 

@@ -21,7 +21,7 @@ namespace Chessnt
         private SpriteFont _buttonFont;
 
         private Button _playButton;
-        private Button _optionButton;
+        private Button _ruleButton;
         private Button _exitButton;
         private Button _voiceButton;
 
@@ -43,31 +43,21 @@ namespace Chessnt
                 Position = new Vector2(150, 400),
                 Text = "Play",
             };
-
             _playButton.Click += PlayButton_Click;
 
-            _optionButton = new Button(_buttonTexture, _buttonFont)
+            _ruleButton = new Button(_buttonTexture, _buttonFont)
             {
                 Position = new Vector2(160, 550),
                 Text = "Rule",
             };
-
-            _optionButton.Click += OptionButton_Click;
+            _ruleButton.Click += OptionButton_Click;
 
             _exitButton = new Button(_buttonTexture, _buttonFont)
             {
                 Position = new Vector2(135, 700),
                 Text = "Exit",
             };
-
             _exitButton.Click += QuitGameButton_Click;
-
-            _voiceButton = new Button(_buttonTexture, _buttonFont)
-            {
-                Position = new Vector2(1400, 170),
-                Text = "Talk",
-            };
-            _voiceButton.Click += VoiceButton_Click;
 
             _voiceButton = new Button(_buttonTexture, _buttonFont)
             {
@@ -79,7 +69,7 @@ namespace Chessnt
             _components = new List<Component>()
                   {
                     _playButton,
-                    _optionButton,
+                    _ruleButton,
                     _exitButton,
                     _voiceButton
                   };
