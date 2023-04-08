@@ -82,7 +82,13 @@ The Game further boasts of rules, which impart an element of unpredictability, t
 
 ### Voice Command
 
-The Chessn't application offers a distinctive functionality, whereby players can relocate pieces on the game board through the utilization of voice commands. To accomplish this, players are required to use the Nato Phonetic alphabet, which ensures that the system can accurately identify and interpret the player's spoken commands. It should be noted that the technology employed by the Monogame platform to process voice signals is not infallible, and there is a possibility of misinterpretation of commands. For instance, the system might erroneously identify the spoken command 'E2' as '82.' Therefore, to specify a particular tile on the chess board, players are advised to enunciate the corresponding phonetic alphabet, such as 'Echo 2', which will be accurately recognized by the system as 'E2'. It is worth mentioning that the application developers encountered some difficulty in identifying a suitable verbal command for moving the 'E4' tile. As a result, players who wish to move the 'E4' tile must articulate the name of the tile a second time to ensure accurate recognition by the system.
+Here are some tips to make the Chessn't app's voice command feature work smoothly:
+
+- Use the NATO Phonetic alphabet to ensure the system can accurately identify and interpret your spoken commands.
+- Keep in mind that the technology used to process voice signals is not perfect and there is a chance of misinterpretation.
+- To avoid confusion, enunciate the corresponding phonetic alphabet for a particular tile on the chess board. For example, if you want to move pawn say "Alfa 2" instead of just "A2" because it might register as a '82'.
+- If you want to move a piece, such as a pawn, from tile 'A2' to tile 'A4', you must first say the tile name where the piece is located, then it displays tile options as a red indicator, and finally you say the tile name where you want the piece relocated. Unfortunately, we were unable to implement proper methods such as 'A2 to A4'.
+- Have fun playing with voice commands and enjoy the unique feature offered by the Chessn't app!
 
 The following table can be used to help player to enunciate letters:
 
