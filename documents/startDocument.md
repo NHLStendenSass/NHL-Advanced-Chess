@@ -55,13 +55,13 @@ The following are mockups for the application's main screens
 
 Main start screen with 3 options to proceed.
 
-![](https://i.imgur.com/kikUQNF.png)
+![](https://i.imgur.com/gLYg3Ng.png)
 
-## Option screen
+## Rule screen
 
-This screen would be use for changing dice and language.
+This screen would be use reading the rule.
 
-![](https://i.imgur.com/6NtBCb5.png)
+![](https://i.imgur.com/B5GrrSM.png)
 
 
 
@@ -73,11 +73,11 @@ This screen would be use for changing dice and language.
 
 The game screen with chess pieces and microphone.
 
-![](https://i.imgur.com/H5JX7sd.png)
+![](https://i.imgur.com/FBU0BwJ.png)
 
 ## 5. UML
 
-![(add image here)](https://cdn.discordapp.com/attachments/1069641268956766292/1077901176663707680/UMLChessnt.png)
+![(add image here)](https://i.imgur.com/1NbPzZT.png)
 
 
 

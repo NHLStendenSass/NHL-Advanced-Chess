@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualBasic;
+﻿using Chessnt.Models.Board;
+using Microsoft.VisualBasic;
 using Microsoft.Xna.Framework;
 
 namespace Chessnt

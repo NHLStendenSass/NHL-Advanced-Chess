@@ -17,9 +17,6 @@
     <None Remove="Content\obj\DesktopGL\net6.0\**" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Remove="Models\Board\ChessBoard.cs" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Icon.ico" />
     <EmbeddedResource Include="Icon.bmp" />
   </ItemGroup>
