@@ -1,4 +1,5 @@
 ﻿using Chessnt.Chess.Managers;
+using Chessnt.Models.Board;
 using Chessnt.Models.Pieces;
 using Microsoft.Xna.Framework;
 using System;
