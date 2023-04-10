@@ -2,8 +2,6 @@
 
 # Chessn't
 
-[TOC]
-
 ## Version
 
 | Version | Changes                                           | Date       |
