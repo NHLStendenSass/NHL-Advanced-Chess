@@ -79,24 +79,6 @@ The game screen with chess pieces and microphone.
 
 ![(add image here)](https://i.imgur.com/1NbPzZT.png)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ## 6. Planning
 
 ![The ganttchart](https://i.imgur.com/ABF5Bp1.png)
