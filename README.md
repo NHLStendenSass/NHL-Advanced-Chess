@@ -76,8 +76,6 @@ The Game further boasts of rules, which impart an element of unpredictability, t
   - Bishop to Pawn
   - Knight to Pawn
   - Rook to Pawn
-- Player loses a random piece
-- Player's opponent loses a random piece
 - Player loses their turn
 
 ### Voice Command
