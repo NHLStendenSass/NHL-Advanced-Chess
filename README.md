@@ -98,6 +98,10 @@
    
    <img src="https://i.imgur.com/iZLkJIL.png" alt="image-20230407111504931" style="zoom:80%;" />
    
+   To utilize the voice command, activate it by clicking the 'Talk' button, as seen below in the Game Screen:
+   
+   ![image-20230410205642437](https://i.imgur.com/ueBoUig.png)
+   
    
    
    # Troubleshoot
