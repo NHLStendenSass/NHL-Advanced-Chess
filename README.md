@@ -1,4 +1,4 @@
-2. # Chessn't
+# Chessn't
 
    You can find the Start Document [here](documents/startDocument.md).
 
